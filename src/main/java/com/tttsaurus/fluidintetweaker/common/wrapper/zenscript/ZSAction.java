@@ -3,6 +3,7 @@ package com.tttsaurus.fluidintetweaker.common.wrapper.zenscript;
 import com.tttsaurus.fluidintetweaker.common.FluidInteractionRecipeManager;
 import com.tttsaurus.fluidintetweaker.common.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.exception.FluidInteractionTweakerRuntimeException;
 import crafttweaker.IAction;
 import crafttweaker.api.block.IBlock;
 import crafttweaker.api.liquid.ILiquidStack;
@@ -112,7 +113,7 @@ public final class ZSAction
         //</editor-fold>
 
         @ReflectionInvoked
-        public void undo() throws RuntimeException
+        public void undo() throws FluidInteractionTweakerRuntimeException
         {
             for (Parameters parameters: parametersList)
             {
@@ -123,7 +124,7 @@ public final class ZSAction
             FluidInteractionRecipeManager.refreshIngredientABLists();
         }
         @Override
-        public void apply() throws RuntimeException
+        public void apply() throws FluidInteractionTweakerRuntimeException
         {
             for (Parameters parameters: parametersList)
             {
@@ -143,24 +144,24 @@ public final class ZSAction
     @Reloadable
     public static final class RemoveAllRecipesAction implements IAction
     {
-        private HashMap<String, Block> recipeDictBackup;
+        //private HashMap<String, Block> recipeDictBackup;
 
         public RemoveAllRecipesAction()
         {
 
         }
 
+        // don't need an undo
         @ReflectionInvoked
         public void undo()
         {
-            FluidInteractionRecipeManager.setAllRecipes(recipeDictBackup);
-            FluidInteractionRecipeManager.refreshIngredientABLists();
+            //FluidInteractionRecipeManager.setAllRecipes(recipeDictBackup);
+            //FluidInteractionRecipeManager.refreshIngredientABLists();
         }
-        @SuppressWarnings("unchecked")
         @Override
         public void apply()
         {
-            recipeDictBackup = (HashMap<String, Block>)FluidInteractionRecipeManager.getAllRecipes().clone();
+            //recipeDictBackup = (HashMap<String, Block>)FluidInteractionRecipeManager.getAllRecipes().clone();
             FluidInteractionRecipeManager.removeAllRecipes();
         }
         @Override

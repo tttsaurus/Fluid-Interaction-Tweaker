@@ -2,12 +2,15 @@ package com.tttsaurus.fluidintetweaker.common;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.IFluidBlock;
+import net.minecraftforge.fluids.capability.wrappers.BlockLiquidWrapper;
 
 public class InteractionIngredient
 {
@@ -39,6 +42,11 @@ public class InteractionIngredient
         else
             return null;
     }
+    @Override
+    public boolean equals(Object object)
+    {
+        return object instanceof InteractionIngredient && object.toString().equals(this.toString());
+    }
 
     public InteractionIngredient(InteractionIngredientType ingredientType, Fluid fluid, boolean isFluidSource, Block block)
     {
@@ -66,8 +74,8 @@ public class InteractionIngredient
                 mat = Material.LAVA;
             }
 
-            // todo: fluid source detection is problematic
-            isFluidSource = block.getBlockLiquidHeight(world, pos, world.getBlockState(pos), mat) >= 0.88f;
+            // todo: fix bad vanilla source fluid check
+            isFluidSource = (block.getBlockLiquidHeight(world, pos, world.getBlockState(pos), mat) >= 0.88f) && (block instanceof BlockStaticLiquid);
         }
         // modded fluid
         else if (block instanceof BlockFluidBase)
@@ -76,8 +84,7 @@ public class InteractionIngredient
             BlockFluidBase fluidBase = ((BlockFluidBase)block);
             fluid = fluidBase.getFluid();
 
-            // todo: fluid source detection is problematic
-            isFluidSource = fluidBase.getFilledPercentage(world, pos) == 1.0f;
+            isFluidSource = fluidBase.canDrain(world, pos);
         }
         // solid block
         else

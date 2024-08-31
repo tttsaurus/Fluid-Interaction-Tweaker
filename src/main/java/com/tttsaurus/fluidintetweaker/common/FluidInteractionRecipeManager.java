@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker.common;
 
+import com.tttsaurus.fluidintetweaker.exception.FluidInteractionTweakerRuntimeException;
 import net.minecraft.block.Block;
 import java.util.*;
 
@@ -50,13 +51,13 @@ public final class FluidInteractionRecipeManager
             if (!recipeIngredientBList.contains(strings[1])) recipeIngredientBList.add(strings[1]);
         }
     }
-    public static void addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock) throws RuntimeException
+    public static void addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock) throws FluidInteractionTweakerRuntimeException
     {
         String ingredientAKey = ingredientA.toString();
         String ingredientBKey = ingredientB.toString();
         String key = ingredientAKey + "+" + ingredientBKey;
         if (recipeDict.containsKey(key))
-            throw new RuntimeException("FluidInteractionRecipeManager.addRecipe fails to execute. The same fluid interaction recipe " + key + " has been added");
+            throw new FluidInteractionTweakerRuntimeException("FluidInteractionRecipeManager.addRecipe() fails to execute. The same fluid interaction recipe " + key + " has been added.");
         else
         {
             if (!recipeIngredientAList.contains(ingredientAKey)) recipeIngredientAList.add(ingredientAKey);
@@ -64,13 +65,13 @@ public final class FluidInteractionRecipeManager
             recipeDict.put(key, outputBlock);
         }
     }
-    public static void removeRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB) throws RuntimeException
+    public static void removeRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB) throws FluidInteractionTweakerRuntimeException
     {
         String key = ingredientA.toString() + "+" + ingredientB.toString();
         if (recipeDict.containsKey(key))
             recipeDict.remove(key);
         else
-            throw new RuntimeException("FluidInteractionRecipeManager.removeRecipe fails to execute. The key being removed doesn't exist");
+            throw new FluidInteractionTweakerRuntimeException("FluidInteractionRecipeManager.removeRecipe() fails to execute. The key being removed doesn't exist.");
     }
     public static void removeAllRecipes()
     {

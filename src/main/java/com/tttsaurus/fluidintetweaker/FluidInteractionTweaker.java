@@ -20,7 +20,7 @@ public class FluidInteractionTweaker
             serverSide = "com.tttsaurus.fluidintetweaker.proxy.ServerProxy")
     private static CommonProxy proxy;
 
-    public static Logger logger;
+    private static Logger logger;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
