@@ -38,13 +38,30 @@ public final class FluidEventHandler
 
             InteractionIngredient ingredient2 = new InteractionIngredient(world, neighborPos, neighborBlock);
 
+            // ingredient1 reacts with ingredient2
             if (FluidInteractionRecipeManager.recipeExists(ingredient1, ingredient2))
             {
+                // ingredient1 (being the ingredientA) turns to a block
+
+                // fluid (ingredient1) must first flow down before turning to another block
+                // if there is another fluid below it
+                if ((ingredient1.getIngredientType() == InteractionIngredientType.FLUID) &&
+                    (ingredient2.getIngredientType() == InteractionIngredientType.FLUID) &&
+                    (facing == EnumFacing.DOWN)) continue;
+
                 Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2);
                 world.setBlockState(pos, output.getDefaultState());
             }
             else if (FluidInteractionRecipeManager.recipeExists(ingredient2, ingredient1))
             {
+                // ingredient2 (being the ingredientA) turns to a block
+
+                // fluid (ingredient2) must first flow down before turning to another block
+                // if there is another fluid below it
+                if ((ingredient2.getIngredientType() == InteractionIngredientType.FLUID) &&
+                    (ingredient1.getIngredientType() == InteractionIngredientType.FLUID) &&
+                    (facing == EnumFacing.UP)) continue;
+
                 Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1);
                 world.setBlockState(neighborPos, output.getDefaultState());
             }

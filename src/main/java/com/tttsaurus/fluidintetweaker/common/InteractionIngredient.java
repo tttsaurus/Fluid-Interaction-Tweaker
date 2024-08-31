@@ -66,6 +66,7 @@ public class InteractionIngredient
                 mat = Material.LAVA;
             }
 
+            // todo: fluid source detection is problematic
             isFluidSource = block.getBlockLiquidHeight(world, pos, world.getBlockState(pos), mat) >= 0.88f;
         }
         // modded fluid
@@ -75,6 +76,7 @@ public class InteractionIngredient
             BlockFluidBase fluidBase = ((BlockFluidBase)block);
             fluid = fluidBase.getFluid();
 
+            // todo: fluid source detection is problematic
             isFluidSource = fluidBase.getFilledPercentage(world, pos) == 1.0f;
         }
         // solid block
