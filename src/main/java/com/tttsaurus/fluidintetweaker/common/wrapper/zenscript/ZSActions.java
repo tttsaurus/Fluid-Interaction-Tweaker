@@ -1,8 +1,8 @@
 package com.tttsaurus.fluidintetweaker.common.wrapper.zenscript;
 
-import com.tttsaurus.fluidintetweaker.common.FluidInteractionRecipeManager;
-import com.tttsaurus.fluidintetweaker.common.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionRecipeManager;
+import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import crafttweaker.IAction;
 import crafttweaker.api.block.IBlock;
 import crafttweaker.api.liquid.ILiquidStack;
@@ -12,7 +12,7 @@ import youyihj.zenutils.api.reload.Reloadable;
 import youyihj.zenutils.api.util.ReflectionInvoked;
 import java.util.*;
 
-public final class ZSAction
+public final class ZSActions
 {
     @Reloadable
     public static final class AddRecipeAction implements IAction

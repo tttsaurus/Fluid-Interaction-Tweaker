@@ -9,34 +9,34 @@ import crafttweaker.annotations.ZenRegister;
 
 @ZenRegister
 @ZenClass("mods.fluidintetweaker.FITweaker")
-public final class ZSMethodWrapper
+public final class ZSAccessibleMethods
 {
     //<editor-fold desc="addRecipe">
     @ZenMethod
     public static void addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlock outputBlock)
     {
-        CraftTweakerAPI.apply(new ZSAction.AddRecipeAction(liquidInitiator, isSourceA, liquidSurrounding, isSourceB, outputBlock));
+        CraftTweakerAPI.apply(new ZSActions.AddRecipeAction(liquidInitiator, isSourceA, liquidSurrounding, isSourceB, outputBlock));
     }
     @ZenMethod
     public static void addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock)
     {
-        CraftTweakerAPI.apply(new ZSAction.AddRecipeAction(liquidInitiator, isSourceA, liquidSurrounding, outputBlock));
+        CraftTweakerAPI.apply(new ZSActions.AddRecipeAction(liquidInitiator, isSourceA, liquidSurrounding, outputBlock));
     }
     @ZenMethod
     public static void addRecipe(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlock outputBlock)
     {
-        CraftTweakerAPI.apply(new ZSAction.AddRecipeAction(liquidInitiator, liquidSurrounding, outputBlock));
+        CraftTweakerAPI.apply(new ZSActions.AddRecipeAction(liquidInitiator, liquidSurrounding, outputBlock));
     }
 
     @ZenMethod
     public static void addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, IBlock outputBlock)
     {
-        CraftTweakerAPI.apply(new ZSAction.AddRecipeAction(liquidInitiator, isSourceA, blockSurrounding, outputBlock));
+        CraftTweakerAPI.apply(new ZSActions.AddRecipeAction(liquidInitiator, isSourceA, blockSurrounding, outputBlock));
     }
     @ZenMethod
     public static void addRecipe(ILiquidStack liquidInitiator, IBlock blockSurrounding, IBlock outputBlock)
     {
-        CraftTweakerAPI.apply(new ZSAction.AddRecipeAction(liquidInitiator, blockSurrounding, outputBlock));
+        CraftTweakerAPI.apply(new ZSActions.AddRecipeAction(liquidInitiator, blockSurrounding, outputBlock));
     }
     //</editor-fold>
 
@@ -44,7 +44,7 @@ public final class ZSMethodWrapper
     @ZenMethod
     public static void removeAllRecipes()
     {
-        CraftTweakerAPI.apply(new ZSAction.RemoveAllRecipesAction());
+        CraftTweakerAPI.apply(new ZSActions.RemoveAllRecipesAction());
     }
     //</editor-fold>
 }

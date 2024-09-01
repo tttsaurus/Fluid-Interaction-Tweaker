@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.exception;
+package com.tttsaurus.fluidintetweaker.common.api.exception;
 
 public class FluidInteractionTweakerRuntimeException extends RuntimeException
 {
