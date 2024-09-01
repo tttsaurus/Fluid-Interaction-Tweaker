@@ -12,7 +12,7 @@ import youyihj.zenutils.api.reload.Reloadable;
 import youyihj.zenutils.api.util.ReflectionInvoked;
 import java.util.*;
 
-public final class ZSActions
+public final class Actions
 {
     @Reloadable
     public static final class AddRecipeAction implements IAction

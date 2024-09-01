@@ -2,16 +2,18 @@ package com.tttsaurus.fluidintetweaker.common.impl;
 
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
 import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import java.util.*;
 
-public final class FluidEventHandler
+public final class FluidInteractionLogic
 {
     @SubscribeEvent
     public static void onNeighborNotifyEvent(NeighborNotifyEvent event)
@@ -53,16 +55,19 @@ public final class FluidEventHandler
             {
                 // fluid below (ingredient2) turns to a block
                 ingredient1.setIsFluidSource(false);
-                if (FluidInteractionRecipeManager.recipeExists(ingredient1, ingredient2))
-                {
-                    Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2);
-                    world.setBlockState(neighborPos, output.getDefaultState());
-                }
-                else if (FluidInteractionRecipeManager.recipeExists(ingredient2, ingredient1))
-                {
-                    Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1);
-                    world.setBlockState(neighborPos, output.getDefaultState());
-                }
+
+                Block output = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2);
+                output = output == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1) : output;
+                if (output == null) continue;
+
+                world.setBlockState(neighborPos, output.getDefaultState());
+                MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
+                        world,
+                        neighborPos,
+                        ingredient2.getFluid(),
+                        ingredient1, // A
+                        ingredient2, // B
+                        output));
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient1, ingredient2))
@@ -70,6 +75,13 @@ public final class FluidEventHandler
                 Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2);
                 // ingredient1 turns to a block
                 world.setBlockState(pos, output.getDefaultState());
+                MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
+                        world,
+                        pos,
+                        ingredient1.getFluid(),
+                        ingredient1, // A
+                        ingredient2, // B
+                        output));
             }
 
             // backward notifying
@@ -83,16 +95,19 @@ public final class FluidEventHandler
             {
                 // fluid below (ingredient1) turns to a block
                 ingredient2.setIsFluidSource(false);
-                if (FluidInteractionRecipeManager.recipeExists(ingredient2, ingredient1))
-                {
-                    Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1);
-                    world.setBlockState(pos, output.getDefaultState());
-                }
-                else if (FluidInteractionRecipeManager.recipeExists(ingredient1, ingredient2))
-                {
-                    Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2);
-                    world.setBlockState(pos, output.getDefaultState());
-                }
+
+                Block output = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1);
+                output = output == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2) : output;
+                if (output == null) continue;
+
+                world.setBlockState(pos, output.getDefaultState());
+                MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
+                        world,
+                        pos,
+                        ingredient1.getFluid(),
+                        ingredient2, // A
+                        ingredient1, // B
+                        output));
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient2, ingredient1))
@@ -100,6 +115,13 @@ public final class FluidEventHandler
                 Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1);
                 // ingredient2 turns to a block
                 world.setBlockState(neighborPos, output.getDefaultState());
+                MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
+                        world,
+                        neighborPos,
+                        ingredient2.getFluid(),
+                        ingredient2, // A
+                        ingredient1, // B
+                        output));
             }
             //</editor-fold>
         }

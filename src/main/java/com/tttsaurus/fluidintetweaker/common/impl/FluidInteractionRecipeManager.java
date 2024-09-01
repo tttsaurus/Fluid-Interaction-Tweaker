@@ -3,14 +3,17 @@ package com.tttsaurus.fluidintetweaker.common.impl;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import net.minecraft.block.Block;
+import javax.annotation.Nullable;
 import java.util.*;
 
 // this class is totally internal
 // use methods in wrappers to manage recipes
 public final class FluidInteractionRecipeManager
 {
-    // it's always that ingredientA turns to an output block
     // ingredientA is the initiator
+    // it's always that ingredientA turns to an output block
+    // except the fluid above & fluid below case
+    // it's always that fluid below turns to a block
 
     // these two lists are just for quick recipe search
     private static final List<String> recipeIngredientAList = new ArrayList<>();
@@ -34,6 +37,14 @@ public final class FluidInteractionRecipeManager
     public static Block getRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
         return recipeDict.get(ingredientA.toString() + "+" + ingredientB.toString());
+    }
+    @Nullable
+    public static Block getNullableRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    {
+        if (recipeExists(ingredientA, ingredientB))
+            return recipeDict.get(ingredientA.toString() + "+" + ingredientB.toString());
+        else
+            return null;
     }
     //</editor-fold>
 
