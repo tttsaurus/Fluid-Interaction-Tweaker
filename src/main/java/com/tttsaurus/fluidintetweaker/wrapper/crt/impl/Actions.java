@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.common.wrapper.zenscript;
+package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionRecipeManager;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;

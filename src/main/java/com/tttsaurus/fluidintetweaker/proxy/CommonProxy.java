@@ -2,6 +2,7 @@ package com.tttsaurus.fluidintetweaker.proxy;
 
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionEventHandler;
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionLogic;
+import com.tttsaurus.fluidintetweaker.wrapper.crt.impl.CTEventManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -20,5 +21,6 @@ public class CommonProxy
 
         MinecraftForge.EVENT_BUS.register(FluidInteractionLogic.class);
         MinecraftForge.EVENT_BUS.register(FluidInteractionEventHandler.class);
+        MinecraftForge.EVENT_BUS.register(CTEventManager.Handler.class);
     }
 }

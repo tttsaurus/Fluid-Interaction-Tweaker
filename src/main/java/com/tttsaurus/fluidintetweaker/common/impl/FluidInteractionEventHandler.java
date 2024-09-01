@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public final class FluidInteractionEventHandler
 {
     @SubscribeEvent
-    public static void onCustomFluidInteractionEvent(CustomFluidInteractionEvent event)
+    public static void onCustomFluidInteraction(CustomFluidInteractionEvent event)
     {
 
     }

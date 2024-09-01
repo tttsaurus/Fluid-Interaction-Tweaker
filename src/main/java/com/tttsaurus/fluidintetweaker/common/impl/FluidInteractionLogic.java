@@ -16,7 +16,7 @@ import java.util.*;
 public final class FluidInteractionLogic
 {
     @SubscribeEvent
-    public static void onNeighborNotifyEvent(NeighborNotifyEvent event)
+    public static void onNeighborNotify(NeighborNotifyEvent event)
     {
         World world = event.getWorld();
         BlockPos pos = event.getPos();
@@ -68,6 +68,7 @@ public final class FluidInteractionLogic
                         ingredient1, // A
                         ingredient2, // B
                         output));
+                return;
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient1, ingredient2))
@@ -82,6 +83,7 @@ public final class FluidInteractionLogic
                         ingredient1, // A
                         ingredient2, // B
                         output));
+                return;
             }
 
             // backward notifying
@@ -108,6 +110,7 @@ public final class FluidInteractionLogic
                         ingredient2, // A
                         ingredient1, // B
                         output));
+                return;
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient2, ingredient1))
@@ -122,6 +125,7 @@ public final class FluidInteractionLogic
                         ingredient2, // A
                         ingredient1, // B
                         output));
+                return;
             }
             //</editor-fold>
         }

@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.common.wrapper.zenscript;
+package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.block.IBlock;
