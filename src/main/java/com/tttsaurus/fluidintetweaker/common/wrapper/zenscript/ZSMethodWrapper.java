@@ -9,7 +9,7 @@ import crafttweaker.annotations.ZenRegister;
 
 @ZenRegister
 @ZenClass("mods.fluidintetweaker.FITweaker")
-public final class ZSWrapper
+public final class ZSMethodWrapper
 {
     //<editor-fold desc="addRecipe">
     @ZenMethod

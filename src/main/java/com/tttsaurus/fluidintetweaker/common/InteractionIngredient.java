@@ -9,8 +9,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.IFluidBlock;
-import net.minecraftforge.fluids.capability.wrappers.BlockLiquidWrapper;
 
 public class InteractionIngredient
 {
@@ -22,10 +20,14 @@ public class InteractionIngredient
     private boolean isFluidSource;
     private Block block;
 
+    // getter
     public InteractionIngredientType getIngredientType() { return ingredientType; }
     public Fluid getFluid() { return fluid; }
     public boolean getIsFluidSource() { return isFluidSource; }
     public Block getBlock() { return block; }
+
+    // setter
+    public void setIsFluidSource(boolean isFluidSource) { this.isFluidSource = isFluidSource; }
 
     @Override
     public String toString()
@@ -48,11 +50,18 @@ public class InteractionIngredient
         return object instanceof InteractionIngredient && object.toString().equals(this.toString());
     }
 
-    public InteractionIngredient(InteractionIngredientType ingredientType, Fluid fluid, boolean isFluidSource, Block block)
+    public InteractionIngredient(Fluid fluid, boolean isFluidSource)
     {
-        this.ingredientType = ingredientType;
+        this.ingredientType = InteractionIngredientType.FLUID;
         this.fluid = fluid;
         this.isFluidSource = isFluidSource;
+        this.block = null;
+    }
+    public InteractionIngredient(Block block)
+    {
+        this.ingredientType = InteractionIngredientType.BLOCK;
+        this.fluid = null;
+        this.isFluidSource = false;
         this.block = block;
     }
     public InteractionIngredient(World world, BlockPos pos, Block block)

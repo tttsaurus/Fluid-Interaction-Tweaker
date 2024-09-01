@@ -2,7 +2,6 @@ package com.tttsaurus.fluidintetweaker.common.wrapper.zenscript;
 
 import com.tttsaurus.fluidintetweaker.common.FluidInteractionRecipeManager;
 import com.tttsaurus.fluidintetweaker.common.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.common.InteractionIngredientType;
 import com.tttsaurus.fluidintetweaker.exception.FluidInteractionTweakerRuntimeException;
 import crafttweaker.IAction;
 import crafttweaker.api.block.IBlock;
@@ -36,19 +35,11 @@ public final class ZSAction
 
         private InteractionIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
         {
-            return new InteractionIngredient(
-                    InteractionIngredientType.FLUID,
-                    ((FluidStack)liquidStack.getInternal()).getFluid(),
-                    isSource,
-                    null);
+            return new InteractionIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
         }
         private InteractionIngredient buildIngredient(IBlock block)
         {
-            return new InteractionIngredient(
-                    InteractionIngredientType.BLOCK,
-                    null,
-                    false,
-                    (Block)block.getDefinition().getInternal());
+            return new InteractionIngredient((Block)block.getDefinition().getInternal());
         }
 
         //<editor-fold desc="fluid & fluid recipe">
