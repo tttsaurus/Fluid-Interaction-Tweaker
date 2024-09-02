@@ -5,11 +5,11 @@
   "description": "Provide CrT methods to tweak the fluid interactions",
   "version": "1.2.0",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://github.com/tttsaurus/Fluid-Interaction-Tweaker",
   "updateUrl": "",
   "authorList": ["tttsaurus"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
+  "credits": "",
+  "logoFile": "logo.png",
   "screenshots": [],
   "dependencies": []
 }
