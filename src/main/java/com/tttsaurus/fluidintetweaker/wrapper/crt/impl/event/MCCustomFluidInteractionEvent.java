@@ -12,6 +12,7 @@ import crafttweaker.mc1120.world.MCBlockPos;
 import crafttweaker.mc1120.world.MCWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 
 public class MCCustomFluidInteractionEvent implements ICustomFluidInteractionEvent
 {
@@ -25,7 +26,8 @@ public class MCCustomFluidInteractionEvent implements ICustomFluidInteractionEve
     @Override
     public ILiquidDefinition getFluidBeforeInteraction()
     {
-        return new MCLiquidDefinition(event.getFluidBeforeInteraction());
+        Fluid fluid = event.getFluidBeforeInteraction();
+        return fluid == null ? null : new MCLiquidDefinition(fluid);
     }
 
     @Override
