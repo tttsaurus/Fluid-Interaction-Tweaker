@@ -8,7 +8,6 @@ import crafttweaker.api.event.IEventHandle;
 import crafttweaker.api.event.IEventManager;
 import crafttweaker.util.EventList;
 import crafttweaker.util.IEventHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenExpansion;

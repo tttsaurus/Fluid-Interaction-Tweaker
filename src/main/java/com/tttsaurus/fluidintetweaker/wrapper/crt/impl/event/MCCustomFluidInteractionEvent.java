@@ -24,6 +24,13 @@ public class MCCustomFluidInteractionEvent implements ICustomFluidInteractionEve
     }
 
     @Override
+    public IBlockState getFluidBlockStateBeforeInteraction()
+    {
+        net.minecraft.block.state.IBlockState state = event.getFluidBlockStateBeforeInteraction();
+        return state == null ? null : new MCBlockState(state);
+    }
+
+    @Override
     public ILiquidDefinition getFluidBeforeInteraction()
     {
         Fluid fluid = event.getFluidBeforeInteraction();
@@ -51,9 +58,9 @@ public class MCCustomFluidInteractionEvent implements ICustomFluidInteractionEve
     }
 
     @Override
-    public void setCanceled(boolean isCanceled)
+    public void setCanceled(boolean cancel)
     {
-        event.setCanceled(isCanceled);
+        event.setCanceled(cancel);
     }
 
     @Override

@@ -8,6 +8,6 @@ public final class FluidInteractionEventHandler
     @SubscribeEvent
     public static void onCustomFluidInteraction(CustomFluidInteractionEvent event)
     {
-
+        if (!event.isCanceled()) event.getDelegate().doAction();
     }
 }

@@ -3,6 +3,7 @@ package com.tttsaurus.fluidintetweaker.common.impl;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -60,14 +61,15 @@ public final class FluidInteractionLogic
                 output = output == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1) : output;
                 if (output == null) continue;
 
-                world.setBlockState(neighborPos, output.getDefaultState());
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
                         neighborPos,
+                        world.getBlockState(neighborPos),
                         ingredient2.getFluid(),
                         ingredient1, // A
                         ingredient2, // B
-                        output));
+                        output,
+                        new FluidInteractionDelegate(world, neighborPos, output.getDefaultState())));
                 return;
             }
             // normal case
@@ -75,14 +77,15 @@ public final class FluidInteractionLogic
             {
                 Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2);
                 // ingredient1 turns to a block
-                world.setBlockState(pos, output.getDefaultState());
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
                         pos,
+                        world.getBlockState(pos),
                         ingredient1.getFluid(),
                         ingredient1, // A
                         ingredient2, // B
-                        output));
+                        output,
+                        new FluidInteractionDelegate(world, pos, output.getDefaultState())));
                 return;
             }
 
@@ -102,14 +105,15 @@ public final class FluidInteractionLogic
                 output = output == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2) : output;
                 if (output == null) continue;
 
-                world.setBlockState(pos, output.getDefaultState());
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
                         pos,
+                        world.getBlockState(pos),
                         ingredient1.getFluid(),
                         ingredient2, // A
                         ingredient1, // B
-                        output));
+                        output,
+                        new FluidInteractionDelegate(world, pos, output.getDefaultState())));
                 return;
             }
             // normal case
@@ -117,14 +121,15 @@ public final class FluidInteractionLogic
             {
                 Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1);
                 // ingredient2 turns to a block
-                world.setBlockState(neighborPos, output.getDefaultState());
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
                         neighborPos,
+                        world.getBlockState(neighborPos),
                         ingredient2.getFluid(),
                         ingredient2, // A
                         ingredient1, // B
-                        output));
+                        output,
+                        new FluidInteractionDelegate(world, neighborPos, output.getDefaultState())));
                 return;
             }
             //</editor-fold>
