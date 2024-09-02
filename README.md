@@ -6,9 +6,19 @@ Example Script (lava & water like interaction)
 #reloadable
 
 import mods.fluidintetweaker.FITweaker;
+import mods.fluidintetweaker.event.CustomFluidInteractionEvent;
 
-//addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock)
+// since 1.16.0
+import mods.zenutils.EventPriority;
 
+// vanilla like lava & water interaction where cobalt acts as lava
 FITweaker.addRecipe(<liquid:cobalt>, false, <liquid:water>, <item:minecraft:stone>.asBlock());
 FITweaker.addRecipe(<liquid:cobalt>, true, <liquid:water>, <item:minecraft:obsidian>.asBlock());
+
+// prevent all fluid interactions
+events.register(function(event as CustomFluidInteractionEvent)
+{
+    event.cancel();
+
+}, EventPriority.highest(), true);
 ```
