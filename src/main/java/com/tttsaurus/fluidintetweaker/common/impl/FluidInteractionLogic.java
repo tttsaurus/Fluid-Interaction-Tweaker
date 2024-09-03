@@ -20,6 +20,9 @@ public final class FluidInteractionLogic
     public static void onNeighborNotify(NeighborNotifyEvent event)
     {
         World world = event.getWorld();
+
+        if (world.isRemote) return;
+
         BlockPos pos = event.getPos();
         Block block = event.getState().getBlock();
 
