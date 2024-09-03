@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
+import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionRecipeManager;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
@@ -135,9 +136,7 @@ public final class Actions
             for (int i = 0; i < length; i++)
             {
                 Parameters p = parametersList.get(i);
-                builder.append(p.ingredientA.toString())
-                       .append("+")
-                       .append(p.ingredientB.toString());
+                builder.append(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(p.ingredientA, p.ingredientB));
                 if (i != length - 1) builder.append(", ");
             }
             return builder.toString();

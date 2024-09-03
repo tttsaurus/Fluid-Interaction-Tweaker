@@ -1,6 +1,7 @@
 package com.tttsaurus.fluidintetweaker.common.impl;
 
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import net.minecraft.block.Block;
 import javax.annotation.Nullable;
@@ -32,17 +33,17 @@ public final class FluidInteractionRecipeManager
     }
     public static boolean recipeExists(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
-        return recipeDict.containsKey(ingredientA.toString() + "+" + ingredientB.toString());
+        return recipeDict.containsKey(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
     }
     public static Block getRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
-        return recipeDict.get(ingredientA.toString() + "+" + ingredientB.toString());
+        return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
     }
     @Nullable
     public static Block getNullableRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
         if (recipeExists(ingredientA, ingredientB))
-            return recipeDict.get(ingredientA.toString() + "+" + ingredientB.toString());
+            return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
         else
             return null;
     }
@@ -58,7 +59,7 @@ public final class FluidInteractionRecipeManager
         recipeIngredientBList.clear();
         for (String key: recipeDict.keySet())
         {
-            String[] strings = key.split("\\+");
+            String[] strings = StringRecipeProtocol.splitRecipeKeyToTwoRawStrings(key);
             if (!recipeIngredientAList.contains(strings[0])) recipeIngredientAList.add(strings[0]);
             if (!recipeIngredientBList.contains(strings[1])) recipeIngredientBList.add(strings[1]);
         }
@@ -67,7 +68,7 @@ public final class FluidInteractionRecipeManager
     {
         String ingredientAKey = ingredientA.toString();
         String ingredientBKey = ingredientB.toString();
-        String key = ingredientAKey + "+" + ingredientBKey;
+        String key = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
         if (recipeDict.containsKey(key))
             throw new FluidInteractionTweakerRuntimeException("FluidInteractionRecipeManager.addRecipe() fails to execute. The same fluid interaction recipe " + key + " has been added.");
         else
@@ -79,7 +80,7 @@ public final class FluidInteractionRecipeManager
     }
     public static void removeRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB) throws FluidInteractionTweakerRuntimeException
     {
-        String key = ingredientA.toString() + "+" + ingredientB.toString();
+        String key = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
         if (recipeDict.containsKey(key))
             recipeDict.remove(key);
         else

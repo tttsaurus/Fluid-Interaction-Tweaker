@@ -38,6 +38,12 @@ public class MCCustomFluidInteractionEvent implements ICustomFluidInteractionEve
     }
 
     @Override
+    public String getFluidInteractionRecipe()
+    {
+        return event.getFluidInteractionRecipe();
+    }
+
+    @Override
     public IWorld getWorld()
     {
         World world = event.getWorld();
