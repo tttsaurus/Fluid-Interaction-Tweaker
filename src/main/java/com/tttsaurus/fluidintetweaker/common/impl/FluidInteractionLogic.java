@@ -57,7 +57,12 @@ public final class FluidInteractionLogic
                 // fluid below (ingredient2) turns to a block
                 ingredient1.setIsFluidSource(false);
 
+                InteractionIngredient ingredientA, ingredientB;
                 Block output = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2);
+                if (output == null)
+                { ingredientA = ingredient2; ingredientB = ingredient1; }
+                else
+                { ingredientA = ingredient1; ingredientB = ingredient2; }
                 output = output == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1) : output;
                 if (output == null) continue;
 
@@ -66,8 +71,8 @@ public final class FluidInteractionLogic
                         neighborPos,
                         world.getBlockState(neighborPos),
                         ingredient2.getFluid(),
-                        ingredient1, // A
-                        ingredient2, // B
+                        ingredientA,
+                        ingredientB,
                         output,
                         new FluidInteractionDelegate(world, neighborPos, output.getDefaultState())));
                 return;
@@ -101,7 +106,12 @@ public final class FluidInteractionLogic
                 // fluid below (ingredient1) turns to a block
                 ingredient2.setIsFluidSource(false);
 
+                InteractionIngredient ingredientA, ingredientB;
                 Block output = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1);
+                if (output == null)
+                { ingredientA = ingredient1; ingredientB = ingredient2; }
+                else
+                { ingredientA = ingredient2; ingredientB = ingredient1; }
                 output = output == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2) : output;
                 if (output == null) continue;
 
@@ -110,8 +120,8 @@ public final class FluidInteractionLogic
                         pos,
                         world.getBlockState(pos),
                         ingredient1.getFluid(),
-                        ingredient2, // A
-                        ingredient1, // B
+                        ingredientA,
+                        ingredientB,
                         output,
                         new FluidInteractionDelegate(world, pos, output.getDefaultState())));
                 return;
