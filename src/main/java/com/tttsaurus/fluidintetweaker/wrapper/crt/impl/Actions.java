@@ -16,7 +16,7 @@ import java.util.*;
 public final class Actions
 {
     @Reloadable
-    public static final class AddRecipeAction implements IAction
+    public static final class AddRecipesAction implements IAction
     {
         private static final class Parameters
         {
@@ -32,6 +32,7 @@ public final class Actions
             }
         }
         private final List<Parameters> parametersList = new ArrayList<>();
+        public final List<String> recipes = new ArrayList<>();
 
         //<editor-fold desc="InteractionIngredient constructor wrappers">
         private InteractionIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
@@ -45,14 +46,14 @@ public final class Actions
         //</editor-fold>
 
         //<editor-fold desc="fluid & fluid recipes">
-        public AddRecipeAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlock outputBlock)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, isSourceB),
                     (Block)outputBlock.getDefinition().getInternal()));
         }
-        public AddRecipeAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, isSourceA),
@@ -63,7 +64,7 @@ public final class Actions
                     buildIngredient(liquidSurrounding, false),
                     (Block)outputBlock.getDefinition().getInternal()));
         }
-        public AddRecipeAction(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlock outputBlock)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, true),
@@ -85,14 +86,14 @@ public final class Actions
         //</editor-fold>
 
         //<editor-fold desc="fluid & block recipes">
-        public AddRecipeAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, IBlock outputBlock)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(blockSurrounding),
                     (Block)outputBlock.getDefinition().getInternal()));
         }
-        public AddRecipeAction(ILiquidStack liquidInitiator, IBlock blockSurrounding, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, IBlock blockSurrounding, IBlock outputBlock)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, true),
@@ -121,10 +122,11 @@ public final class Actions
         {
             for (Parameters parameters: parametersList)
             {
-                FluidInteractionRecipeManager.addRecipe(
+                String recipe = FluidInteractionRecipeManager.addRecipe(
                         parameters.ingredientA,
                         parameters.ingredientB,
                         parameters.outputBlock);
+                recipes.add(recipe);
             }
         }
         @Override
@@ -132,11 +134,10 @@ public final class Actions
         {
             StringBuilder builder = new StringBuilder();
             builder.append("Added fluid interaction recipe(s): ");
-            int length = parametersList.size();
+            int length = recipes.size();
             for (int i = 0; i < length; i++)
             {
-                Parameters p = parametersList.get(i);
-                builder.append(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(p.ingredientA, p.ingredientB));
+                builder.append(recipes.get(i));
                 if (i != length - 1) builder.append(", ");
             }
             return builder.toString();

@@ -64,7 +64,7 @@ public final class FluidInteractionRecipeManager
             if (!recipeIngredientBList.contains(strings[1])) recipeIngredientBList.add(strings[1]);
         }
     }
-    public static void addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock) throws FluidInteractionTweakerRuntimeException
+    public static String addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock) throws FluidInteractionTweakerRuntimeException
     {
         String ingredientAKey = ingredientA.toString();
         String ingredientBKey = ingredientB.toString();
@@ -76,6 +76,7 @@ public final class FluidInteractionRecipeManager
             if (!recipeIngredientAList.contains(ingredientAKey)) recipeIngredientAList.add(ingredientAKey);
             if (!recipeIngredientBList.contains(ingredientBKey)) recipeIngredientBList.add(ingredientBKey);
             recipeDict.put(key, outputBlock);
+            return key;
         }
     }
     public static void removeRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB) throws FluidInteractionTweakerRuntimeException
