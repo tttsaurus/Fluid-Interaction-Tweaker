@@ -4,16 +4,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class InteractionIngredient
 {
-    private static final Fluid FLUID_WATER = new Fluid("water", new ResourceLocation("minecraft:water"), new ResourceLocation("minecraft:flowing_water"));
-    private static final Fluid FLUID_LAVA = new Fluid("lava", new ResourceLocation("minecraft:lava"), new ResourceLocation("minecraft:flowing_lava"));
+    public static final InteractionIngredient SOURCE_WATER = new InteractionIngredient(FluidRegistry.WATER, true);
+    public static final InteractionIngredient FLOWING_WATER = new InteractionIngredient(FluidRegistry.WATER, false);
+    public static final InteractionIngredient SOURCE_LAVA = new InteractionIngredient(FluidRegistry.LAVA, true);
+    public static final InteractionIngredient FLOWING_LAVA = new InteractionIngredient(FluidRegistry.LAVA, false);
 
     private InteractionIngredientType ingredientType;
     private Fluid fluid;
@@ -76,12 +78,12 @@ public class InteractionIngredient
             Material mat = null;
             if (name.equals("minecraft:water") || name.equals("minecraft:flowing_water"))
             {
-                fluid = FLUID_WATER;
+                fluid = FluidRegistry.WATER;
                 mat = Material.WATER;
             }
             else if (name.equals("minecraft:lava") || name.equals("minecraft:flowing_lava"))
             {
-                fluid = FLUID_LAVA;
+                fluid = FluidRegistry.LAVA;
                 mat = Material.LAVA;
             }
 

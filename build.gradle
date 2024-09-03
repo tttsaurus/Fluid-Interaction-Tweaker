@@ -67,6 +67,14 @@ repositories {
             includeGroup "curse.maven"
         }
     }
+    maven {
+        name = "JEI Progwml6 Maven"
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        name = "JEI Maven"
+        url = "modmaven.k-4u.nl"
+    }
 }
 
 dependencies {
@@ -74,6 +82,9 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
+
+    compileOnly "mezz.jei:jei_1.12.2:${jei_version}:api"
+    runtimeOnly "mezz.jei:jei_1.12.2:${jei_version}:api"
 
     // zenutils-1.12.8
     compileOnly "curse.maven:zenutils-401178:4394263"

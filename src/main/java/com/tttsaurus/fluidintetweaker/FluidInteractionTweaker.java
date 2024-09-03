@@ -8,8 +8,11 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 import com.tttsaurus.fluidintetweaker.proxy.CommonProxy;
 
-@Mod(modid = FluidInteractionTweaker.MODID, name = FluidInteractionTweaker.NAME, version = FluidInteractionTweaker.VERSION)
-public class FluidInteractionTweaker
+@Mod(modid = FluidInteractionTweaker.MODID,
+     name = FluidInteractionTweaker.NAME,
+     version = FluidInteractionTweaker.VERSION,
+     dependencies = "after:jei@[4.12,)")
+public final class FluidInteractionTweaker
 {
     public static final String MODID = "fluidintetweaker";
     public static final String NAME = "Fluid Interaction Tweaker";
@@ -20,7 +23,7 @@ public class FluidInteractionTweaker
             serverSide = "com.tttsaurus.fluidintetweaker.proxy.ServerProxy")
     private static CommonProxy proxy;
 
-    private static Logger logger;
+    public static Logger logger;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -33,6 +36,6 @@ public class FluidInteractionTweaker
     public void init(FMLInitializationEvent event)
     {
         proxy.init(event, logger);
-        logger.info("Fluid Interaction Tweaker initialized");
+        logger.info("Fluid Interaction Tweaker initialized.");
     }
 }

@@ -17,7 +17,7 @@ public class CommonProxy
 
     public void init(FMLInitializationEvent event, Logger logger)
     {
-        logger.info("Fluid Interaction Tweaker starts initializing");
+        logger.info("Fluid Interaction Tweaker starts initializing.");
 
         MinecraftForge.EVENT_BUS.register(FluidInteractionLogic.class);
         MinecraftForge.EVENT_BUS.register(FluidInteractionEventHandler.class);
