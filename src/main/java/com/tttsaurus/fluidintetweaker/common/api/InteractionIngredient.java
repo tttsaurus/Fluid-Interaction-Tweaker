@@ -20,14 +20,16 @@ public class InteractionIngredient
     private boolean isFluidSource;
     private Block block;
 
-    // getter
+    //<editor-fold desc="getter">
     public InteractionIngredientType getIngredientType() { return ingredientType; }
     public Fluid getFluid() { return fluid; }
     public boolean getIsFluidSource() { return isFluidSource; }
     public Block getBlock() { return block; }
+    //</editor-fold>
 
-    // setter
+    //<editor-fold desc="setter">
     public void setIsFluidSource(boolean isFluidSource) { this.isFluidSource = isFluidSource; }
+    //</editor-fold>
 
     @Override
     public String toString()

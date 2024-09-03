@@ -30,9 +30,9 @@ public final class Actions
                 this.outputBlock = outputBlock;
             }
         }
-
         private final List<Parameters> parametersList = new ArrayList<>();
 
+        //<editor-fold desc="InteractionIngredient constructor wrappers">
         private InteractionIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
         {
             return new InteractionIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
@@ -41,8 +41,9 @@ public final class Actions
         {
             return new InteractionIngredient((Block)block.getDefinition().getInternal());
         }
+        //</editor-fold>
 
-        //<editor-fold desc="fluid & fluid recipe">
+        //<editor-fold desc="fluid & fluid recipes">
         public AddRecipeAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlock outputBlock)
         {
             parametersList.add(new Parameters(
@@ -82,7 +83,7 @@ public final class Actions
         }
         //</editor-fold>
 
-        //<editor-fold desc="fluid & block recipe">
+        //<editor-fold desc="fluid & block recipes">
         public AddRecipeAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, IBlock outputBlock)
         {
             parametersList.add(new Parameters(
@@ -128,7 +129,18 @@ public final class Actions
         @Override
         public String describe()
         {
-            return "Add fluid interaction recipes";
+            StringBuilder builder = new StringBuilder();
+            builder.append("Added fluid interaction recipe(s): ");
+            int length = parametersList.size();
+            for (int i = 0; i < length; i++)
+            {
+                Parameters p = parametersList.get(i);
+                builder.append(p.ingredientA.toString())
+                       .append("+")
+                       .append(p.ingredientB.toString());
+                if (i != length - 1) builder.append(", ");
+            }
+            return builder.toString();
         }
     }
 
@@ -158,7 +170,7 @@ public final class Actions
         @Override
         public String describe()
         {
-            return "Remove all fluid interaction recipes";
+            return "Removed all fluid interaction recipes";
         }
     }
 }
