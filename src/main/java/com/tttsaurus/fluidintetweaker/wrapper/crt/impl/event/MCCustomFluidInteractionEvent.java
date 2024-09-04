@@ -38,9 +38,9 @@ public class MCCustomFluidInteractionEvent implements ICustomFluidInteractionEve
     }
 
     @Override
-    public String getFluidInteractionRecipe()
+    public String getFluidInteractionRecipeKey()
     {
-        return event.getFluidInteractionRecipe();
+        return event.getFluidInteractionRecipeKey();
     }
 
     @Override

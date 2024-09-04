@@ -21,6 +21,6 @@ public interface ICustomFluidInteractionEvent extends IEventCancelable, IBlockEv
     @ZenGetter("liquidBeforeInteraction")
     ILiquidDefinition getFluidBeforeInteraction();
 
-    @ZenGetter("liquidInteractionRecipe")
-    String getFluidInteractionRecipe();
+    @ZenGetter("liquidInteractionRecipeKey")
+    String getFluidInteractionRecipeKey();
 }

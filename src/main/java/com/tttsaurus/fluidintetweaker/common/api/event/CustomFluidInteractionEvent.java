@@ -25,7 +25,7 @@ public class CustomFluidInteractionEvent extends BlockEvent
     public InteractionIngredient getIngredientA() { return ingredientA; }
     public InteractionIngredient getIngredientB() { return ingredientB; }
     public IDelegate getDelegate() { return delegate; }
-    public String getFluidInteractionRecipe() { return StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB); }
+    public String getFluidInteractionRecipeKey() { return StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB); }
 
     public CustomFluidInteractionEvent(World world, BlockPos pos, IBlockState fluidBlockStateBeforeInteraction, Fluid fluidBeforeInteraction, InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, IDelegate delegate)
     {

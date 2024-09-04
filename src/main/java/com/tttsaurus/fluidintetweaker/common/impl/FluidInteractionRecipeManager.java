@@ -1,9 +1,11 @@
 package com.tttsaurus.fluidintetweaker.common.impl;
 
+import com.tttsaurus.fluidintetweaker.client.jefi.impl.JEFIPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import net.minecraft.block.Block;
+import net.minecraftforge.fml.common.Loader;
 import javax.annotation.Nullable;
 import java.util.*;
 
@@ -20,7 +22,7 @@ public final class FluidInteractionRecipeManager
     private static final List<String> recipeIngredientAList = new ArrayList<>();
     private static final List<String> recipeIngredientBList = new ArrayList<>();
 
-    private static HashMap<String, Block> recipeDict = new HashMap<>();
+    private static final HashMap<String, Block> recipeDict = new HashMap<>();
 
     //<editor-fold desc="methods for FluidEventHandler">
     public static boolean ingredientAExists(InteractionIngredient ingredientA)
@@ -50,9 +52,6 @@ public final class FluidInteractionRecipeManager
     //</editor-fold>
 
     //<editor-fold desc="methods for wrappers">
-    public static HashMap<String, Block> getAllRecipes() { return recipeDict; }
-    public static void setAllRecipes(HashMap<String, Block> anotherRecipeDict) { recipeDict = anotherRecipeDict; }
-
     public static void refreshIngredientABLists()
     {
         recipeIngredientAList.clear();
@@ -76,6 +75,10 @@ public final class FluidInteractionRecipeManager
             if (!recipeIngredientAList.contains(ingredientAKey)) recipeIngredientAList.add(ingredientAKey);
             if (!recipeIngredientBList.contains(ingredientBKey)) recipeIngredientBList.add(ingredientBKey);
             recipeDict.put(key, outputBlock);
+
+            // jei compat
+            JEFIPlugin.addRecipeWrapper(key, ingredientA, ingredientB, outputBlock);
+
             return key;
         }
     }

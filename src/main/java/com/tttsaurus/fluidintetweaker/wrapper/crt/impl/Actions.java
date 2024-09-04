@@ -32,7 +32,7 @@ public final class Actions
             }
         }
         private final List<Parameters> parametersList = new ArrayList<>();
-        public final List<String> recipes = new ArrayList<>();
+        public final List<String> recipeKeys = new ArrayList<>();
 
         //<editor-fold desc="InteractionIngredient constructor wrappers">
         private InteractionIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
@@ -126,7 +126,7 @@ public final class Actions
                         parameters.ingredientA,
                         parameters.ingredientB,
                         parameters.outputBlock);
-                recipes.add(recipe);
+                recipeKeys.add(recipe);
             }
         }
         @Override
@@ -134,10 +134,13 @@ public final class Actions
         {
             StringBuilder builder = new StringBuilder();
             builder.append("Added fluid interaction recipe(s): ");
-            int length = recipes.size();
+            int length = parametersList.size();
             for (int i = 0; i < length; i++)
             {
-                builder.append(recipes.get(i));
+                Parameters p = parametersList.get(i);
+                builder.append(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(p.ingredientA, p.ingredientB))
+                       .append("->")
+                       .append(p.outputBlock.toString());
                 if (i != length - 1) builder.append(", ");
             }
             return builder.toString();

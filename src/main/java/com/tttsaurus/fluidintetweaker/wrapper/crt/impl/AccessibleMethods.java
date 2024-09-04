@@ -18,21 +18,21 @@ public final class AccessibleMethods
     {
         Actions.AddRecipesAction action = new Actions.AddRecipesAction(liquidInitiator, isSourceA, liquidSurrounding, isSourceB, outputBlock);
         CraftTweakerAPI.apply(action);
-        return action.recipes;
+        return action.recipeKeys;
     }
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock)
     {
         Actions.AddRecipesAction action = new Actions.AddRecipesAction(liquidInitiator, isSourceA, liquidSurrounding, outputBlock);
         CraftTweakerAPI.apply(action);
-        return action.recipes;
+        return action.recipeKeys;
     }
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlock outputBlock)
     {
         Actions.AddRecipesAction action = new Actions.AddRecipesAction(liquidInitiator, liquidSurrounding, outputBlock);
         CraftTweakerAPI.apply(action);
-        return action.recipes;
+        return action.recipeKeys;
     }
 
     @ZenMethod
@@ -40,14 +40,14 @@ public final class AccessibleMethods
     {
         Actions.AddRecipesAction action = new Actions.AddRecipesAction(liquidInitiator, isSourceA, blockSurrounding, outputBlock);
         CraftTweakerAPI.apply(action);
-        return action.recipes;
+        return action.recipeKeys;
     }
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, IBlock blockSurrounding, IBlock outputBlock)
     {
         Actions.AddRecipesAction action = new Actions.AddRecipesAction(liquidInitiator, blockSurrounding, outputBlock);
         CraftTweakerAPI.apply(action);
-        return action.recipes;
+        return action.recipeKeys;
     }
     //</editor-fold>
 

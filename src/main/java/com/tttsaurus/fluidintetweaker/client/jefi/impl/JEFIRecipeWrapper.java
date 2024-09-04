@@ -18,9 +18,11 @@ import java.util.Arrays;
 @SideOnly(Side.CLIENT)
 public class JEFIRecipeWrapper implements IRecipeWrapper
 {
-    protected InteractionIngredient ingredientA;
-    protected InteractionIngredient ingredientB;
-    protected Block outputBlock;
+    public InteractionIngredient ingredientA;
+    public boolean isAnyFluidStateA = false;
+    public InteractionIngredient ingredientB;
+    public boolean isAnyFluidStateB = false;
+    public Block outputBlock;
 
     public JEFIRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock)
     {
@@ -50,12 +52,15 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
     {
-        String source_text = I18n.format("fluidintetweaker.jefi.fluid_source");
-        String flowing_text = I18n.format("fluidintetweaker.jefi.fluid_flowing");
-
-        minecraft.fontRenderer.drawString(ingredientA.getIsFluidSource() ? source_text : flowing_text, 7, 35, Color.GRAY.getRGB());
+        if (!isAnyFluidStateA)
+            minecraft.fontRenderer.drawString(ingredientA.getIsFluidSource() ?
+                    I18n.format("fluidintetweaker.jefi.fluid_source") :
+                    I18n.format("fluidintetweaker.jefi.fluid_flowing"), 7, 35, Color.GRAY.getRGB());
 
         if (ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
-            minecraft.fontRenderer.drawString(ingredientB.getIsFluidSource() ? source_text : flowing_text, 47, 35, Color.GRAY.getRGB());
+            if (!isAnyFluidStateB)
+                minecraft.fontRenderer.drawString(ingredientB.getIsFluidSource() ?
+                        I18n.format("fluidintetweaker.jefi.fluid_source") :
+                        I18n.format("fluidintetweaker.jefi.fluid_flowing"), 47, 35, Color.GRAY.getRGB());
     }
 }
