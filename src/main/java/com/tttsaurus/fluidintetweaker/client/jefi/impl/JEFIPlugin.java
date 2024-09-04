@@ -2,6 +2,7 @@ package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
@@ -38,15 +39,18 @@ public class JEFIPlugin implements IModPlugin
         }
         ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
 
-        ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
-        newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
-        if (recipeWrapperDict.containsKey(newKey) &&
-            recipeWrapperDict.get(newKey).outputBlock.toString().equals(outputBlock.toString()))
+        if (ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {
-            recipeWrapperDict.remove(newKey);
-            recipeWrapper.isAnyFluidStateB = true;
+            ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
+            newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
+            if (recipeWrapperDict.containsKey(newKey) &&
+                recipeWrapperDict.get(newKey).outputBlock.toString().equals(outputBlock.toString()))
+            {
+                recipeWrapperDict.remove(newKey);
+                recipeWrapper.isAnyFluidStateB = true;
+            }
+            ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
         }
-        ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
     }
 
     @Override
