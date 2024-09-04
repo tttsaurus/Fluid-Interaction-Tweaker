@@ -24,25 +24,25 @@ public final class FluidInteractionRecipeManager
 
     private static final HashMap<String, Block> recipeDict = new HashMap<>();
 
-    //<editor-fold desc="methods for FluidEventHandler">
-    public static boolean ingredientAExists(InteractionIngredient ingredientA)
+    //<editor-fold desc="methods for FluidInteractionLogic">
+    static boolean ingredientAExists(InteractionIngredient ingredientA)
     {
         return recipeIngredientAList.contains(ingredientA.toString());
     }
-    public static boolean ingredientBExists(InteractionIngredient ingredientB)
+    static boolean ingredientBExists(InteractionIngredient ingredientB)
     {
         return recipeIngredientBList.contains(ingredientB.toString());
     }
-    public static boolean recipeExists(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    static boolean recipeExists(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
         return recipeDict.containsKey(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
     }
-    public static Block getRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    static Block getRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
         return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
     }
     @Nullable
-    public static Block getNullableRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    static Block getNullableRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
         if (recipeExists(ingredientA, ingredientB))
             return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));

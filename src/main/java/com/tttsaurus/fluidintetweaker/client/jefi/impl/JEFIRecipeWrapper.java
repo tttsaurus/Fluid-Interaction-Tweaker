@@ -18,11 +18,11 @@ import java.util.Arrays;
 @SideOnly(Side.CLIENT)
 public class JEFIRecipeWrapper implements IRecipeWrapper
 {
-    public InteractionIngredient ingredientA;
-    public boolean isAnyFluidStateA = false;
-    public InteractionIngredient ingredientB;
-    public boolean isAnyFluidStateB = false;
-    public Block outputBlock;
+    protected InteractionIngredient ingredientA;
+    protected boolean isAnyFluidStateA = false;
+    protected InteractionIngredient ingredientB;
+    protected boolean isAnyFluidStateB = false;
+    protected Block outputBlock;
 
     public JEFIRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock)
     {
