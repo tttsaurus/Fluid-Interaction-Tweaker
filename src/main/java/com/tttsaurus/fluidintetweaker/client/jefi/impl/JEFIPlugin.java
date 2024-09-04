@@ -8,6 +8,7 @@ import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.*;
@@ -16,8 +17,12 @@ import java.util.*;
 @JEIPlugin
 public class JEFIPlugin implements IModPlugin
 {
-    private static final HashMap<String, JEFIRecipeWrapper> recipeWrapperDict = new HashMap<>();
+    private static final LinkedHashMap<String, JEFIRecipeWrapper> recipeWrapperDict = new LinkedHashMap<>();
 
+    private static void addRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock)
+    {
+        addRecipeWrapper(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB), ingredientA, ingredientB, outputBlock);
+    }
     public static void addRecipeWrapper(String recipeKey, InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock)
     {
         JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(ingredientA, ingredientB, outputBlock);
@@ -47,8 +52,10 @@ public class JEFIPlugin implements IModPlugin
     @Override
     public void register(IModRegistry registry)
     {
-        //recipeWrapperList.add(new JEFIRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.OBSIDIAN));
-        //recipeWrapperList.add(new JEFIRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.OBSIDIAN));
+        addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.OBSIDIAN);
+        addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.OBSIDIAN);
+        addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.COBBLESTONE);
+        addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.COBBLESTONE);
 
         registry.addRecipes(recipeWrapperDict.values(), JustEnoughFluidInteractions.UID);
     }
