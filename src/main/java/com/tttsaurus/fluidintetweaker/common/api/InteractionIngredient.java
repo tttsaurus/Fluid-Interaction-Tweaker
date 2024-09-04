@@ -2,8 +2,6 @@ package com.tttsaurus.fluidintetweaker.common.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.BlockStaticLiquid;
-import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -12,6 +10,10 @@ import net.minecraftforge.fluids.FluidRegistry;
 
 public class InteractionIngredient
 {
+    public static final String KEYWORD_BLOCK = "BLOCK";
+    public static final String KEYWORD_FLUID_SOURCE = "FLUID_SOURCE";
+    public static final String KEYWORD_FLUID_FLOWING = "FLUID_FLOWING";
+
     public static final InteractionIngredient SOURCE_WATER = new InteractionIngredient(FluidRegistry.WATER, true);
     public static final InteractionIngredient FLOWING_WATER = new InteractionIngredient(FluidRegistry.WATER, false);
     public static final InteractionIngredient SOURCE_LAVA = new InteractionIngredient(FluidRegistry.LAVA, true);
@@ -37,13 +39,13 @@ public class InteractionIngredient
     public String toString()
     {
         if (ingredientType == InteractionIngredientType.BLOCK)
-            return "BLOCK:" + block.getRegistryName().toString();
+            return KEYWORD_BLOCK + ":" + block.getRegistryName().toString();
         else if (ingredientType == InteractionIngredientType.FLUID)
         {
             if (isFluidSource)
-                return "FLUID_SOURCE:" + fluid.getName();
+                return KEYWORD_FLUID_SOURCE + ":" + fluid.getName();
             else
-                return "FLUID_FLOWING:" + fluid.getName();
+                return KEYWORD_FLUID_FLOWING + ":" + fluid.getName();
         }
         else
             return null;
@@ -75,20 +77,12 @@ public class InteractionIngredient
         {
             ingredientType = InteractionIngredientType.FLUID;
             String name = block.getRegistryName().toString();
-            Material mat = null;
             if (name.equals("minecraft:water") || name.equals("minecraft:flowing_water"))
-            {
                 fluid = FluidRegistry.WATER;
-                mat = Material.WATER;
-            }
             else if (name.equals("minecraft:lava") || name.equals("minecraft:flowing_lava"))
-            {
                 fluid = FluidRegistry.LAVA;
-                mat = Material.LAVA;
-            }
 
-            // todo: fix bad vanilla source fluid check
-            isFluidSource = (block.getBlockLiquidHeight(world, pos, world.getBlockState(pos), mat) >= 0.88f) && (block instanceof BlockStaticLiquid);
+            isFluidSource = world.getBlockState(pos).getValue(BlockLiquid.LEVEL) == 0;
         }
         // modded fluid
         else if (block instanceof BlockFluidBase)
