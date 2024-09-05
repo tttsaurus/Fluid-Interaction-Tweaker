@@ -24,6 +24,12 @@ public class MCCustomFluidInteractionEvent implements ICustomFluidInteractionEve
     }
 
     @Override
+    public boolean getIsFluidAboveAndBelowCase()
+    {
+        return event.getIsFluidAboveAndBelowCase();
+    }
+
+    @Override
     public IBlockState getFluidBlockStateBeforeInteraction()
     {
         net.minecraft.block.state.IBlockState state = event.getFluidBlockStateBeforeInteraction();

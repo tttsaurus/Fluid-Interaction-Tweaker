@@ -15,6 +15,9 @@ public interface ICustomFluidInteractionEvent extends IEventCancelable, IBlockEv
     // it seems that crt doesn't like the field name fluid
     // I follow the pattern
 
+    @ZenGetter("isLiquidAboveAndBelowCase")
+    boolean getIsFluidAboveAndBelowCase();
+
     @ZenGetter("liquidBlockStateBeforeInteraction")
     IBlockState getFluidBlockStateBeforeInteraction();
 

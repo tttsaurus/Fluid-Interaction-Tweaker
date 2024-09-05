@@ -72,6 +72,7 @@ public final class FluidInteractionLogic
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
                         neighborPos,
+                        true,
                         world.getBlockState(neighborPos),
                         ingredient2.getFluid(),
                         ingredientA,
@@ -88,6 +89,7 @@ public final class FluidInteractionLogic
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
                         pos,
+                        false,
                         world.getBlockState(pos),
                         ingredient1.getFluid(),
                         ingredient1, // A
@@ -121,6 +123,7 @@ public final class FluidInteractionLogic
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
                         pos,
+                        true,
                         world.getBlockState(pos),
                         ingredient1.getFluid(),
                         ingredientA,
@@ -137,6 +140,7 @@ public final class FluidInteractionLogic
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
                         neighborPos,
+                        false,
                         world.getBlockState(neighborPos),
                         ingredient2.getFluid(),
                         ingredient2, // A

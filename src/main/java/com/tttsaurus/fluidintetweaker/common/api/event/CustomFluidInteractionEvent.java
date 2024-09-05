@@ -15,12 +15,14 @@ import net.minecraftforge.fml.common.eventhandler.Cancelable;
 @Cancelable
 public class CustomFluidInteractionEvent extends BlockEvent
 {
+    private final boolean isFluidAboveAndBelowCase;
     private final IBlockState fluidBlockStateBeforeInteraction;
     private final Fluid fluidBeforeInteraction;
     private final InteractionIngredient ingredientA;
     private final InteractionIngredient ingredientB;
     private final FluidInteractionDelegate delegate;
 
+    public boolean getIsFluidAboveAndBelowCase() { return isFluidAboveAndBelowCase; }
     public IBlockState getFluidBlockStateBeforeInteraction() { return fluidBlockStateBeforeInteraction; }
     public Fluid getFluidBeforeInteraction() { return fluidBeforeInteraction; }
     public InteractionIngredient getIngredientA() { return ingredientA; }
@@ -28,9 +30,10 @@ public class CustomFluidInteractionEvent extends BlockEvent
     public FluidInteractionDelegate getDelegate() { return delegate; }
     public String getFluidInteractionRecipeKey() { return StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB); }
 
-    public CustomFluidInteractionEvent(World world, BlockPos pos, IBlockState fluidBlockStateBeforeInteraction, Fluid fluidBeforeInteraction, InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, FluidInteractionDelegate delegate)
+    public CustomFluidInteractionEvent(World world, BlockPos pos, boolean isFluidAboveAndBelowCase, IBlockState fluidBlockStateBeforeInteraction, Fluid fluidBeforeInteraction, InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, FluidInteractionDelegate delegate)
     {
         super(world, pos, outputBlock.getDefaultState());
+        this.isFluidAboveAndBelowCase = isFluidAboveAndBelowCase;
         this.fluidBlockStateBeforeInteraction = fluidBlockStateBeforeInteraction;
         this.fluidBeforeInteraction = fluidBeforeInteraction;
         this.ingredientA = ingredientA;
