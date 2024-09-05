@@ -27,18 +27,14 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     protected Block outputBlock;
 
     private String extraInfoLocalizationKey = null;
-    private ItemStack outputItemStack;
 
     public JEFIRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey)
     {
         this.ingredientA = ingredientA;
         this.ingredientB = ingredientB;
         this.outputBlock = outputBlock;
-        if (extraInfoLocalizationKey != null)
-        {
+        if (!(extraInfoLocalizationKey == null || extraInfoLocalizationKey.isEmpty()))
             this.extraInfoLocalizationKey = extraInfoLocalizationKey;
-            outputItemStack = new ItemStack(outputBlock);
-        }
     }
 
     @Override
@@ -90,7 +86,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                     height += 9;
                 }
 
-                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(outputItemStack, width, height, Arrays.asList(lines)));
+                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(new ItemStack(outputBlock), width, height, Arrays.asList(lines)));
             }
     }
 }

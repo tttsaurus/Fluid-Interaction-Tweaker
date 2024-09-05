@@ -63,7 +63,7 @@ public final class FluidInteractionRecipeManager
             if (!recipeIngredientBList.contains(strings[1])) recipeIngredientBList.add(strings[1]);
         }
     }
-    public static String addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock) throws FluidInteractionTweakerRuntimeException
+    public static String addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey) throws FluidInteractionTweakerRuntimeException
     {
         String ingredientAKey = ingredientA.toString();
         String ingredientBKey = ingredientB.toString();
@@ -78,7 +78,7 @@ public final class FluidInteractionRecipeManager
 
             // jei compat
             if (Loader.isModLoaded("jei"))
-                JEFIPlugin.addRecipeWrapper(key, ingredientA, ingredientB, outputBlock, null);
+                JEFIPlugin.addRecipeWrapper(key, ingredientA, ingredientB, outputBlock, extraInfoLocalizationKey);
 
             return key;
         }

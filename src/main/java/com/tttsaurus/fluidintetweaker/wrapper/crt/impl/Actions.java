@@ -23,12 +23,14 @@ public final class Actions
             public InteractionIngredient ingredientA;
             public InteractionIngredient ingredientB;
             public Block outputBlock;
+            public String extraInfoLocalizationKey;
 
-            public Parameters(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock)
+            public Parameters(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey)
             {
                 this.ingredientA = ingredientA;
                 this.ingredientB = ingredientB;
                 this.outputBlock = outputBlock;
+                this.extraInfoLocalizationKey = extraInfoLocalizationKey;
             }
         }
         private final List<Parameters> parametersList = new ArrayList<>();
@@ -46,63 +48,73 @@ public final class Actions
         //</editor-fold>
 
         //<editor-fold desc="fluid & fluid recipes">
-        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlock outputBlock, String extraInfoLocalizationKey)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, isSourceB),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
         }
-        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, true),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, false),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
         }
-        public AddRecipesAction(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(liquidSurrounding, true),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(liquidSurrounding, false),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(liquidSurrounding, true),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(liquidSurrounding, false),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
         }
         //</editor-fold>
 
         //<editor-fold desc="fluid & block recipes">
-        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(blockSurrounding),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
         }
-        public AddRecipesAction(ILiquidStack liquidInitiator, IBlock blockSurrounding, IBlock outputBlock)
+        public AddRecipesAction(ILiquidStack liquidInitiator, IBlock blockSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
         {
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(blockSurrounding),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
             parametersList.add(new Parameters(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(blockSurrounding),
-                    (Block)outputBlock.getDefinition().getInternal()));
+                    (Block)outputBlock.getDefinition().getInternal(),
+                    extraInfoLocalizationKey));
         }
         //</editor-fold>
 
@@ -125,7 +137,8 @@ public final class Actions
                 String recipe = FluidInteractionRecipeManager.addRecipe(
                         parameters.ingredientA,
                         parameters.ingredientB,
-                        parameters.outputBlock);
+                        parameters.outputBlock,
+                        parameters.extraInfoLocalizationKey);
                 recipeKeys.add(recipe);
             }
         }

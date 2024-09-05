@@ -3,9 +3,12 @@ package com.tttsaurus.fluidintetweaker.client.jefi.impl.delegate;
 import com.cleanroommc.modularui.drawable.GuiDraw;
 import com.tttsaurus.fluidintetweaker.common.api.delegate.IDelegate;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import java.awt.*;
 import java.util.List;
 
+@SideOnly(Side.CLIENT)
 public class RenderExtraTooltipDelegate implements IDelegate
 {
     private int x;
