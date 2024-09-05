@@ -1,5 +1,7 @@
 package com.tttsaurus.fluidintetweaker.proxy;
 
+import com.tttsaurus.fluidintetweaker.client.jefi.impl.RenderTooltipEventHandler;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
@@ -16,5 +18,6 @@ public class ClientProxy extends CommonProxy
     public void init(FMLInitializationEvent event, Logger logger)
     {
         super.init(event, logger);
+        MinecraftForge.EVENT_BUS.register(RenderTooltipEventHandler.class);
     }
 }

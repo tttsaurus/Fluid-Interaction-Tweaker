@@ -78,7 +78,7 @@ public final class FluidInteractionRecipeManager
 
             // jei compat
             if (Loader.isModLoaded("jei"))
-                JEFIPlugin.addRecipeWrapper(key, ingredientA, ingredientB, outputBlock);
+                JEFIPlugin.addRecipeWrapper(key, ingredientA, ingredientB, outputBlock, null);
 
             return key;
         }

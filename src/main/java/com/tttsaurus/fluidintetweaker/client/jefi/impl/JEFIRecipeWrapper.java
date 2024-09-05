@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
+import com.tttsaurus.fluidintetweaker.client.jefi.impl.delegate.RenderExtraTooltipDelegate;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import mezz.jei.api.ingredients.IIngredients;
@@ -7,6 +8,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -24,11 +26,19 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     protected boolean isAnyFluidStateB = false;
     protected Block outputBlock;
 
-    public JEFIRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock)
+    private String extraInfoLocalizationKey = null;
+    private ItemStack outputItemStack;
+
+    public JEFIRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey)
     {
         this.ingredientA = ingredientA;
         this.ingredientB = ingredientB;
         this.outputBlock = outputBlock;
+        if (extraInfoLocalizationKey != null)
+        {
+            this.extraInfoLocalizationKey = extraInfoLocalizationKey;
+            outputItemStack = new ItemStack(outputBlock);
+        }
     }
 
     @Override
@@ -62,5 +72,25 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                 minecraft.fontRenderer.drawString(ingredientB.getIsFluidSource() ?
                         I18n.format("fluidintetweaker.jefi.fluid_source") :
                         I18n.format("fluidintetweaker.jefi.fluid_flowing"), 47, 35, Color.GRAY.getRGB());
+
+        if (extraInfoLocalizationKey != null)
+            if (mouseX >= 107 && mouseX <= 124 && mouseY >= 14 && mouseY <= 31)
+            {
+                FontRenderer fr = minecraft.fontRenderer;
+                String text = I18n.format(extraInfoLocalizationKey);
+                String[] lines = text.split("\\\\n");
+
+                int width = 0;
+                int height = 0;
+
+                for (String line: lines)
+                {
+                    int lineWidth = fr.getStringWidth(line);
+                    if (lineWidth > width) width = lineWidth;
+                    height += 9;
+                }
+
+                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(outputItemStack, width, height, Arrays.asList(lines)));
+            }
     }
 }

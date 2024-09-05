@@ -20,13 +20,13 @@ public class JEFIPlugin implements IModPlugin
 {
     private static final LinkedHashMap<String, JEFIRecipeWrapper> recipeWrapperDict = new LinkedHashMap<>();
 
-    private static void addRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock)
+    private static void addRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey)
     {
-        addRecipeWrapper(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB), ingredientA, ingredientB, outputBlock);
+        addRecipeWrapper(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB), ingredientA, ingredientB, outputBlock, extraInfoLocalizationKey);
     }
-    public static void addRecipeWrapper(String recipeKey, InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock)
+    public static void addRecipeWrapper(String recipeKey, InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey)
     {
-        JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(ingredientA, ingredientB, outputBlock);
+        JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(ingredientA, ingredientB, outputBlock, extraInfoLocalizationKey);
         recipeWrapperDict.put(recipeKey, recipeWrapper);
 
         ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
@@ -56,10 +56,10 @@ public class JEFIPlugin implements IModPlugin
     @Override
     public void register(IModRegistry registry)
     {
-        addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.OBSIDIAN);
-        addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.OBSIDIAN);
-        addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.COBBLESTONE);
-        addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.COBBLESTONE);
+        addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.OBSIDIAN, null);
+        addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.OBSIDIAN, null);
+        addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.COBBLESTONE, "fluidintetweaker.jefi.extra_info_for_lava_and_water");
+        addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.COBBLESTONE, "fluidintetweaker.jefi.extra_info_for_lava_and_water");
 
         registry.addRecipes(recipeWrapperDict.values(), JustEnoughFluidInteractions.UID);
     }

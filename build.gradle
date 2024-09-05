@@ -57,12 +57,12 @@ minecraft {
 
 repositories {
     maven {
-        name "CraftTweaker Jared Maven"
-        url "http://maven.blamejared.com/"
+        name = "CraftTweaker Jared Maven"
+        url = "http://maven.blamejared.com/"
     }
     maven {
-        name "CurseForge Maven"
-        url "https://cursemaven.com"
+        name = "CurseForge Maven"
+        url = "https://cursemaven.com"
         content {
             includeGroup "curse.maven"
         }
@@ -75,6 +75,10 @@ repositories {
         name = "JEI Maven"
         url = "modmaven.k-4u.nl"
     }
+    maven {
+        name = 'Cleanroom Maven'
+        url = 'https://maven.cleanroommc.com'
+    }
 }
 
 dependencies {
@@ -85,6 +89,9 @@ dependencies {
 
     compileOnly "mezz.jei:jei_1.12.2:${jei_version}:api"
     runtimeOnly "mezz.jei:jei_1.12.2:${jei_version}:api"
+
+    compileOnly "com.cleanroommc:modularui:2.5.0-rc1"
+    runtimeOnly "com.cleanroommc:modularui:2.5.0-rc1"
 
     // zenutils-1.12.8
     compileOnly "curse.maven:zenutils-401178:4394263"
