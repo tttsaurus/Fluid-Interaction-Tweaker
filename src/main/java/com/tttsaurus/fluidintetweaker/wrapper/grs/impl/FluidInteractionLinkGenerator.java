@@ -13,6 +13,6 @@ public class FluidInteractionLinkGenerator extends BasicLinkGenerator
     @Override
     protected String domain()
     {
-        return "https://github.com/tttsaurus/Fluid-Interaction-Tweaker";
+        return "https://github.com/tttsaurus/Fluid-Interaction-Tweaker/";
     }
 }
