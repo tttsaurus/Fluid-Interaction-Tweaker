@@ -1,0 +1,27 @@
+// Add any additional repositories for your dependencies here
+
+repositories {
+    maven {
+        name = "CraftTweaker Jared Maven"
+        url = "http://maven.blamejared.com/"
+    }
+    maven {
+        name = "CurseForge Maven"
+        url = "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        name = "JEI Progwml6 Maven"
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        name = "JEI Maven"
+        url = "modmaven.k-4u.nl"
+    }
+    maven {
+        name = "Cleanroom Maven"
+        url = "https://maven.cleanroommc.com"
+    }
+}
