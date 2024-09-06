@@ -4,6 +4,7 @@ import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionRecipeManager;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.api.FluidInteractionRecipe;
 import crafttweaker.IAction;
 import crafttweaker.api.block.IBlock;
 import crafttweaker.api.liquid.ILiquidStack;
@@ -18,22 +19,7 @@ public final class Actions
     @Reloadable
     public static final class AddRecipesAction implements IAction
     {
-        private static final class Parameters
-        {
-            public InteractionIngredient ingredientA;
-            public InteractionIngredient ingredientB;
-            public Block outputBlock;
-            public String extraInfoLocalizationKey;
-
-            public Parameters(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey)
-            {
-                this.ingredientA = ingredientA;
-                this.ingredientB = ingredientB;
-                this.outputBlock = outputBlock;
-                this.extraInfoLocalizationKey = extraInfoLocalizationKey;
-            }
-        }
-        private final List<Parameters> parametersList = new ArrayList<>();
+        private final List<FluidInteractionRecipe> recipeList = new ArrayList<>();
         public final List<String> recipeKeys = new ArrayList<>();
 
         //<editor-fold desc="InteractionIngredient constructor wrappers">
@@ -50,7 +36,7 @@ public final class Actions
         //<editor-fold desc="fluid & fluid recipes">
         public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlock outputBlock, String extraInfoLocalizationKey)
         {
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, isSourceB),
                     (Block)outputBlock.getDefinition().getInternal(),
@@ -58,12 +44,12 @@ public final class Actions
         }
         public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
         {
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, true),
                     (Block)outputBlock.getDefinition().getInternal(),
                     extraInfoLocalizationKey));
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, false),
                     (Block)outputBlock.getDefinition().getInternal(),
@@ -71,22 +57,22 @@ public final class Actions
         }
         public AddRecipesAction(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
         {
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(liquidSurrounding, true),
                     (Block)outputBlock.getDefinition().getInternal(),
                     extraInfoLocalizationKey));
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(liquidSurrounding, false),
                     (Block)outputBlock.getDefinition().getInternal(),
                     extraInfoLocalizationKey));
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(liquidSurrounding, true),
                     (Block)outputBlock.getDefinition().getInternal(),
                     extraInfoLocalizationKey));
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(liquidSurrounding, false),
                     (Block)outputBlock.getDefinition().getInternal(),
@@ -97,7 +83,7 @@ public final class Actions
         //<editor-fold desc="fluid & block recipes">
         public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
         {
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(blockSurrounding),
                     (Block)outputBlock.getDefinition().getInternal(),
@@ -105,12 +91,12 @@ public final class Actions
         }
         public AddRecipesAction(ILiquidStack liquidInitiator, IBlock blockSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
         {
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(blockSurrounding),
                     (Block)outputBlock.getDefinition().getInternal(),
                     extraInfoLocalizationKey));
-            parametersList.add(new Parameters(
+            recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(blockSurrounding),
                     (Block)outputBlock.getDefinition().getInternal(),
@@ -121,39 +107,28 @@ public final class Actions
         @ReflectionInvoked
         public void undo() throws FluidInteractionTweakerRuntimeException
         {
-            for (Parameters parameters: parametersList)
-            {
-                FluidInteractionRecipeManager.removeRecipe(
-                        parameters.ingredientA,
-                        parameters.ingredientB);
-            }
+            for (FluidInteractionRecipe recipe: recipeList)
+                FluidInteractionRecipeManager.removeRecipe(recipe);
             FluidInteractionRecipeManager.refreshIngredientABLists();
         }
         @Override
         public void apply() throws FluidInteractionTweakerRuntimeException
         {
-            for (Parameters parameters: parametersList)
-            {
-                String recipe = FluidInteractionRecipeManager.addRecipe(
-                        parameters.ingredientA,
-                        parameters.ingredientB,
-                        parameters.outputBlock,
-                        parameters.extraInfoLocalizationKey);
-                recipeKeys.add(recipe);
-            }
+            for (FluidInteractionRecipe recipe: recipeList)
+                recipeKeys.add(FluidInteractionRecipeManager.addRecipe(recipe));
         }
         @Override
         public String describe()
         {
             StringBuilder builder = new StringBuilder();
             builder.append("Added fluid interaction recipe(s): ");
-            int length = parametersList.size();
+            int length = recipeList.size();
             for (int i = 0; i < length; i++)
             {
-                Parameters p = parametersList.get(i);
-                builder.append(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(p.ingredientA, p.ingredientB))
+                FluidInteractionRecipe recipe = recipeList.get(i);
+                builder.append(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(recipe.ingredientA, recipe.ingredientB))
                        .append("->")
-                       .append(p.outputBlock.toString());
+                       .append(recipe.outputBlock.toString());
                 if (i != length - 1) builder.append(", ");
             }
             return builder.toString();

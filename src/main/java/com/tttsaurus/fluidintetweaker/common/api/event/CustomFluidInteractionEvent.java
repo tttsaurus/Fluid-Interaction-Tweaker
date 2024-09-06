@@ -2,7 +2,6 @@ package com.tttsaurus.fluidintetweaker.common.api.event;
 
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
-import com.tttsaurus.fluidintetweaker.common.api.delegate.IDelegate;
 import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

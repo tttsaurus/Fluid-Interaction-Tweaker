@@ -16,7 +16,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenRegister
 @ZenClass("mods.fluidintetweaker.IEventManager")
 @ZenExpansion("crafttweaker.events.IEventManager")
-public abstract class CTEventManager
+public abstract class CrTEventManager
 {
     private static final EventList<ICustomFluidInteractionEvent> customFluidInteractionEventList = new EventList<>();
 
