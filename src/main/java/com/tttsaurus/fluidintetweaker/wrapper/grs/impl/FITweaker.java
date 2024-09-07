@@ -16,8 +16,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 @RegistryDescription(linkGenerator = FluidInteractionTweaker.MODID,
-                     title = "FITweaker",
-                     description = "It enables you to add custom fluid interactions. Advanced interactions can be achieved by listening to the event com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent")
+                     title = "groovyscript.wiki.fluidintetweaker.fitweaker.title",
+                     description = "groovyscript.wiki.fluidintetweaker.fitweaker.description")
 public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
 {
     @RecipeBuilderDescription(example =

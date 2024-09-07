@@ -2,3 +2,6 @@ fluidintetweaker.jefi.category=Fluid Interactions
 fluidintetweaker.jefi.fluid_source=Source
 fluidintetweaker.jefi.fluid_flowing=Flowing
 fluidintetweaker.jefi.extra_info_for_lava_and_water=Forms stone when \nlava is above water
+
+groovyscript.wiki.fluidintetweaker.fitweaker.title=FITweaker
+groovyscript.wiki.fluidintetweaker.fitweaker.description=It enables you to add custom fluid interactions. Advanced interactions can be achieved by listening to the event com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent.
