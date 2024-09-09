@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker.common.impl;
 
+import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.impl.JEFIPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
@@ -82,7 +83,7 @@ public final class FluidInteractionRecipeManager
             recipeDict.put(key, outputBlock);
 
             // jei compat
-            if (Loader.isModLoaded("jei"))
+            if (FluidInteractionTweaker.IS_JEI_LOADED)
                 JEFIPlugin.addRecipeWrapper(key, ingredientA, ingredientB, outputBlock, extraInfoLocalizationKey);
 
             return key;

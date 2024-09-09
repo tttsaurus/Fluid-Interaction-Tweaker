@@ -1,7 +1,10 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl.delegate;
 
 import com.cleanroommc.modularui.drawable.GuiDraw;
+import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.common.api.delegate.IDelegate;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,8 +35,17 @@ public class RenderExtraTooltipDelegate implements IDelegate
     @Override
     public void doAction()
     {
-        GuiDraw.drawTooltipBackground(itemStack, lines, x, y, width, height);
-        for (int i = 0; i < lines.size(); i++)
-            GuiDraw.drawText(lines.get(i), x, y + 9 * i, 1, Color.GRAY.getRGB(), true);
+        if (FluidInteractionTweaker.IS_MODULARUI_LOADED)
+        {
+            GuiDraw.drawTooltipBackground(itemStack, lines, x, y, width, height);
+            for (int i = 0; i < lines.size(); i++)
+                GuiDraw.drawText(lines.get(i), x, y + 9 * i, 1, Color.GRAY.getRGB(), true);
+        }
+        else
+        {
+            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+            for (int i = 0; i < lines.size(); i++)
+                fontRenderer.drawString(lines.get(i), x, y + 9 * i, Color.GRAY.getRGB(), true);
+        }
     }
 }

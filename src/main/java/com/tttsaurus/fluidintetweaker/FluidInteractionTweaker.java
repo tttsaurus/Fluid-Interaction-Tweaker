@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker;
 
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -17,6 +18,9 @@ public final class FluidInteractionTweaker
     public static final String MODID = "fluidintetweaker";
     public static final String NAME = "Fluid Interaction Tweaker";
     public static final String VERSION = "1.3.1";
+
+    public static final boolean IS_JEI_LOADED = Loader.isModLoaded("jei");
+    public static final boolean IS_MODULARUI_LOADED = Loader.isModLoaded("modularui");
 
     @SidedProxy(
             clientSide = "com.tttsaurus.fluidintetweaker.proxy.ClientProxy",
