@@ -9,4 +9,4 @@ This mod is created using [GregTechCEu's Buildscripts](https://github.com/GregTe
 - Compulsory: groovyscript (game doesn't crash without it)
 - Optional: zenutils (for crt reloading purposes)
 - Optional: jei (for recipes to be displayed)
-- Optional: modularui (it turns to compulsory if you want the jei compat to work)
+- Optional: modularui (makes jei recipes look better)
