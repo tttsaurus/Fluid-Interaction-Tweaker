@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
+import com.tttsaurus.fluidintetweaker.Configuration;
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
@@ -56,11 +57,13 @@ public class JEFIPlugin implements IModPlugin
     @Override
     public void register(IModRegistry registry)
     {
-        addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.OBSIDIAN, null);
-        addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.OBSIDIAN, null);
-        addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.COBBLESTONE, "fluidintetweaker.jefi.extra_info_for_lava_and_water");
-        addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.COBBLESTONE, "fluidintetweaker.jefi.extra_info_for_lava_and_water");
-
+        if (Configuration.enableLavaAndWaterRecipeInJEI)
+        {
+            addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.OBSIDIAN, null);
+            addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.OBSIDIAN, null);
+            addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.SOURCE_WATER, Blocks.COBBLESTONE, "fluidintetweaker.jefi.extra_info_for_lava_and_water");
+            addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.FLOWING_WATER, Blocks.COBBLESTONE, "fluidintetweaker.jefi.extra_info_for_lava_and_water");
+        }
         registry.addRecipes(recipeWrapperDict.values(), JustEnoughFluidInteractions.UID);
     }
 
