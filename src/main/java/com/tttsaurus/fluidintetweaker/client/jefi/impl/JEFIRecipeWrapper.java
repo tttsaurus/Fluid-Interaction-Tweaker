@@ -1,6 +1,7 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.client.jefi.impl.delegate.RenderExtraTooltipDelegate;
+import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import mezz.jei.api.ingredients.IIngredients;
@@ -24,15 +25,15 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     protected boolean isAnyFluidStateA = false;
     protected InteractionIngredient ingredientB;
     protected boolean isAnyFluidStateB = false;
-    protected Block outputBlock;
+    protected ComplexOutput complexOutput;
 
     private String extraInfoLocalizationKey = null;
 
-    public JEFIRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey)
+    public JEFIRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         this.ingredientA = ingredientA;
         this.ingredientB = ingredientB;
-        this.outputBlock = outputBlock;
+        this.complexOutput = complexOutput;
         if (!(extraInfoLocalizationKey == null || extraInfoLocalizationKey.isEmpty()))
             this.extraInfoLocalizationKey = extraInfoLocalizationKey;
     }
@@ -52,7 +53,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
             ingredients.setInput(VanillaTypes.ITEM, new ItemStack(ingredientB.getBlock()));
         }
 
-        ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(outputBlock));
+        ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(complexOutput.getLegacyOutputBlock()));
     }
 
     @Override
@@ -86,7 +87,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                     height += 9;
                 }
 
-                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(new ItemStack(outputBlock), width, height, Arrays.asList(lines)));
+                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(new ItemStack(complexOutput.getLegacyOutputBlock()), width, height, Arrays.asList(lines)));
             }
     }
 }

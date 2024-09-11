@@ -6,6 +6,7 @@ import com.cleanroommc.groovyscript.api.documentation.annotations.*;
 import com.cleanroommc.groovyscript.helper.recipe.AbstractRecipeBuilder;
 import com.cleanroommc.groovyscript.registry.VirtualizedRegistry;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
+import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionRecipeManager;
@@ -148,7 +149,7 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, isSourceA),
                         new InteractionIngredient(fluidSurrounding, isSourceB),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
             else if (recipeType == 2)
@@ -156,12 +157,12 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, isSourceA),
                         new InteractionIngredient(fluidSurrounding, true),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, isSourceA),
                         new InteractionIngredient(fluidSurrounding, false),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
             else if (recipeType == 3)
@@ -169,22 +170,22 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, true),
                         new InteractionIngredient(fluidSurrounding, true),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, true),
                         new InteractionIngredient(fluidSurrounding, false),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, false),
                         new InteractionIngredient(fluidSurrounding, true),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, false),
                         new InteractionIngredient(fluidSurrounding, false),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
             else if (recipeType == 4)
@@ -192,7 +193,7 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, isSourceA),
                         new InteractionIngredient(blockSurrounding),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
             else if (recipeType == 5)
@@ -200,12 +201,12 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, true),
                         new InteractionIngredient(blockSurrounding),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, false),
                         new InteractionIngredient(blockSurrounding),
-                        outputBlock,
+                        new ComplexOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
 

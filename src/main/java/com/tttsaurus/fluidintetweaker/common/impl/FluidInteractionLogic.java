@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker.common.impl;
 
+import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
@@ -61,13 +62,13 @@ public final class FluidInteractionLogic
                 ingredient1.setIsFluidSource(false);
 
                 InteractionIngredient ingredientA, ingredientB;
-                Block output = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2);
-                if (output == null)
+                ComplexOutput complexOutput = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2);
+                if (complexOutput == null)
                 { ingredientA = ingredient2; ingredientB = ingredient1; }
                 else
                 { ingredientA = ingredient1; ingredientB = ingredient2; }
-                output = output == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1) : output;
-                if (output == null) continue;
+                complexOutput = complexOutput == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1) : complexOutput;
+                if (complexOutput == null) continue;
 
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
@@ -77,14 +78,14 @@ public final class FluidInteractionLogic
                         ingredient2.getFluid(),
                         ingredientA,
                         ingredientB,
-                        output,
-                        new FluidInteractionDelegate(world, neighborPos, output.getDefaultState())));
+                        complexOutput.getLegacyOutputBlock(),
+                        complexOutput.getOutputDelegate(world, neighborPos)));
                 return;
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient1, ingredient2))
             {
-                Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2);
+                ComplexOutput complexOutput = FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2);
                 // ingredient1 turns to a block
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
@@ -94,8 +95,8 @@ public final class FluidInteractionLogic
                         ingredient1.getFluid(),
                         ingredient1, // A
                         ingredient2, // B
-                        output,
-                        new FluidInteractionDelegate(world, pos, output.getDefaultState())));
+                        complexOutput.getLegacyOutputBlock(),
+                        complexOutput.getOutputDelegate(world, pos)));
                 return;
             }
 
@@ -112,13 +113,13 @@ public final class FluidInteractionLogic
                 ingredient2.setIsFluidSource(false);
 
                 InteractionIngredient ingredientA, ingredientB;
-                Block output = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1);
-                if (output == null)
+                ComplexOutput complexOutput = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1);
+                if (complexOutput == null)
                 { ingredientA = ingredient1; ingredientB = ingredient2; }
                 else
                 { ingredientA = ingredient2; ingredientB = ingredient1; }
-                output = output == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2) : output;
-                if (output == null) continue;
+                complexOutput = complexOutput == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2) : complexOutput;
+                if (complexOutput == null) continue;
 
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
@@ -128,14 +129,14 @@ public final class FluidInteractionLogic
                         ingredient1.getFluid(),
                         ingredientA,
                         ingredientB,
-                        output,
-                        new FluidInteractionDelegate(world, pos, output.getDefaultState())));
+                        complexOutput.getLegacyOutputBlock(),
+                        complexOutput.getOutputDelegate(world, pos)));
                 return;
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient2, ingredient1))
             {
-                Block output = FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1);
+                ComplexOutput complexOutput = FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1);
                 // ingredient2 turns to a block
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
                         world,
@@ -145,8 +146,8 @@ public final class FluidInteractionLogic
                         ingredient2.getFluid(),
                         ingredient2, // A
                         ingredient1, // B
-                        output,
-                        new FluidInteractionDelegate(world, neighborPos, output.getDefaultState())));
+                        complexOutput.getLegacyOutputBlock(),
+                        complexOutput.getOutputDelegate(world, neighborPos)));
                 return;
             }
             //</editor-fold>

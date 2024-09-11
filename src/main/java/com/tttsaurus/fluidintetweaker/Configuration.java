@@ -6,4 +6,6 @@ import net.minecraftforge.common.config.Config;
 public class Configuration
 {
     public static boolean enableLavaAndWaterRecipeInJEI = true;
+    public static boolean enableThermalFoundationJEICompat = true;
+    public static boolean enableBiomesOPlentyJEICompat = true;
 }

@@ -1,19 +1,17 @@
 package com.tttsaurus.fluidintetweaker.common.api;
 
-import net.minecraft.block.Block;
-
 public class FluidInteractionRecipe
 {
     public InteractionIngredient ingredientA;
     public InteractionIngredient ingredientB;
-    public Block outputBlock;
+    public ComplexOutput complexOutput;
     public String extraInfoLocalizationKey;
 
-    public FluidInteractionRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey)
+    public FluidInteractionRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         this.ingredientA = ingredientA;
         this.ingredientB = ingredientB;
-        this.outputBlock = outputBlock;
+        this.complexOutput = complexOutput;
         this.extraInfoLocalizationKey = extraInfoLocalizationKey;
     }
 }

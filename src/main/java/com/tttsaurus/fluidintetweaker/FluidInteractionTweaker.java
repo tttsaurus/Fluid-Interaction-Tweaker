@@ -21,6 +21,8 @@ public final class FluidInteractionTweaker
 
     public static final boolean IS_JEI_LOADED = Loader.isModLoaded("jei");
     public static final boolean IS_MODULARUI_LOADED = Loader.isModLoaded("modularui");
+    public static final boolean IS_THERMALFOUNDATION_LOADED = Loader.isModLoaded("thermalfoundation");
+    public static final boolean IS_BIOMESOPLENTY_LOADED = Loader.isModLoaded("biomesoplenty");
 
     @SidedProxy(
             clientSide = "com.tttsaurus.fluidintetweaker.proxy.ClientProxy",

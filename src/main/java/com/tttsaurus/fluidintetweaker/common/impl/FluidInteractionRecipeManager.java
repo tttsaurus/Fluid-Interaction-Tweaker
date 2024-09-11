@@ -2,6 +2,7 @@ package com.tttsaurus.fluidintetweaker.common.impl;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.impl.JEFIPlugin;
+import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
@@ -24,7 +25,7 @@ public final class FluidInteractionRecipeManager
     private static final List<String> recipeIngredientAList = new ArrayList<>();
     private static final List<String> recipeIngredientBList = new ArrayList<>();
 
-    private static final HashMap<String, Block> recipeDict = new HashMap<>();
+    private static final HashMap<String, ComplexOutput> recipeDict = new HashMap<>();
 
     //<editor-fold desc="methods for FluidInteractionLogic">
     static boolean ingredientAExists(InteractionIngredient ingredientA)
@@ -39,12 +40,12 @@ public final class FluidInteractionRecipeManager
     {
         return recipeDict.containsKey(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
     }
-    static Block getRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    static ComplexOutput getRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
         return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
     }
     @Nullable
-    static Block getNullableRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    static ComplexOutput getNullableRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
     {
         if (recipeExists(ingredientA, ingredientB))
             return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
@@ -67,9 +68,9 @@ public final class FluidInteractionRecipeManager
     }
     public static String addRecipe(FluidInteractionRecipe recipe)
     {
-        return addRecipe(recipe.ingredientA, recipe.ingredientB, recipe.outputBlock, recipe.extraInfoLocalizationKey);
+        return addRecipe(recipe.ingredientA, recipe.ingredientB, recipe.complexOutput, recipe.extraInfoLocalizationKey);
     }
-    public static String addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, Block outputBlock, String extraInfoLocalizationKey) throws FluidInteractionTweakerRuntimeException
+    public static String addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey) throws FluidInteractionTweakerRuntimeException
     {
         String ingredientAKey = ingredientA.toString();
         String ingredientBKey = ingredientB.toString();
@@ -80,11 +81,11 @@ public final class FluidInteractionRecipeManager
         {
             if (!recipeIngredientAList.contains(ingredientAKey)) recipeIngredientAList.add(ingredientAKey);
             if (!recipeIngredientBList.contains(ingredientBKey)) recipeIngredientBList.add(ingredientBKey);
-            recipeDict.put(key, outputBlock);
+            recipeDict.put(key, complexOutput);
 
             // jei compat
             if (FluidInteractionTweaker.IS_JEI_LOADED)
-                JEFIPlugin.addRecipeWrapper(key, ingredientA, ingredientB, outputBlock, extraInfoLocalizationKey);
+                JEFIPlugin.addRecipeWrapper(key, ingredientA, ingredientB, complexOutput, extraInfoLocalizationKey);
 
             return key;
         }
