@@ -7,8 +7,6 @@ import com.tttsaurus.fluidintetweaker.common.api.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
-import net.minecraft.block.Block;
-import net.minecraftforge.fml.common.Loader;
 import javax.annotation.Nullable;
 import java.util.*;
 

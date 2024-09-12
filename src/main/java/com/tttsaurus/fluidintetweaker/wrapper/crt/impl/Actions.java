@@ -35,72 +35,96 @@ public final class Actions
         //</editor-fold>
 
         //<editor-fold desc="fluid & fluid recipes">
-        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlock outputBlock, String extraInfoLocalizationKey)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, isSourceB),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
         }
-        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, true),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(liquidSurrounding, false),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
         }
-        public AddRecipesAction(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
+        public AddRecipesAction(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(liquidSurrounding, true),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(liquidSurrounding, false),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(liquidSurrounding, true),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(liquidSurrounding, false),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
         }
         //</editor-fold>
 
         //<editor-fold desc="fluid & block recipes">
-        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
                     buildIngredient(blockSurrounding),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
         }
-        public AddRecipesAction(ILiquidStack liquidInitiator, IBlock blockSurrounding, IBlock outputBlock, String extraInfoLocalizationKey)
+        public AddRecipesAction(ILiquidStack liquidInitiator, IBlock blockSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, true),
                     buildIngredient(blockSurrounding),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
                     extraInfoLocalizationKey));
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, false),
                     buildIngredient(blockSurrounding),
-                    new ComplexOutput((Block)outputBlock.getDefinition().getInternal()),
+                    complexOutput,
+                    extraInfoLocalizationKey));
+        }
+        //</editor-fold>
+
+        //<editor-fold desc="block & fluid recipes">
+        public AddRecipesAction(IBlock blockInitiator, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+        {
+            recipeList.add(new FluidInteractionRecipe(
+                    buildIngredient(blockInitiator),
+                    buildIngredient(liquidSurrounding, isSourceB),
+                    complexOutput,
+                    extraInfoLocalizationKey));
+        }
+        public AddRecipesAction(IBlock blockInitiator, ILiquidStack liquidSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+        {
+            recipeList.add(new FluidInteractionRecipe(
+                    buildIngredient(blockInitiator),
+                    buildIngredient(liquidSurrounding, true),
+                    complexOutput,
+                    extraInfoLocalizationKey));
+            recipeList.add(new FluidInteractionRecipe(
+                    buildIngredient(blockInitiator),
+                    buildIngredient(liquidSurrounding, false),
+                    complexOutput,
                     extraInfoLocalizationKey));
         }
         //</editor-fold>

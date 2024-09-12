@@ -31,20 +31,23 @@ public class JEFIPlugin implements IModPlugin
         JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(ingredientA, ingredientB, complexOutput, extraInfoLocalizationKey);
         recipeWrapperDict.put(recipeKey, recipeWrapper);
 
-        ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
-        String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
-        if (recipeWrapperDict.containsKey(newKey) &&
-            recipeWrapperDict.get(newKey).complexOutput.getLegacyOutputBlock().toString().equals(complexOutput.getLegacyOutputBlock().toString()))
+        //<editor-fold desc="combine `source` and `flowing` if they both exist">
+        if (ingredientA.getIngredientType() == InteractionIngredientType.FLUID)
         {
-            recipeWrapperDict.remove(newKey);
-            recipeWrapper.isAnyFluidStateA = true;
+            ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
+            String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
+            if (recipeWrapperDict.containsKey(newKey) &&
+                    recipeWrapperDict.get(newKey).complexOutput.getLegacyOutputBlock().toString().equals(complexOutput.getLegacyOutputBlock().toString())) {
+                recipeWrapperDict.remove(newKey);
+                recipeWrapper.isAnyFluidStateA = true;
+            }
+            ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
         }
-        ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
 
         if (ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {
             ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
-            newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
+            String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
             if (recipeWrapperDict.containsKey(newKey) &&
                 recipeWrapperDict.get(newKey).complexOutput.getLegacyOutputBlock().toString().equals(complexOutput.getLegacyOutputBlock().toString()))
             {
@@ -53,6 +56,7 @@ public class JEFIPlugin implements IModPlugin
             }
             ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
         }
+        //</editor-fold>
     }
 
     @Override

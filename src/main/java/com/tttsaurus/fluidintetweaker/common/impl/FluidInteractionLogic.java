@@ -80,7 +80,6 @@ public final class FluidInteractionLogic
                         ingredientB,
                         complexOutput.getLegacyOutputBlock(),
                         complexOutput.getOutputDelegate(world, neighborPos)));
-                return;
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient1, ingredient2))
@@ -97,7 +96,6 @@ public final class FluidInteractionLogic
                         ingredient2, // B
                         complexOutput.getLegacyOutputBlock(),
                         complexOutput.getOutputDelegate(world, pos)));
-                return;
             }
 
             // backward notifying
@@ -131,7 +129,6 @@ public final class FluidInteractionLogic
                         ingredientB,
                         complexOutput.getLegacyOutputBlock(),
                         complexOutput.getOutputDelegate(world, pos)));
-                return;
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient2, ingredient1))
@@ -148,7 +145,6 @@ public final class FluidInteractionLogic
                         ingredient1, // B
                         complexOutput.getLegacyOutputBlock(),
                         complexOutput.getOutputDelegate(world, neighborPos)));
-                return;
             }
             //</editor-fold>
         }

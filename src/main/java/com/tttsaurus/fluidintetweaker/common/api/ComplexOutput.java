@@ -14,7 +14,7 @@ public class ComplexOutput
     @Nullable
     public Block getLegacyOutputBlock()
     {
-        if (outputMode == OutputMode.LegacyOneBlockMode)
+        if (outputMode == OutputMode.LegacyOneBlock)
             return legacyOutputBlock;
         else
             return null;
@@ -22,13 +22,13 @@ public class ComplexOutput
 
     public ComplexOutput(Block legacyOutputBlock)
     {
-        outputMode = OutputMode.LegacyOneBlockMode;
+        outputMode = OutputMode.LegacyOneBlock;
         this.legacyOutputBlock = legacyOutputBlock;
     }
 
     public FluidInteractionDelegate getOutputDelegate(World world, BlockPos pos)
     {
-        if (outputMode == OutputMode.LegacyOneBlockMode)
+        if (outputMode == OutputMode.LegacyOneBlock)
         {
             return new FluidInteractionDelegate(world, pos)
             {
