@@ -7,7 +7,6 @@ import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
@@ -41,16 +40,24 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     @Override
     public void getIngredients(IIngredients ingredients)
     {
-        if (ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        if (ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
+            ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {
             ingredients.setInputs(VanillaTypes.FLUID, Arrays.asList(
                     new FluidStack(ingredientA.getFluid(), 1000),
                     new FluidStack(ingredientB.getFluid(), 1000)));
         }
-        else if (ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
+        else if (ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
+                 ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
         {
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientA.getFluid(), 1000));
             ingredients.setInput(VanillaTypes.ITEM, new ItemStack(ingredientB.getBlock()));
+        }
+        else if (ingredientA.getIngredientType() == InteractionIngredientType.BLOCK &&
+                 ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        {
+            ingredients.setInput(VanillaTypes.ITEM, new ItemStack(ingredientA.getBlock()));
+            ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientB.getFluid(), 1000));
         }
 
         ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(complexOutput.getLegacyOutputBlock()));
@@ -59,10 +66,11 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
     {
-        if (!isAnyFluidStateA)
-            minecraft.fontRenderer.drawString(ingredientA.getIsFluidSource() ?
-                    I18n.format("fluidintetweaker.jefi.fluid_source") :
-                    I18n.format("fluidintetweaker.jefi.fluid_flowing"), 7, 35, Color.GRAY.getRGB());
+        if (ingredientA.getIngredientType() == InteractionIngredientType.FLUID)
+            if (!isAnyFluidStateA)
+                minecraft.fontRenderer.drawString(ingredientA.getIsFluidSource() ?
+                        I18n.format("fluidintetweaker.jefi.fluid_source") :
+                        I18n.format("fluidintetweaker.jefi.fluid_flowing"), 7, 35, Color.GRAY.getRGB());
 
         if (ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
             if (!isAnyFluidStateB)

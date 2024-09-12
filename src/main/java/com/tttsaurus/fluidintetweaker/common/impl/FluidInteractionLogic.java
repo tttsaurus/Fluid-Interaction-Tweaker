@@ -4,7 +4,6 @@ import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
