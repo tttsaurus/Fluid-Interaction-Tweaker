@@ -2,7 +2,7 @@ package com.tttsaurus.fluidintetweaker.common.api;
 
 public enum OutputMode
 {
-    LegacyOneBlock,
+    SimpleBlock,
     BlocksByConditions,
     ItemSpawning,
     MobSpawning

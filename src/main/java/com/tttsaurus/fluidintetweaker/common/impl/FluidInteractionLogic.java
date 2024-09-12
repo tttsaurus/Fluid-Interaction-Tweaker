@@ -4,7 +4,6 @@ import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
-import net.minecraft.block.Block;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
@@ -24,9 +23,7 @@ public final class FluidInteractionLogic
         if (world.isRemote) return;
 
         BlockPos pos = event.getPos();
-        Block block = event.getState().getBlock();
-
-        InteractionIngredient ingredient1 = new InteractionIngredient(world, pos, block);
+        InteractionIngredient ingredient1 = new InteractionIngredient(world, pos);
 
         // the recipe doesn't exist
         // so early escape
@@ -42,9 +39,7 @@ public final class FluidInteractionLogic
             int z = vec3.getZ();
 
             BlockPos neighborPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-            Block neighborBlock = world.getBlockState(neighborPos).getBlock();
-
-            InteractionIngredient ingredient2 = new InteractionIngredient(world, neighborPos, neighborBlock);
+            InteractionIngredient ingredient2 = new InteractionIngredient(world, neighborPos);
 
             //<editor-fold desc="ingredient1 reacts with ingredient2">
 
@@ -74,11 +69,9 @@ public final class FluidInteractionLogic
                         neighborPos,
                         true,
                         world.getBlockState(neighborPos),
-                        ingredient2.getFluid(),
                         ingredientA,
                         ingredientB,
-                        complexOutput.getLegacyOutputBlock(),
-                        complexOutput.getOutputDelegate(world, neighborPos)));
+                        complexOutput));
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient1, ingredient2))
@@ -90,11 +83,9 @@ public final class FluidInteractionLogic
                         pos,
                         false,
                         world.getBlockState(pos),
-                        ingredient1.getFluid(),
                         ingredient1, // A
                         ingredient2, // B
-                        complexOutput.getLegacyOutputBlock(),
-                        complexOutput.getOutputDelegate(world, pos)));
+                        complexOutput));
             }
 
             // backward notifying
@@ -123,11 +114,9 @@ public final class FluidInteractionLogic
                         pos,
                         true,
                         world.getBlockState(pos),
-                        ingredient1.getFluid(),
                         ingredientA,
                         ingredientB,
-                        complexOutput.getLegacyOutputBlock(),
-                        complexOutput.getOutputDelegate(world, pos)));
+                        complexOutput));
             }
             // normal case
             else if (FluidInteractionRecipeManager.recipeExists(ingredient2, ingredient1))
@@ -139,11 +128,9 @@ public final class FluidInteractionLogic
                         neighborPos,
                         false,
                         world.getBlockState(neighborPos),
-                        ingredient2.getFluid(),
                         ingredient2, // A
                         ingredient1, // B
-                        complexOutput.getLegacyOutputBlock(),
-                        complexOutput.getOutputDelegate(world, neighborPos)));
+                        complexOutput));
             }
             //</editor-fold>
         }

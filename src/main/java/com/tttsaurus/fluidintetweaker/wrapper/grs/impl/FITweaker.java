@@ -10,7 +10,7 @@ import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionRecipeManager;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
@@ -69,8 +69,8 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
         private boolean isSourceA;
         private Fluid fluidSurrounding;
         private boolean isSourceB;
-        private Block blockSurrounding;
-        private Block outputBlock;
+        private IBlockState blockSurrounding;
+        private IBlockState outputBlock;
         private String extraInfoLocalizationKey;
 
         @RecipeBuilderMethodDescription
@@ -104,16 +104,16 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
             return this;
         }
         @RecipeBuilderMethodDescription
-        public RecipeBuilder blockSurrounding(Block block)
+        public RecipeBuilder blockSurrounding(IBlockState blockState)
         {
-            blockSurrounding = block;
+            blockSurrounding = blockState;
             removePossibleRecipeTypes(1, 2, 3);
             return this;
         }
         @RecipeBuilderMethodDescription
-        public RecipeBuilder outputBlock(Block block)
+        public RecipeBuilder outputBlock(IBlockState blockState)
         {
-            outputBlock = block;
+            outputBlock = blockState;
             return this;
         }
         @RecipeBuilderMethodDescription

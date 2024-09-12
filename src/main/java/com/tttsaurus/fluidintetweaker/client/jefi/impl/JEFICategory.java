@@ -9,14 +9,11 @@ import mezz.jei.api.gui.IGuiFluidStackGroup;
 import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
-import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
@@ -63,28 +60,28 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
     }
 
     @Override
-    public void setRecipe(IRecipeLayout recipeLayout, JEFIRecipeWrapper jefiRecipeWrapper, IIngredients ingredients)
+    public void setRecipe(IRecipeLayout recipeLayout, JEFIRecipeWrapper recipeWrapper, IIngredients ingredients)
     {
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
         // inputs & output
-        if (jefiRecipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
-            jefiRecipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
+            recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiFluidStacks.init(1, true, 47, 15, 16, 16, 1000, false, null);
             guiItemStacks.init(0, false, 107, 14);
         }
-        else if (jefiRecipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
-                 jefiRecipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
+        else if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
+                 recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
         {
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiItemStacks.init(0, true, 47, 14);
             guiItemStacks.init(1, false, 107, 14);
         }
-        else if (jefiRecipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.BLOCK &&
-                 jefiRecipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        else if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.BLOCK &&
+                 recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {
             guiItemStacks.init(0, true, 7, 14);
             guiFluidStacks.init(0, true, 47, 15, 16, 16, 1000, false, null);

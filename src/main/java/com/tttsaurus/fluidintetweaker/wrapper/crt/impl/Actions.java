@@ -1,15 +1,11 @@
 package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
-import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.StringRecipeProtocol;
+import com.tttsaurus.fluidintetweaker.common.api.*;
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionRecipeManager;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
-import com.tttsaurus.fluidintetweaker.common.api.FluidInteractionRecipe;
 import crafttweaker.IAction;
-import crafttweaker.api.block.IBlock;
+import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.liquid.ILiquidStack;
-import net.minecraft.block.Block;
 import net.minecraftforge.fluids.FluidStack;
 import youyihj.zenutils.api.reload.Reloadable;
 import youyihj.zenutils.api.util.ReflectionInvoked;
@@ -28,9 +24,9 @@ public final class Actions
         {
             return new InteractionIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
         }
-        private InteractionIngredient buildIngredient(IBlock block)
+        private InteractionIngredient buildIngredient(IBlockState blockState)
         {
-            return new InteractionIngredient((Block)block.getDefinition().getInternal());
+            return new InteractionIngredient((net.minecraft.block.state.IBlockState)blockState.getInternal());
         }
         //</editor-fold>
 
@@ -82,7 +78,7 @@ public final class Actions
         //</editor-fold>
 
         //<editor-fold desc="fluid & block recipes">
-        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlock blockSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+        public AddRecipesAction(ILiquidStack liquidInitiator, boolean isSourceA, IBlockState blockSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, isSourceA),
@@ -90,7 +86,7 @@ public final class Actions
                     complexOutput,
                     extraInfoLocalizationKey));
         }
-        public AddRecipesAction(ILiquidStack liquidInitiator, IBlock blockSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+        public AddRecipesAction(ILiquidStack liquidInitiator, IBlockState blockSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(liquidInitiator, true),
@@ -106,7 +102,7 @@ public final class Actions
         //</editor-fold>
 
         //<editor-fold desc="block & fluid recipes">
-        public AddRecipesAction(IBlock blockInitiator, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+        public AddRecipesAction(IBlockState blockInitiator, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(blockInitiator),
@@ -114,7 +110,7 @@ public final class Actions
                     complexOutput,
                     extraInfoLocalizationKey));
         }
-        public AddRecipesAction(IBlock blockInitiator, ILiquidStack liquidSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+        public AddRecipesAction(IBlockState blockInitiator, ILiquidStack liquidSurrounding, ComplexOutput complexOutput, String extraInfoLocalizationKey)
         {
             recipeList.add(new FluidInteractionRecipe(
                     buildIngredient(blockInitiator),
@@ -153,7 +149,7 @@ public final class Actions
                 FluidInteractionRecipe recipe = recipeList.get(i);
                 builder.append(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(recipe.ingredientA, recipe.ingredientB))
                        .append("->")
-                       .append(recipe.complexOutput.getLegacyOutputBlock().toString());
+                       .append(BlockUtil.toString(recipe.complexOutput.getSimpleBlockOutput()));
                 if (i != length - 1) builder.append(", ");
             }
             return builder.toString();

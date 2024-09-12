@@ -12,7 +12,7 @@ import com.tttsaurus.fluidintetweaker.proxy.CommonProxy;
 @Mod(modid = FluidInteractionTweaker.MODID,
      name = FluidInteractionTweaker.NAME,
      version = FluidInteractionTweaker.VERSION,
-     dependencies = "after:jei@[4.12,)")
+     dependencies = "after:jei@[4.12,);after:thermalfoundation;after:biomesoplenty")
 public final class FluidInteractionTweaker
 {
     public static final String MODID = "fluidintetweaker";

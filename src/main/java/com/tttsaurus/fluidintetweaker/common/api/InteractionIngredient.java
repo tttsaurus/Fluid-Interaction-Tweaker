@@ -2,11 +2,14 @@ package com.tttsaurus.fluidintetweaker.common.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import javax.annotation.Nonnull;
 
 public class InteractionIngredient
 {
@@ -19,16 +22,16 @@ public class InteractionIngredient
     public static final InteractionIngredient SOURCE_LAVA = new InteractionIngredient(FluidRegistry.LAVA, true);
     public static final InteractionIngredient FLOWING_LAVA = new InteractionIngredient(FluidRegistry.LAVA, false);
 
-    private InteractionIngredientType ingredientType;
+    private final InteractionIngredientType ingredientType;
     private Fluid fluid;
     private boolean isFluidSource;
-    private Block block;
+    private IBlockState blockState;
 
     //<editor-fold desc="getter">
     public InteractionIngredientType getIngredientType() { return ingredientType; }
     public Fluid getFluid() { return fluid; }
     public boolean getIsFluidSource() { return isFluidSource; }
-    public Block getBlock() { return block; }
+    public IBlockState getBlockState() { return blockState; }
     //</editor-fold>
 
     //<editor-fold desc="setter">
@@ -39,13 +42,13 @@ public class InteractionIngredient
     public String toString()
     {
         if (ingredientType == InteractionIngredientType.BLOCK)
-            return KEYWORD_BLOCK + ":" + block.getRegistryName().toString();
+            return KEYWORD_BLOCK + "{" + BlockUtil.toString(blockState) + "}";
         else if (ingredientType == InteractionIngredientType.FLUID)
         {
             if (isFluidSource)
-                return KEYWORD_FLUID_SOURCE + ":" + fluid.getName();
+                return KEYWORD_FLUID_SOURCE + "{" + fluid.getName() + "}";
             else
-                return KEYWORD_FLUID_FLOWING + ":" + fluid.getName();
+                return KEYWORD_FLUID_FLOWING + "{" + fluid.getName() + "}";
         }
         else
             return null;
@@ -56,22 +59,25 @@ public class InteractionIngredient
         return object instanceof InteractionIngredient && object.toString().equals(this.toString());
     }
 
-    public InteractionIngredient(Fluid fluid, boolean isFluidSource)
+    public InteractionIngredient(@Nonnull Fluid fluid, boolean isFluidSource)
     {
         this.ingredientType = InteractionIngredientType.FLUID;
         this.fluid = fluid;
         this.isFluidSource = isFluidSource;
-        this.block = null;
+        this.blockState = null;
     }
-    public InteractionIngredient(Block block)
+    public InteractionIngredient(@Nonnull IBlockState blockState)
     {
         this.ingredientType = InteractionIngredientType.BLOCK;
         this.fluid = null;
         this.isFluidSource = false;
-        this.block = block;
+        this.blockState = blockState;
     }
-    public InteractionIngredient(World world, BlockPos pos, Block block)
+    @SuppressWarnings("ConstantConditions")
+    public InteractionIngredient(@Nonnull World world, @Nonnull BlockPos pos)
     {
+        IBlockState blockState = world.getBlockState(pos);
+        Block block = blockState.getBlock();
         // vanilla liquid
         if (block instanceof BlockLiquid)
         {
@@ -82,13 +88,12 @@ public class InteractionIngredient
             else if (name.equals("minecraft:lava") || name.equals("minecraft:flowing_lava"))
                 fluid = FluidRegistry.LAVA;
 
-            isFluidSource = world.getBlockState(pos).getValue(BlockLiquid.LEVEL) == 0;
+            isFluidSource = blockState.getValue(BlockLiquid.LEVEL) == 0;
         }
         // modded fluid
-        else if (block instanceof BlockFluidBase)
+        else if (block instanceof BlockFluidBase fluidBase)
         {
             ingredientType = InteractionIngredientType.FLUID;
-            BlockFluidBase fluidBase = ((BlockFluidBase)block);
             fluid = fluidBase.getFluid();
 
             isFluidSource = fluidBase.canDrain(world, pos);
@@ -97,7 +102,7 @@ public class InteractionIngredient
         else
         {
             ingredientType = InteractionIngredientType.BLOCK;
-            this.block = block;
+            this.blockState = blockState;
         }
     }
 }

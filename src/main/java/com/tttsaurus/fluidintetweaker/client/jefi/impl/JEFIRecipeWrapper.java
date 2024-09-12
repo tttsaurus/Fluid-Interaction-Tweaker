@@ -1,6 +1,7 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.client.jefi.impl.delegate.RenderExtraTooltipDelegate;
+import com.tttsaurus.fluidintetweaker.common.api.BlockUtil;
 import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
@@ -10,7 +11,6 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -51,16 +51,16 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                  ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
         {
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientA.getFluid(), 1000));
-            ingredients.setInput(VanillaTypes.ITEM, new ItemStack(ingredientB.getBlock()));
+            ingredients.setInput(VanillaTypes.ITEM, BlockUtil.getItemStack(ingredientB.getBlockState()));
         }
         else if (ingredientA.getIngredientType() == InteractionIngredientType.BLOCK &&
                  ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {
-            ingredients.setInput(VanillaTypes.ITEM, new ItemStack(ingredientA.getBlock()));
+            ingredients.setInput(VanillaTypes.ITEM, BlockUtil.getItemStack(ingredientA.getBlockState()));
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientB.getFluid(), 1000));
         }
 
-        ingredients.setOutput(VanillaTypes.ITEM, new ItemStack(complexOutput.getLegacyOutputBlock()));
+        ingredients.setOutput(VanillaTypes.ITEM, BlockUtil.getItemStack(complexOutput.getSimpleBlockOutput()));
     }
 
     @Override
@@ -95,7 +95,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                     height += 9;
                 }
 
-                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(new ItemStack(complexOutput.getLegacyOutputBlock()), width, height, Arrays.asList(lines)));
+                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(BlockUtil.getItemStack(complexOutput.getSimpleBlockOutput()), width, height, Arrays.asList(lines)));
             }
     }
 }
