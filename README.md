@@ -5,8 +5,8 @@ This mod doesn't change anything about the vanilla water and lava interaction. I
 This mod is created using [GregTechCEu's Buildscripts](https://github.com/GregTechCEu/Buildscripts)
 
 ### Dependencies
-- Compulsory: crafttweaker (game doesn't crash without it)
-- Compulsory: groovyscript (game doesn't crash without it)
+- Optional/Compulsory: crafttweaker
+- Optional/Compulsory: groovyscript
 - Optional: zenutils (for crt reloading purposes)
 - Optional: jei (for recipes to be displayed)
 - Optional: modularui (makes jei recipes look better)
