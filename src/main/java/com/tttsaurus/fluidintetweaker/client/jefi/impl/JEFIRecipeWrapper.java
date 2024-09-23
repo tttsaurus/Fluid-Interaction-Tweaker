@@ -1,7 +1,7 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.client.jefi.impl.delegate.RenderExtraTooltipDelegate;
-import com.tttsaurus.fluidintetweaker.common.api.BlockUtil;
+import com.tttsaurus.fluidintetweaker.common.api.BlockUtils;
 import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
@@ -51,16 +51,16 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                  ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
         {
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientA.getFluid(), 1000));
-            ingredients.setInput(VanillaTypes.ITEM, BlockUtil.getItemStack(ingredientB.getBlockState()));
+            ingredients.setInput(VanillaTypes.ITEM, BlockUtils.getItemStack(ingredientB.getBlockState()));
         }
         else if (ingredientA.getIngredientType() == InteractionIngredientType.BLOCK &&
                  ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {
-            ingredients.setInput(VanillaTypes.ITEM, BlockUtil.getItemStack(ingredientA.getBlockState()));
+            ingredients.setInput(VanillaTypes.ITEM, BlockUtils.getItemStack(ingredientA.getBlockState()));
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientB.getFluid(), 1000));
         }
 
-        ingredients.setOutput(VanillaTypes.ITEM, BlockUtil.getItemStack(complexOutput.getSimpleBlockOutput()));
+        ingredients.setOutput(VanillaTypes.ITEM, BlockUtils.getItemStack(complexOutput.getSimpleBlockOutput()));
     }
 
     @Override
@@ -95,7 +95,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                     height += 9;
                 }
 
-                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(BlockUtil.getItemStack(complexOutput.getSimpleBlockOutput()), width, height, Arrays.asList(lines)));
+                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(BlockUtils.getItemStack(complexOutput.getSimpleBlockOutput()), width, height, Arrays.asList(lines)));
             }
     }
 }

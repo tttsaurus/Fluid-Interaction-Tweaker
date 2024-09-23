@@ -12,6 +12,7 @@ import net.minecraft.init.Blocks;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 @SideOnly(Side.CLIENT)
@@ -60,7 +61,7 @@ public class JEFIPlugin implements IModPlugin
             ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
             String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
             if (recipeWrapperDict.containsKey(newKey) &&
-                BlockUtil.toString(recipeWrapperDict.get(newKey).complexOutput.getSimpleBlockOutput()).equals(BlockUtil.toString(complexOutput.getSimpleBlockOutput())))
+                BlockUtils.toString(recipeWrapperDict.get(newKey).complexOutput.getSimpleBlockOutput()).equals(BlockUtils.toString(complexOutput.getSimpleBlockOutput())))
             {
                 recipeWrapperDict.remove(newKey);
                 recipeWrapper.isAnyFluidStateA = true;
@@ -73,7 +74,7 @@ public class JEFIPlugin implements IModPlugin
             ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
             String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
             if (recipeWrapperDict.containsKey(newKey) &&
-                BlockUtil.toString(recipeWrapperDict.get(newKey).complexOutput.getSimpleBlockOutput()).equals(BlockUtil.toString(complexOutput.getSimpleBlockOutput())))
+                BlockUtils.toString(recipeWrapperDict.get(newKey).complexOutput.getSimpleBlockOutput()).equals(BlockUtils.toString(complexOutput.getSimpleBlockOutput())))
             {
                 recipeWrapperDict.remove(newKey);
                 recipeWrapper.isAnyFluidStateB = true;
@@ -83,9 +84,9 @@ public class JEFIPlugin implements IModPlugin
         //</editor-fold>
     }
 
-    @SuppressWarnings("ConstantConditions")
+    @SuppressWarnings({"ConstantConditions", "deprecation"})
     @Override
-    public void register(IModRegistry registry)
+    public void register(@NotNull IModRegistry registry)
     {
         if (Configuration.enableLavaAndWaterRecipeInJEI)
         {
@@ -96,23 +97,68 @@ public class JEFIPlugin implements IModPlugin
         {
             /*
                 Primal Mana Todos:
-                adjacent blocks are set on fire or covered with snow layers;
-                dirt is turned into grass blocks; ✅
-                coarse dirt is turned into podzol; ✅
-                farmland is turned into mycelium;
-                glass is turned into sand;
-                redstone ore lights up;
-                lapis lazuli ore is turned into lapis lazuli blocks;
-                silver ore is turned into mana infused ore;
-                lead ore is turned into gold ore;
-                blocks of silver are turned into blocks of mana infused metal;
-                blocks of lead are turned into blocks of gold.
+                - entities that come into contact with primal mana may be teleported to a random destination in a radius of 8 blocks
+                - adjacent blocks are set on fire or covered with snow layers
+                - redstone ore lights up
             */
-
             InteractionIngredient FLOWING_MANA = new InteractionIngredient(FluidRegistry.getFluid("mana"), false);
             addRecipeWrapper(new InteractionIngredient(Blocks.DIRT.getDefaultState()), FLOWING_MANA, true, new ComplexOutput(Blocks.GRASS_PATH.getDefaultState()));
             addRecipeWrapper(new InteractionIngredient(Blocks.DIRT.getStateFromMeta(1)), FLOWING_MANA, true, new ComplexOutput(Blocks.GRASS_PATH.getStateFromMeta(1)));
-            
+            addRecipeWrapper(new InteractionIngredient(Blocks.FARMLAND.getDefaultState()), FLOWING_MANA, true, new ComplexOutput(Blocks.MYCELIUM.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.GLASS.getDefaultState()), FLOWING_MANA, true, new ComplexOutput(Blocks.SAND.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.LAPIS_ORE.getDefaultState()), FLOWING_MANA, true, new ComplexOutput(Blocks.LAPIS_BLOCK.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(BlockUtils.getBlockState("thermalfoundation:ore", 2)), FLOWING_MANA, true, new ComplexOutput(BlockUtils.getBlockState("thermalfoundation:ore", 8)));
+            addRecipeWrapper(new InteractionIngredient(BlockUtils.getBlockState("thermalfoundation:ore", 3)), FLOWING_MANA, true, new ComplexOutput(Blocks.GOLD_ORE.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(BlockUtils.getBlockState("thermalfoundation:storage", 2)), FLOWING_MANA, true, new ComplexOutput(BlockUtils.getBlockState("thermalfoundation:storage", 8)));
+            addRecipeWrapper(new InteractionIngredient(BlockUtils.getBlockState("thermalfoundation:storage", 3)), FLOWING_MANA, true, new ComplexOutput(Blocks.GOLD_BLOCK.getDefaultState()));
+
+            /*
+                Pyrotheum Todos:
+                - instantly starting fires on top of every adjacent block
+                - flammable blocks are instantly destroyed
+                - creepers instantly explode
+            */
+            InteractionIngredient FLOWING_PYROTHEUM = new InteractionIngredient(FluidRegistry.getFluid("pyrotheum"), false);
+            addRecipeWrapper(new InteractionIngredient(Blocks.COBBLESTONE.getDefaultState()), FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.STONE.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.GRASS.getDefaultState()), FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.DIRT.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.SAND.getDefaultState()), FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.GLASS.getDefaultState()));
+            addRecipeWrapper(InteractionIngredient.FLOWING_WATER, true, FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.STONE.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.ICE.getDefaultState()), FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.STONE.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.CLAY.getDefaultState()), FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.HARDENED_CLAY.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.SNOW.getDefaultState()), FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.AIR.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.SNOW_LAYER.getDefaultState()), FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.AIR.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.STONE_STAIRS.getStateFromMeta(0)), FLOWING_PYROTHEUM, true, new ComplexOutput(Blocks.STONE_BRICK_STAIRS.getStateFromMeta(0)));
+
+            /*
+                Cryotheum Todos:
+                - adjacent blocks are covered with snow layers
+                - grass and leaves are instantly destroyed
+                - fire is extinguished
+                - zombies and creepers are turned into snow golems
+                - blazes take 10 damage instead of 2
+                - snow golems and blizzes are given the effects Speed I and Regeneration I for 6 seconds
+            */
+            InteractionIngredient FLOWING_CRYOTHEUM = new InteractionIngredient(FluidRegistry.getFluid("cryotheum"), false);
+            addRecipeWrapper(new InteractionIngredient(Blocks.GRASS.getDefaultState()), FLOWING_CRYOTHEUM, true, new ComplexOutput(Blocks.DIRT.getDefaultState()));
+            addRecipeWrapper(InteractionIngredient.SOURCE_WATER, FLOWING_CRYOTHEUM, true, new ComplexOutput(Blocks.ICE.getDefaultState()));
+            addRecipeWrapper(InteractionIngredient.FLOWING_WATER, FLOWING_CRYOTHEUM, true, new ComplexOutput(Blocks.SNOW.getDefaultState()));
+            addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, FLOWING_CRYOTHEUM, true, new ComplexOutput(Blocks.OBSIDIAN.getDefaultState()));
+            addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, FLOWING_CRYOTHEUM, true, new ComplexOutput(Blocks.STONE.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(FluidRegistry.getFluid("glowstone"), true), FLOWING_CRYOTHEUM, true, new ComplexOutput(Blocks.GLOWSTONE.getDefaultState()));
+
+            /*
+                Petrotheum Todos:
+                - when touched by players and mobs, tectonic petrotheum applies the effect Haste I to them for 6 seconds
+                - if enabled, tectonic petrotheum breaks any adjacent stone- or rock-like blocks. This is disabled by default
+            */
+            InteractionIngredient FLOWING_PETROTHEUM = new InteractionIngredient(FluidRegistry.getFluid("petrotheum"), false);
+            addRecipeWrapper(new InteractionIngredient(Blocks.STONE.getDefaultState()), FLOWING_PETROTHEUM, true, new ComplexOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.COBBLESTONE.getDefaultState()), FLOWING_PETROTHEUM, true, new ComplexOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.STONEBRICK.getDefaultState()), FLOWING_PETROTHEUM, true, new ComplexOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.STONEBRICK.getStateFromMeta(1)), FLOWING_PETROTHEUM, true, new ComplexOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.STONEBRICK.getStateFromMeta(2)), FLOWING_PETROTHEUM, true, new ComplexOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.STONEBRICK.getStateFromMeta(3)), FLOWING_PETROTHEUM, true, new ComplexOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new InteractionIngredient(Blocks.MOSSY_COBBLESTONE.getDefaultState()), FLOWING_PETROTHEUM, true, new ComplexOutput(Blocks.GRAVEL.getDefaultState()));
         }
         if (Configuration.enableBiomesOPlentyJEICompat && FluidInteractionTweaker.IS_BIOMESOPLENTY_LOADED)
         {

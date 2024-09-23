@@ -149,7 +149,7 @@ public final class Actions
                 FluidInteractionRecipe recipe = recipeList.get(i);
                 builder.append(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(recipe.ingredientA, recipe.ingredientB))
                        .append("->")
-                       .append(BlockUtil.toString(recipe.complexOutput.getSimpleBlockOutput()));
+                       .append(BlockUtils.toString(recipe.complexOutput.getSimpleBlockOutput()));
                 if (i != length - 1) builder.append(", ");
             }
             return builder.toString();

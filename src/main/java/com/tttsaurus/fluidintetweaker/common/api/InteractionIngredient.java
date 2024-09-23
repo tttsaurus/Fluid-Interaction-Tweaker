@@ -8,7 +8,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-
 import javax.annotation.Nonnull;
 
 public class InteractionIngredient
@@ -42,7 +41,7 @@ public class InteractionIngredient
     public String toString()
     {
         if (ingredientType == InteractionIngredientType.BLOCK)
-            return KEYWORD_BLOCK + "{" + BlockUtil.toString(blockState) + "}";
+            return KEYWORD_BLOCK + "{" + BlockUtils.toString(blockState) + "}";
         else if (ingredientType == InteractionIngredientType.FLUID)
         {
             if (isFluidSource)
