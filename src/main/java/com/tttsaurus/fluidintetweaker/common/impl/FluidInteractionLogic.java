@@ -23,7 +23,7 @@ public final class FluidInteractionLogic
         if (world.isRemote) return;
 
         BlockPos pos = event.getPos();
-        InteractionIngredient ingredient1 = new InteractionIngredient(world, pos);
+        InteractionIngredient ingredient1 = InteractionIngredient.getFrom(world, pos);
 
         // the recipe doesn't exist
         // so early escape
@@ -39,7 +39,7 @@ public final class FluidInteractionLogic
             int z = vec3.getZ();
 
             BlockPos neighborPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-            InteractionIngredient ingredient2 = new InteractionIngredient(world, neighborPos);
+            InteractionIngredient ingredient2 = InteractionIngredient.getFrom(world, neighborPos);
 
             //<editor-fold desc="ingredient1 reacts with ingredient2">
 

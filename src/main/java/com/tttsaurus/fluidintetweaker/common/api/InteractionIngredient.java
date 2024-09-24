@@ -3,6 +3,9 @@ package com.tttsaurus.fluidintetweaker.common.api;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidBase;
@@ -16,12 +19,13 @@ public class InteractionIngredient
     public static final String KEYWORD_FLUID_SOURCE = "FLUID_SOURCE";
     public static final String KEYWORD_FLUID_FLOWING = "FLUID_FLOWING";
 
+    public static final InteractionIngredient AIR = new InteractionIngredient(Blocks.AIR.getDefaultState());
     public static final InteractionIngredient SOURCE_WATER = new InteractionIngredient(FluidRegistry.WATER, true);
     public static final InteractionIngredient FLOWING_WATER = new InteractionIngredient(FluidRegistry.WATER, false);
     public static final InteractionIngredient SOURCE_LAVA = new InteractionIngredient(FluidRegistry.LAVA, true);
     public static final InteractionIngredient FLOWING_LAVA = new InteractionIngredient(FluidRegistry.LAVA, false);
 
-    private final InteractionIngredientType ingredientType;
+    private InteractionIngredientType ingredientType;
     private Fluid fluid;
     private boolean isFluidSource;
     private IBlockState blockState;
@@ -72,36 +76,45 @@ public class InteractionIngredient
         this.isFluidSource = false;
         this.blockState = blockState;
     }
-    @SuppressWarnings("ConstantConditions")
-    public InteractionIngredient(@Nonnull World world, @Nonnull BlockPos pos)
+    private InteractionIngredient() { }
+
+    public static InteractionIngredient getFrom(@Nonnull World world, @Nonnull BlockPos pos)
     {
         IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
-        // vanilla liquid
-        if (block instanceof BlockLiquid)
-        {
-            ingredientType = InteractionIngredientType.FLUID;
-            String name = block.getRegistryName().toString();
-            if (name.equals("minecraft:water") || name.equals("minecraft:flowing_water"))
-                fluid = FluidRegistry.WATER;
-            else if (name.equals("minecraft:lava") || name.equals("minecraft:flowing_lava"))
-                fluid = FluidRegistry.LAVA;
+        ResourceLocation rl = block.getRegistryName();
+        if (rl == null) return AIR;
 
-            isFluidSource = blockState.getValue(BlockLiquid.LEVEL) == 0;
+        InteractionIngredient ingredient = new InteractionIngredient();
+        String registryName = rl.toString();
+
+        // air
+        if (registryName.equals("minecraft:air")) return AIR;
+        // vanilla liquid
+        else if (block instanceof BlockLiquid)
+        {
+            ingredient.ingredientType = InteractionIngredientType.FLUID;
+            if (registryName.equals("minecraft:water") || registryName.equals("minecraft:flowing_water"))
+                ingredient.fluid = FluidRegistry.WATER;
+            else if (registryName.equals("minecraft:lava") || registryName.equals("minecraft:flowing_lava"))
+                ingredient.fluid = FluidRegistry.LAVA;
+
+            ingredient.isFluidSource = blockState.getValue(BlockLiquid.LEVEL) == 0;
         }
         // modded fluid
         else if (block instanceof BlockFluidBase fluidBase)
         {
-            ingredientType = InteractionIngredientType.FLUID;
-            fluid = fluidBase.getFluid();
+            ingredient.ingredientType = InteractionIngredientType.FLUID;
+            ingredient.fluid = fluidBase.getFluid();
 
-            isFluidSource = fluidBase.canDrain(world, pos);
+            ingredient.isFluidSource = fluidBase.canDrain(world, pos);
         }
         // solid block
         else
         {
-            ingredientType = InteractionIngredientType.BLOCK;
-            this.blockState = blockState;
+            ingredient.ingredientType = InteractionIngredientType.BLOCK;
+            ingredient.blockState = blockState;
         }
+        return ingredient;
     }
 }
