@@ -42,4 +42,8 @@ public final class BlockUtils
     {
         return getBlock(id).getStateFromMeta(meta);
     }
+    public static IBlockState getBlockState(String id)
+    {
+        return getBlockState(id, 0);
+    }
 }

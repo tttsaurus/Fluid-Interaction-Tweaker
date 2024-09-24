@@ -162,7 +162,17 @@ public class JEFIPlugin implements IModPlugin
         }
         if (Configuration.enableBiomesOPlentyJEICompat && FluidInteractionTweaker.IS_BIOMESOPLENTY_LOADED)
         {
-
+            /*
+            InteractionIngredient FLOWING_BLOOD = new InteractionIngredient(FluidRegistry.getFluid("blood"), false);
+            addRecipeWrapper(FLOWING_BLOOD, true, InteractionIngredient.FLOWING_WATER, true, new ComplexOutput(BlockUtils.getBlockState("biomesoplenty:flesh")));
+            addRecipeWrapper(FLOWING_BLOOD, true, InteractionIngredient.FLOWING_LAVA, true, new ComplexOutput(BlockUtils.getBlockState("biomesoplenty:flesh")));
+            addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, FLOWING_BLOOD, true, new ComplexOutput(Blocks.COBBLESTONE.getDefaultState()));
+            addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, FLOWING_BLOOD, true, new ComplexOutput(Blocks.OBSIDIAN.getDefaultState()));
+            addRecipeWrapper(FLOWING_BLOOD, true, new InteractionIngredient(FluidRegistry.getFluid("sand"), false), true, new ComplexOutput(BlockUtils.getBlockState("biomesoplenty:flesh")));
+            addRecipeWrapper(new InteractionIngredient(FluidRegistry.getFluid("sand"), false), true, FLOWING_BLOOD, true, new ComplexOutput(BlockUtils.getBlockState("biomesoplenty:mud")));
+            addRecipeWrapper(FLOWING_BLOOD, true, new InteractionIngredient(FluidRegistry.getFluid("hot_spring_water"), false), true, new ComplexOutput(BlockUtils.getBlockState("biomesoplenty:flesh")));
+            addRecipeWrapper(new InteractionIngredient(FluidRegistry.getFluid("hot_spring_water"), false), true, FLOWING_BLOOD, true, new ComplexOutput(Blocks.STONE.getDefaultState()));
+            */
         }
 
         registry.addRecipes(recipeWrapperDict.values(), JustEnoughFluidInteractions.UID);
