@@ -2,7 +2,7 @@ package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredientType;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
@@ -71,21 +71,30 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
         {
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiFluidStacks.init(1, true, 47, 15, 16, 16, 1000, false, null);
-            guiItemStacks.init(0, false, 107, 14);
+
+            int length = recipeWrapper.complexOutput.getEvents().size();
+            for (int i = 0; i < length; i++)
+                guiItemStacks.init(i, false, 116 - length * 9 + i * 18, 14);
         }
         else if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
                  recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
         {
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiItemStacks.init(0, true, 47, 14);
-            guiItemStacks.init(1, false, 107, 14);
+
+            int length = recipeWrapper.complexOutput.getEvents().size();
+            for (int i = 0; i < length; i++)
+                guiItemStacks.init(i + 1, false, 116 - length * 9 + i * 18, 14);
         }
         else if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.BLOCK &&
                  recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {
             guiItemStacks.init(0, true, 7, 14);
             guiFluidStacks.init(0, true, 47, 15, 16, 16, 1000, false, null);
-            guiItemStacks.init(1, false, 107, 14);
+
+            int length = recipeWrapper.complexOutput.getEvents().size();
+            for (int i = 0; i < length; i++)
+                guiItemStacks.init(i + 1, false, 116 - length * 9 + i * 18, 14);
         }
 
         guiItemStacks.set(ingredients);

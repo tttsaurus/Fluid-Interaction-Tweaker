@@ -1,8 +1,8 @@
 package com.tttsaurus.fluidintetweaker.common.impl;
 
 import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -68,6 +68,7 @@ public final class FluidInteractionLogic
                         world,
                         neighborPos,
                         true,
+                        ingredientA.equals(ingredient1),
                         world.getBlockState(neighborPos),
                         ingredientA,
                         ingredientB,
@@ -82,6 +83,7 @@ public final class FluidInteractionLogic
                         world,
                         pos,
                         false,
+                        facing == EnumFacing.DOWN,
                         world.getBlockState(pos),
                         ingredient1, // A
                         ingredient2, // B
@@ -113,6 +115,7 @@ public final class FluidInteractionLogic
                         world,
                         pos,
                         true,
+                        ingredientA.equals(ingredient2),
                         world.getBlockState(pos),
                         ingredientA,
                         ingredientB,
@@ -127,6 +130,7 @@ public final class FluidInteractionLogic
                         world,
                         neighborPos,
                         false,
+                        facing == EnumFacing.UP,
                         world.getBlockState(neighborPos),
                         ingredient2, // A
                         ingredient1, // B

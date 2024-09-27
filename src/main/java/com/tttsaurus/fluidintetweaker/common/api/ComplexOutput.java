@@ -1,45 +1,77 @@
 package com.tttsaurus.fluidintetweaker.common.api;
 
+import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComplexOutput
 {
-    private final OutputMode outputMode;
-    private final IBlockState simpleBlockOutput;
+    private final List<InteractionEvent> events = new ArrayList<>();
+    public List<InteractionEvent> getEvents() { return events; }
 
-    @Nullable
-    public IBlockState getSimpleBlockOutput()
+    private ComplexOutput() { }
+
+    public static ComplexOutput create()
     {
-        if (outputMode == OutputMode.SimpleBlock)
-            return simpleBlockOutput;
-        else
-            return null;
+        return new ComplexOutput();
+    }
+    public static ComplexOutput createSimpleBlockOutput(IBlockState blockState)
+    {
+        return create().addEvent(InteractionEvent.createSetBlockEvent(blockState));
+    }
+    public ComplexOutput addEvent(InteractionEvent event)
+    {
+        events.add(event);
+        return this;
     }
 
-    public ComplexOutput(IBlockState simpleBlockOutput)
+    public FluidInteractionDelegate getOutputDelegate(CustomFluidInteractionEvent fluidInteractionEvent)
     {
-        outputMode = OutputMode.SimpleBlock;
-        this.simpleBlockOutput = simpleBlockOutput;
-    }
-
-    public FluidInteractionDelegate getOutputDelegate(World world, BlockPos pos)
-    {
-        if (outputMode == OutputMode.SimpleBlock)
+        World world = fluidInteractionEvent.getWorld();
+        BlockPos pos = fluidInteractionEvent.getPos();
+        return new FluidInteractionDelegate()
         {
-            return new FluidInteractionDelegate(world, pos)
+            @Override
+            public void doAction()
             {
-                @Override
-                public void doAction()
+                for (InteractionEvent event: events)
                 {
-                    world.setBlockState(pos, simpleBlockOutput);
+                    List<IEventCondition> conditions = event.getConditions();
+                    boolean flag = true;
+                    for (IEventCondition condition: conditions)
+                    {
+                        flag = condition.judge(fluidInteractionEvent);
+                        if (!flag) break;
+                    }
+                    if (flag)
+                    {
+                        InteractionEventType eventType = event.getEventType();
+                        if (eventType == InteractionEventType.SetBlock)
+                        {
+                            world.setBlockState(pos, event.getBlockState());
+                        }
+                        else if (eventType == InteractionEventType.Explosion)
+                        {
+
+                        }
+                        else if (eventType == InteractionEventType.SpawnEntity)
+                        {
+
+                        }
+                        else if (eventType == InteractionEventType.SpawnEntityItem)
+                        {
+
+                        }
+                    }
                 }
-            };
-        }
-        else
-            return null;
+            }
+        };
     }
 }

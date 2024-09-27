@@ -1,5 +1,6 @@
-package com.tttsaurus.fluidintetweaker.common.api;
+package com.tttsaurus.fluidintetweaker.common.api.util;
 
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredient;
 import javax.annotation.Nullable;
 
 public final class StringRecipeProtocol

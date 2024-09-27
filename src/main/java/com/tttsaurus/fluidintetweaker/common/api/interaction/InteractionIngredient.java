@@ -1,5 +1,6 @@
-package com.tttsaurus.fluidintetweaker.common.api;
+package com.tttsaurus.fluidintetweaker.common.api.interaction;
 
+import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;

@@ -8,7 +8,7 @@ import com.cleanroommc.groovyscript.registry.VirtualizedRegistry;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.impl.FluidInteractionRecipeManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fluids.Fluid;
@@ -149,7 +149,7 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, isSourceA),
                         new InteractionIngredient(fluidSurrounding, isSourceB),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
             else if (recipeType == 2)
@@ -157,12 +157,12 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, isSourceA),
                         new InteractionIngredient(fluidSurrounding, true),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, isSourceA),
                         new InteractionIngredient(fluidSurrounding, false),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
             else if (recipeType == 3)
@@ -170,22 +170,22 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, true),
                         new InteractionIngredient(fluidSurrounding, true),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, true),
                         new InteractionIngredient(fluidSurrounding, false),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, false),
                         new InteractionIngredient(fluidSurrounding, true),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, false),
                         new InteractionIngredient(fluidSurrounding, false),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
             else if (recipeType == 4)
@@ -193,7 +193,7 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, isSourceA),
                         new InteractionIngredient(blockSurrounding),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
             else if (recipeType == 5)
@@ -201,12 +201,12 @@ public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, true),
                         new InteractionIngredient(blockSurrounding),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
                 recipeList.add(new FluidInteractionRecipe(
                         new InteractionIngredient(fluidInitiator, false),
                         new InteractionIngredient(blockSurrounding),
-                        new ComplexOutput(outputBlock),
+                        ComplexOutput.createSimpleBlockOutput(outputBlock),
                         extraInfoLocalizationKey));
             }
 
