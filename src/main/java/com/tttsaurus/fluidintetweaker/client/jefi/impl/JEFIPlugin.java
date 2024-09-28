@@ -4,8 +4,10 @@ import com.tttsaurus.fluidintetweaker.Configuration;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
 import com.tttsaurus.fluidintetweaker.common.api.*;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IsInitiatorAbove;
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
 import com.tttsaurus.fluidintetweaker.common.api.util.StringRecipeProtocol;
 import mezz.jei.api.IModPlugin;
@@ -95,7 +97,7 @@ public class JEFIPlugin implements IModPlugin
         if (Configuration.enableLavaAndWaterRecipeInJEI)
         {
             addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.FLOWING_WATER, true, ComplexOutput.createSimpleBlockOutput(Blocks.OBSIDIAN.getDefaultState()));
-            addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.FLOWING_WATER, true, ComplexOutput.createSimpleBlockOutput(Blocks.COBBLESTONE.getDefaultState()), "fluidintetweaker.jefi.extra_info_for_lava_and_water");
+            addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.FLOWING_WATER, true, ComplexOutput.create().addEvent(InteractionEvent.createSetBlockEvent(Blocks.COBBLESTONE.getDefaultState())).addEvent(InteractionEvent.createSetBlockEvent(Blocks.STONE.getDefaultState()).addCondition(new IsInitiatorAbove())));
         }
         if (Configuration.enableThermalFoundationJEICompat && FluidInteractionTweaker.IS_THERMALFOUNDATION_LOADED)
         {

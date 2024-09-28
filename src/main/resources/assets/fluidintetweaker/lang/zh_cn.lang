@@ -1,7 +1,10 @@
 fluidintetweaker.jefi.category=流体交互
 fluidintetweaker.jefi.fluid_source=源头
 fluidintetweaker.jefi.fluid_flowing=流动的
-fluidintetweaker.jefi.extra_info_for_lava_and_water=熔岩在水之上\n时形成石头
+fluidintetweaker.jefi.shift_tips=按住 SHIFT 查看详情
+fluidintetweaker.jefi.condition_tips=这只在以下条件满足时发生：
+fluidintetweaker.jefi.condition.by_chance=  - p
+fluidintetweaker.jefi.condition.is_initiator_above=  - 发起者（第一个槽位）在上时
 
 groovyscript.wiki.fluidintetweaker.fitweaker.title=FITweaker
 groovyscript.wiki.fluidintetweaker.fitweaker.description=这将帮助你添加自定义的流体交互配方。对于进阶交互逻辑，请监听事件 com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent。

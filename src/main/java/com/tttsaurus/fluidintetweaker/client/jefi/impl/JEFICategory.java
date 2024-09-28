@@ -65,7 +65,7 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
         IGuiItemStackGroup guiItemStacks = recipeLayout.getItemStacks();
         IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
-        // inputs & output
+        // inputs & outputs
         if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
             recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
         {

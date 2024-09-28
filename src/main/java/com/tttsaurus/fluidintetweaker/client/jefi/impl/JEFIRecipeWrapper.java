@@ -1,6 +1,7 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.client.jefi.impl.delegate.RenderExtraTooltipDelegate;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
 import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
@@ -13,7 +14,6 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -104,26 +104,51 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                         I18n.format("fluidintetweaker.jefi.fluid_source") :
                         I18n.format("fluidintetweaker.jefi.fluid_flowing"), 47, 35, Color.GRAY.getRGB());
 
-        if (extraInfoLocalizationKey != null)
+        int length = complexOutput.getEvents().size();
+        if (mouseX >= (116 - length * 9) && mouseX <= (116 + length * 9) && mouseY >= 14 && mouseY <= 31)
         {
-            int length = complexOutput.getEvents().size();
-            if (mouseX >= (116 - length * 9) && mouseX <= (116 + length * 9) && mouseY >= 14 && mouseY <= 31)
+            FontRenderer fr = minecraft.fontRenderer;
+            List<String> tooltip = new ArrayList<>();
+
+            int hoverIndex = (mouseX - 116 + length * 9) / 18;
+            hoverIndex = hoverIndex >= length ? length - 1 : hoverIndex;
+            InteractionEvent interactionEvent = complexOutput.getEvents().get(hoverIndex);
+            int width = 0;
+            int height = 0;
+
+            for (IEventCondition condition: interactionEvent.getConditions())
             {
-                FontRenderer fr = minecraft.fontRenderer;
-                String text = I18n.format(extraInfoLocalizationKey);
-                String[] lines = text.split("\\\\n");
-
-                int width = 0;
-                int height = 0;
-
-                for (String line : lines)
+                String desc = condition.getDesc();
+                if (desc != null)
                 {
-                    int lineWidth = fr.getStringWidth(line);
-                    if (lineWidth > width) width = lineWidth;
-                    height += 9;
+                    String[] lines = desc.split("<br>");
+                    tooltip.addAll(Arrays.asList(lines));
                 }
+            }
+            if (!tooltip.isEmpty())
+                tooltip.add(0, I18n.format("fluidintetweaker.jefi.condition_tips"));
+            if (extraInfoLocalizationKey != null)
+            {
+                String text = I18n.format(extraInfoLocalizationKey);
+                String[] lines = text.split("<br>");
+                tooltip.addAll(Arrays.asList(lines));
+            }
 
-                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(BlockUtils.getItemStack(Blocks.AIR.getDefaultState()), width, height, Arrays.asList(lines)));
+            for (String line : tooltip)
+            {
+                int lineWidth = fr.getStringWidth(line);
+                if (lineWidth > width) width = lineWidth;
+                height += 9;
+            }
+
+            if (!tooltip.isEmpty())
+            {
+                RenderTooltipEventHandler.setRenderExtraTooltip(new RenderExtraTooltipDelegate(
+                        hoverIndex,
+                        interactionEvent,
+                        width,
+                        height,
+                        tooltip));
             }
         }
     }
