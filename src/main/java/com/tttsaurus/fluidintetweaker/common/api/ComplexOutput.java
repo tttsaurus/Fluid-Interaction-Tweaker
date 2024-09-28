@@ -6,6 +6,9 @@ import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventTyp
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import java.util.ArrayList;
@@ -59,15 +62,18 @@ public class ComplexOutput
                         }
                         else if (eventType == InteractionEventType.Explosion)
                         {
-
+                            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), event.getStrength(), event.getDamagesTerrain()).doExplosionB(true);
                         }
                         else if (eventType == InteractionEventType.SpawnEntity)
                         {
-
+                            Entity entity = event.getEntityEntry().newInstance(world);
+                            entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                            world.spawnEntity(entity);
                         }
                         else if (eventType == InteractionEventType.SpawnEntityItem)
                         {
-
+                            EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(event.getItem(), event.getItemAmount(), event.getItemMeta()));
+                            world.spawnEntity(entityItem);
                         }
                     }
                 }

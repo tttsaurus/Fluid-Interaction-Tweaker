@@ -233,6 +233,22 @@ public final class FITweaker
             return this;
         }
         @ZenMethod
+        public InteractionEventBuilder createExplosionEvent(float strength, boolean damagesTerrain)
+        {
+            interactionEvent = InteractionEvent.createExplosionEvent(strength, damagesTerrain);
+            return this;
+        }
+        public InteractionEventBuilder createSpawnEntityEvent(String id)
+        {
+            interactionEvent = InteractionEvent.createSpawnEntityEvent(id);
+            return this;
+        }
+        public InteractionEventBuilder createSpawnEntityItemEvent(String id, int itemMeta, int itemAmount)
+        {
+            interactionEvent = InteractionEvent.createSpawnEntityItemEvent(id, itemMeta, itemAmount);
+            return this;
+        }
+        @ZenMethod
         public InteractionEventBuilder addCondition(String className, Object[] params)
         {
             IEventCondition condition = null;
