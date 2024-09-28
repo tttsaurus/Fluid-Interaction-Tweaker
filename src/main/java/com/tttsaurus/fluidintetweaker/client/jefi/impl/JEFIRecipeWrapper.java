@@ -14,7 +14,9 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -76,14 +78,26 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
             }
             else if (eventType == InteractionEventType.Explosion)
             {
-                outputs.add(null);
+                ItemStack tnt = new ItemStack(Items.TNT_MINECART);
+                tnt.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.explosion"));
+                outputs.add(tnt);
             }
             else if (eventType == InteractionEventType.SpawnEntity)
             {
-                outputs.add(null);
+                ItemStack egg = new ItemStack(Items.SPAWN_EGG);
+                NBTTagCompound nbt1 = new NBTTagCompound();
+                nbt1.setString("id", event.getEntityEntry().getEgg().spawnedID.toString());
+                NBTTagCompound nbt2 = new NBTTagCompound();
+                nbt2.setTag("EntityTag", nbt1);
+                egg.setTagCompound(nbt2);
+                egg.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity") + " " + egg.getDisplayName());
+                outputs.add(egg);
             }
-            else if (eventType == InteractionEventType.SpawnEntityItem) {
-                outputs.add(null);
+            else if (eventType == InteractionEventType.SpawnEntityItem)
+            {
+                ItemStack itemStack = new ItemStack(event.getItem(), event.getItemAmount(), event.getItemMeta());
+                itemStack.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity_item") + " " + itemStack.getDisplayName());
+                outputs.add(itemStack);
             }
         }
         ingredients.setOutputs(VanillaTypes.ITEM, outputs);

@@ -1,14 +1,9 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl.delegate;
 
-import com.cleanroommc.modularui.drawable.GuiDraw;
-import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.common.api.delegate.IDelegate;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import java.awt.*;
@@ -44,16 +39,8 @@ public class RenderExtraTooltipDelegate implements IDelegate
     @Override
     public void doAction()
     {
-        if (FluidInteractionTweaker.IS_MODULARUI_LOADED)
-        {
-            for (int i = 0; i < lines.size(); i++)
-                GuiDraw.drawText(lines.get(i), x, y + 9 * i, 1, Color.GRAY.getRGB(), true);
-        }
-        else
-        {
-            FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
-            for (int i = 0; i < lines.size(); i++)
-                fontRenderer.drawString(lines.get(i), x, y + 9 * i, Color.GRAY.getRGB(), true);
-        }
+        FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+        for (int i = 0; i < lines.size(); i++)
+            fontRenderer.drawString(lines.get(i), x, y + 9 * i, Color.YELLOW.getRGB(), true);
     }
 }

@@ -15,7 +15,7 @@ public class ByChance implements IEventCondition
     @Override
     public boolean judge(CustomFluidInteractionEvent fluidInteractionEvent)
     {
-        return fluidInteractionEvent.getWorld().rand.nextFloat() > probability;
+        return fluidInteractionEvent.getWorld().rand.nextFloat() < probability;
     }
 
     @Override
