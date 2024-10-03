@@ -5,9 +5,9 @@ fluidintetweaker.jefi.shift_tips=Hold SHIFT to display details
 fluidintetweaker.jefi.interaction.explosion=Explosion
 fluidintetweaker.jefi.interaction.spawn_entity=Creature:
 fluidintetweaker.jefi.interaction.spawn_entity_item=Item:
-fluidintetweaker.jefi.condition_tips=This only happens when:
-fluidintetweaker.jefi.condition.by_chance=  - p
-fluidintetweaker.jefi.condition.is_initiator_above=  - initiator (first slot) is above
+fluidintetweaker.jefi.condition_tips=§dThis only happens when:
+fluidintetweaker.jefi.condition.by_chance=§e  - p
+fluidintetweaker.jefi.condition.is_initiator_above=§e  - initiator (first slot) is above
 
 groovyscript.wiki.fluidintetweaker.fitweaker.title=FITweaker
 groovyscript.wiki.fluidintetweaker.fitweaker.description=It enables you to add custom fluid interactions. Advanced interactions can be achieved by listening to the event com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent.

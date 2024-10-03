@@ -17,6 +17,7 @@ public final class RenderTooltipEventHandler
     private static RenderExtraTooltipDelegate renderExtraTooltip = null;
     public static void setRenderExtraTooltip(RenderExtraTooltipDelegate delegate) { renderExtraTooltip = delegate; }
 
+    /*
     @SubscribeEvent
     public static void onRenderTooltipPostText(PostText event)
     {
@@ -31,6 +32,8 @@ public final class RenderTooltipEventHandler
             renderExtraTooltip = null;
         }
     }
+    */
+
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event)
     {
@@ -39,6 +42,7 @@ public final class RenderTooltipEventHandler
             List<String> tooltip = event.getToolTip();
             if (GuiScreen.isShiftKeyDown())
             {
+                /*
                 float height_count = renderExtraTooltip.getHeight() / 9f;
                 height_count = height_count > (int)height_count ? (int)height_count + 1 : height_count;
                 String[] strings = new String[(int)height_count];
@@ -51,9 +55,12 @@ public final class RenderTooltipEventHandler
 
                 strings[0] = builder.toString();
                 tooltip.addAll(Arrays.asList(strings));
+                */
+                tooltip.addAll(renderExtraTooltip.getLines());
             }
             else
                 tooltip.add(I18n.format("fluidintetweaker.jefi.shift_tips"));
+            renderExtraTooltip = null;
         }
     }
 }

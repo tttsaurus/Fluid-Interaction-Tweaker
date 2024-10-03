@@ -39,8 +39,10 @@ public class RenderExtraTooltipDelegate implements IDelegate
     @Override
     public void doAction()
     {
+        /*
         FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
         for (int i = 0; i < lines.size(); i++)
             fontRenderer.drawString(lines.get(i), x, y + 9 * i, Color.YELLOW.getRGB(), true);
+        */
     }
 }
