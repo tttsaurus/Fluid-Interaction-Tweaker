@@ -1,10 +1,10 @@
 fluidintetweaker.jefi.category=Fluid Interactions
 fluidintetweaker.jefi.fluid_source=Source
 fluidintetweaker.jefi.fluid_flowing=Flowing
-fluidintetweaker.jefi.shift_tips=Hold SHIFT to display details
-fluidintetweaker.jefi.interaction.explosion=Explosion
-fluidintetweaker.jefi.interaction.spawn_entity=Creature:
-fluidintetweaker.jefi.interaction.spawn_entity_item=Item:
+fluidintetweaker.jefi.shift_tips=§oHold [SHIFT] to display details
+fluidintetweaker.jefi.interaction.explosion=§rExplosion
+fluidintetweaker.jefi.interaction.spawn_entity=§rCreature:
+fluidintetweaker.jefi.interaction.spawn_entity_item=§rItem:
 fluidintetweaker.jefi.condition_tips=§dThis only happens when:
 fluidintetweaker.jefi.condition.by_chance=§e  - p
 fluidintetweaker.jefi.condition.is_initiator_above=§e  - initiator (first slot) is above

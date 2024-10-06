@@ -1,10 +1,10 @@
 fluidintetweaker.jefi.category=流体交互
 fluidintetweaker.jefi.fluid_source=源头
 fluidintetweaker.jefi.fluid_flowing=流动的
-fluidintetweaker.jefi.shift_tips=按住 SHIFT 查看详情
-fluidintetweaker.jefi.interaction.explosion=爆炸
-fluidintetweaker.jefi.interaction.spawn_entity=生物:
-fluidintetweaker.jefi.interaction.spawn_entity_item=物品:
+fluidintetweaker.jefi.shift_tips=§o按住 [SHIFT] 查看详情
+fluidintetweaker.jefi.interaction.explosion=§r爆炸
+fluidintetweaker.jefi.interaction.spawn_entity=§r生物:
+fluidintetweaker.jefi.interaction.spawn_entity_item=§r物品:
 fluidintetweaker.jefi.condition_tips=§d这只在以下条件满足时发生:
 fluidintetweaker.jefi.condition.by_chance=§e  - p
 fluidintetweaker.jefi.condition.is_initiator_above=§e  - 发起者（第一个槽位）在上时
