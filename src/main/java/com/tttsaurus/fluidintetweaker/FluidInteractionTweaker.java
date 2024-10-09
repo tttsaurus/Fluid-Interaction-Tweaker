@@ -1,10 +1,10 @@
 package com.tttsaurus.fluidintetweaker;
 
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 import com.tttsaurus.fluidintetweaker.proxy.CommonProxy;
@@ -19,10 +19,9 @@ public final class FluidInteractionTweaker
     public static final String NAME = "Fluid Interaction Tweaker";
     public static final String VERSION = "1.4.0-preview-1";
 
-    public static final boolean IS_JEI_LOADED = Loader.isModLoaded("jei");
-    public static final boolean IS_MODULARUI_LOADED = Loader.isModLoaded("modularui");
-    public static final boolean IS_THERMALFOUNDATION_LOADED = Loader.isModLoaded("thermalfoundation");
-    public static final boolean IS_BIOMESOPLENTY_LOADED = Loader.isModLoaded("biomesoplenty");
+    public static boolean IS_JEI_LOADED;
+    public static boolean IS_THERMALFOUNDATION_LOADED;
+    public static boolean IS_BIOMESOPLENTY_LOADED;
 
     @SidedProxy(
             clientSide = "com.tttsaurus.fluidintetweaker.proxy.ClientProxy",
@@ -42,6 +41,12 @@ public final class FluidInteractionTweaker
     public void init(FMLInitializationEvent event)
     {
         proxy.init(event, logger);
-        logger.info("Fluid Interaction Tweaker initialized.");
+        logger.info(FluidInteractionTweaker.NAME + " initialized.");
+    }
+
+    @EventHandler
+    public void postInit(FMLPostInitializationEvent event)
+    {
+        proxy.postInit(event, logger);
     }
 }
