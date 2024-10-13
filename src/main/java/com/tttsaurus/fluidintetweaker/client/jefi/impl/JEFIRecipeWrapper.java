@@ -133,8 +133,10 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                 float x = 116 - length * 9 + hoverIndex * 18 + 9;
                 float y = 14 - 1;
                 if (entityRenderer == null) entityRenderer = new EntityRenderer(minecraft, interactionEvent.getEntityEntry());
-                float dist = 55;
-                double angle = Math.atan((mouseX - x)/dist) / 2f * 3.14159f * 360f;
+                // entity is behind the screen
+                // dist describes how far is the entity
+                float dist = 9f;
+                double angle = Math.atan((mouseX - x)/dist) / (2f * 3.14159f) * 360f;
                 entityRenderer.render(x, y, 0, (float)angle, 0);
             }
             //</editor-fold>
