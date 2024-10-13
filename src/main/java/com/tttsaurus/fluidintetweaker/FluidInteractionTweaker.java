@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker;
 
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -19,9 +20,9 @@ public final class FluidInteractionTweaker
     public static final String NAME = "Fluid Interaction Tweaker";
     public static final String VERSION = "1.4.0-preview-1";
 
-    public static boolean IS_JEI_LOADED;
-    public static boolean IS_THERMALFOUNDATION_LOADED;
-    public static boolean IS_BIOMESOPLENTY_LOADED;
+    public static boolean IS_JEI_LOADED = Loader.isModLoaded("jei");
+    public static boolean IS_THERMALFOUNDATION_LOADED = Loader.isModLoaded("thermalfoundation");
+    public static boolean IS_BIOMESOPLENTY_LOADED = Loader.isModLoaded("biomesoplenty");
 
     @SidedProxy(
             clientSide = "com.tttsaurus.fluidintetweaker.proxy.ClientProxy",

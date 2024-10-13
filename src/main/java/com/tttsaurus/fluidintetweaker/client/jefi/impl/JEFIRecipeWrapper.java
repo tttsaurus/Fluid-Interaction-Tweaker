@@ -1,5 +1,6 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
+import com.tttsaurus.fluidintetweaker.client.api.render.EntityRenderer;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
 import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
@@ -11,27 +12,14 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
-
 import java.awt.*;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -114,39 +102,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
         ingredients.setOutputs(VanillaTypes.ITEM, outputs);
     }
 
-    private final IntBuffer textureIdBuffer = ByteBuffer.allocateDirect(16 << 2).order(ByteOrder.nativeOrder()).asIntBuffer();
-    private final FloatBuffer colorBuffer = ByteBuffer.allocateDirect(16 << 2).order(ByteOrder.nativeOrder()).asFloatBuffer();
-    private void renderEntity(float x, float y, Minecraft minecraft, EntityEntry entityEntry)
-    {
-        Entity entity = entityEntry.newInstance(minecraft.player.world);
-        Render<Entity> render = minecraft.getRenderManager().getEntityRenderObject(entity);
-
-        GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D, textureIdBuffer);
-        int textureID = textureIdBuffer.get(0);
-        GL11.glGetFloat(GL11.GL_CURRENT_COLOR, colorBuffer);
-        float r = colorBuffer.get(0);
-        float g = colorBuffer.get(1);
-        float b = colorBuffer.get(2);
-        float a = colorBuffer.get(3);
-        boolean blendState = GL11.glIsEnabled(GL11.GL_BLEND);
-
-        GlStateManager.pushMatrix();
-        GlStateManager.translate(x, y, 10);
-        GlStateManager.scale(-10f, 10f, 10f);
-        GlStateManager.rotate(180.0f, 0.0f, 0.0f, 1.0f);
-
-        render.doRender(entity, 0, 0, 0, 0, 0);
-
-        GlStateManager.popMatrix();
-
-        if (blendState)
-            GlStateManager.enableBlend();
-        else
-            GlStateManager.disableBlend();
-        GlStateManager.color(r, g, b, a);
-        GlStateManager.bindTexture(textureID);
-    }
-
+    private EntityRenderer entityRenderer = null;
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
     {
@@ -176,7 +132,8 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
             {
                 float x = 116 - length * 9 + hoverIndex * 18 + 9;
                 float y = 14 - 1;
-                renderEntity(x, y, minecraft, interactionEvent.getEntityEntry());
+                if (entityRenderer == null) entityRenderer = new EntityRenderer(minecraft, interactionEvent.getEntityEntry());
+                entityRenderer.render(x, y);
             }
             //</editor-fold>
 
