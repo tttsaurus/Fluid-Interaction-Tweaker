@@ -38,7 +38,7 @@ public final class EntityRenderer
 
     private final IntBuffer intBuffer = ByteBuffer.allocateDirect(16 << 2).order(ByteOrder.nativeOrder()).asIntBuffer();
     private final FloatBuffer floatBuffer = ByteBuffer.allocateDirect(16 << 2).order(ByteOrder.nativeOrder()).asFloatBuffer();
-    public void render(float x, float y)
+    public void render(float x, float y, float rotationX, float rotationY, float rotationZ)
     {
         intBuffer.clear();
         floatBuffer.clear();
@@ -70,7 +70,11 @@ public final class EntityRenderer
 
         // alphaTest
         boolean alphaTest = GL11.glIsEnabled(GL11.GL_ALPHA_TEST);
+
+        // rescaleNormal
         boolean rescaleNormal = GL11.glIsEnabled(GL12.GL_RESCALE_NORMAL);
+
+        // lighting
         boolean lighting = GL11.glIsEnabled(GL11.GL_LIGHTING);
 
         // colorMatFace & colorMatMode
@@ -194,6 +198,9 @@ public final class EntityRenderer
         GlStateManager.translate(x, y, 10);
         GlStateManager.scale(-10f, 10f, 10f);
         GlStateManager.rotate(180.0f, 0.0f, 0.0f, 1.0f);
+        if (rotationX != 0) GlStateManager.rotate(rotationX, 1.0f, 0.0f, 0.0f);
+        if (rotationY != 0) GlStateManager.rotate(rotationY, 0.0f, 1.0f, 0.0f);
+        if (rotationZ != 0) GlStateManager.rotate(rotationZ, 0.0f, 0.0f, 1.0f);
 
         GlStateManager.setActiveTexture(activeTexture);
         renderer.doRender(entity, 0, 0, 0, 0, 0);
