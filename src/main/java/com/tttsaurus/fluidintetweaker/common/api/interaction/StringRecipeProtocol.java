@@ -1,11 +1,11 @@
-package com.tttsaurus.fluidintetweaker.common.api.util;
+package com.tttsaurus.fluidintetweaker.common.api.interaction;
 
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import javax.annotation.Nullable;
 
 public final class StringRecipeProtocol
 {
-    public static String getRecipeKeyFromTwoIngredients(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    public static String getRecipeKeyFromTwoIngredients(WorldIngredient ingredientA, WorldIngredient ingredientB)
     {
         return ingredientA.toString() + "+" + ingredientB.toString();
     }

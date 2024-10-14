@@ -1,8 +1,8 @@
 package com.tttsaurus.fluidintetweaker.common.impl.interaction;
 
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +23,7 @@ public final class FluidInteractionLogic
         if (world.isRemote) return;
 
         BlockPos pos = event.getPos();
-        InteractionIngredient ingredient1 = InteractionIngredient.getFrom(world, pos);
+        WorldIngredient ingredient1 = WorldIngredient.getFrom(world, pos);
 
         // the recipe doesn't exist
         // so early escape
@@ -39,7 +39,7 @@ public final class FluidInteractionLogic
             int z = vec3.getZ();
 
             BlockPos neighborPos = new BlockPos(pos.getX() + x, pos.getY() + y, pos.getZ() + z);
-            InteractionIngredient ingredient2 = InteractionIngredient.getFrom(world, neighborPos);
+            WorldIngredient ingredient2 = WorldIngredient.getFrom(world, neighborPos);
 
             //<editor-fold desc="ingredient1 reacts with ingredient2">
 
@@ -48,14 +48,14 @@ public final class FluidInteractionLogic
 
             // special case: fluid (ingredient2) under another fluid (ingredient1)
             // treat fluid above (ingredient1) as flowing
-            if ((ingredient1.getIngredientType() == InteractionIngredientType.FLUID) &&
-                (ingredient2.getIngredientType() == InteractionIngredientType.FLUID) &&
+            if ((ingredient1.getIngredientType() == WorldIngredientType.FLUID) &&
+                (ingredient2.getIngredientType() == WorldIngredientType.FLUID) &&
                 (facing == EnumFacing.DOWN))
             {
                 // fluid below (ingredient2) turns to a block
                 ingredient1.setIsFluidSource(false);
 
-                InteractionIngredient ingredientA, ingredientB;
+                WorldIngredient ingredientA, ingredientB;
                 ComplexOutput complexOutput = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2);
                 if (complexOutput == null)
                 { ingredientA = ingredient2; ingredientB = ingredient1; }
@@ -95,14 +95,14 @@ public final class FluidInteractionLogic
 
             // special case: fluid (ingredient1) under another fluid (ingredient2)
             // treat fluid above (ingredient2) as flowing
-            else if ((ingredient2.getIngredientType() == InteractionIngredientType.FLUID) &&
-                     (ingredient1.getIngredientType() == InteractionIngredientType.FLUID) &&
+            else if ((ingredient2.getIngredientType() == WorldIngredientType.FLUID) &&
+                     (ingredient1.getIngredientType() == WorldIngredientType.FLUID) &&
                      (facing == EnumFacing.UP))
             {
                 // fluid below (ingredient1) turns to a block
                 ingredient2.setIsFluidSource(false);
 
-                InteractionIngredient ingredientA, ingredientB;
+                WorldIngredient ingredientA, ingredientB;
                 ComplexOutput complexOutput = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1);
                 if (complexOutput == null)
                 { ingredientA = ingredient1; ingredientB = ingredient2; }

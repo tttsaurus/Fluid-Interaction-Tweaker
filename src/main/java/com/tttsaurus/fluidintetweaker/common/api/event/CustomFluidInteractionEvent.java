@@ -1,8 +1,8 @@
 package com.tttsaurus.fluidintetweaker.common.api.event;
 
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.util.StringRecipeProtocol;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -17,8 +17,8 @@ public class CustomFluidInteractionEvent extends WorldEvent
     private final boolean isFluidAboveAndBelowCase;
     private final boolean isInitiatorAbove;
     private final IBlockState blockStateBeforeInteraction;
-    private final InteractionIngredient ingredientA;
-    private final InteractionIngredient ingredientB;
+    private final WorldIngredient ingredientA;
+    private final WorldIngredient ingredientB;
     private final ComplexOutput complexOutput;
     private final FluidInteractionDelegate delegate;
 
@@ -26,13 +26,13 @@ public class CustomFluidInteractionEvent extends WorldEvent
     public boolean getIsFluidAboveAndBelowCase() { return isFluidAboveAndBelowCase; }
     public boolean getIsInitiatorAbove() { return isInitiatorAbove; }
     public IBlockState getBlockStateBeforeInteraction() { return blockStateBeforeInteraction; }
-    public InteractionIngredient getIngredientA() { return ingredientA; }
-    public InteractionIngredient getIngredientB() { return ingredientB; }
+    public WorldIngredient getIngredientA() { return ingredientA; }
+    public WorldIngredient getIngredientB() { return ingredientB; }
     public ComplexOutput getComplexOutput() { return complexOutput; }
     public FluidInteractionDelegate getDelegate() { return delegate; }
     public String getFluidInteractionRecipeKey() { return StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB); }
 
-    public CustomFluidInteractionEvent(World world, BlockPos pos, boolean isFluidAboveAndBelowCase, boolean isInitiatorAbove, IBlockState blockStateBeforeInteraction, InteractionIngredient ingredientA, InteractionIngredient ingredientB, ComplexOutput complexOutput)
+    public CustomFluidInteractionEvent(World world, BlockPos pos, boolean isFluidAboveAndBelowCase, boolean isInitiatorAbove, IBlockState blockStateBeforeInteraction, WorldIngredient ingredientA, WorldIngredient ingredientB, ComplexOutput complexOutput)
     {
         super(world);
         this.pos = pos;

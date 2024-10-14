@@ -5,11 +5,11 @@ import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IsInitiatorAbove;
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
-import com.tttsaurus.fluidintetweaker.common.api.util.StringRecipeProtocol;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -27,27 +27,27 @@ public class JEFIPlugin implements IModPlugin
 {
     private static final LinkedHashMap<String, JEFIRecipeWrapper> recipeWrapperDict = new LinkedHashMap<>();
 
-    private static void addRecipeWrapper(InteractionIngredient ingredientA, boolean isAnyFluidStateA, InteractionIngredient ingredientB, ComplexOutput complexOutput)
+    private static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, ComplexOutput complexOutput)
     {
         addRecipeWrapper(ingredientA, isAnyFluidStateA, ingredientB, complexOutput, null);
     }
-    private static void addRecipeWrapper(InteractionIngredient ingredientA, boolean isAnyFluidStateA, InteractionIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    private static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         addRecipeWrapper(ingredientA, isAnyFluidStateA, ingredientB, false, complexOutput, extraInfoLocalizationKey);
     }
-    private static void addRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput)
+    private static void addRecipeWrapper(WorldIngredient ingredientA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput)
     {
         addRecipeWrapper(ingredientA, ingredientB, isAnyFluidStateB, complexOutput, null);
     }
-    private static void addRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    private static void addRecipeWrapper(WorldIngredient ingredientA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         addRecipeWrapper(ingredientA, false, ingredientB, isAnyFluidStateB, complexOutput, extraInfoLocalizationKey);
     }
-    private static void addRecipeWrapper(InteractionIngredient ingredientA, boolean isAnyFluidStateA, InteractionIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput)
+    private static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput)
     {
         addRecipeWrapper(ingredientA, isAnyFluidStateA, ingredientB, isAnyFluidStateB, complexOutput, null);
     }
-    private static void addRecipeWrapper(InteractionIngredient ingredientA, boolean isAnyFluidStateA, InteractionIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    private static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(ingredientA, ingredientB, complexOutput, extraInfoLocalizationKey);
         recipeWrapper.isAnyFluidStateA = isAnyFluidStateA;
@@ -56,13 +56,13 @@ public class JEFIPlugin implements IModPlugin
         recipeWrapperDict.put(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB), recipeWrapper);
     }
 
-    public static void addRecipeWrapper(String recipeKey, InteractionIngredient ingredientA, InteractionIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    public static void addRecipeWrapper(String recipeKey, WorldIngredient ingredientA, WorldIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(ingredientA, ingredientB, complexOutput, extraInfoLocalizationKey);
         recipeWrapperDict.put(recipeKey, recipeWrapper);
 
         //<editor-fold desc="combine `source` and `flowing` if they both exist">
-        if (ingredientA.getIngredientType() == InteractionIngredientType.FLUID)
+        if (ingredientA.getIngredientType() == WorldIngredientType.FLUID)
         {
             ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
             String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
@@ -75,7 +75,7 @@ public class JEFIPlugin implements IModPlugin
             ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
         }
 
-        if (ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        if (ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
             ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
             String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
@@ -96,8 +96,8 @@ public class JEFIPlugin implements IModPlugin
     {
         if (Configuration.enableLavaAndWaterRecipeInJEI)
         {
-            addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, InteractionIngredient.FLOWING_WATER, true, ComplexOutput.createSimpleBlockOutput(Blocks.OBSIDIAN.getDefaultState()));
-            addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, InteractionIngredient.FLOWING_WATER, true, ComplexOutput.create().addEvent(InteractionEvent.createSetBlockEvent(Blocks.COBBLESTONE.getDefaultState())).addEvent(InteractionEvent.createSetBlockEvent(Blocks.STONE.getDefaultState()).addCondition(new IsInitiatorAbove())));
+            addRecipeWrapper(WorldIngredient.SOURCE_LAVA, WorldIngredient.FLOWING_WATER, true, ComplexOutput.createSimpleBlockOutput(Blocks.OBSIDIAN.getDefaultState()));
+            addRecipeWrapper(WorldIngredient.FLOWING_LAVA, WorldIngredient.FLOWING_WATER, true, ComplexOutput.create().addEvent(InteractionEvent.createSetBlockEvent(Blocks.COBBLESTONE.getDefaultState())).addEvent(InteractionEvent.createSetBlockEvent(Blocks.STONE.getDefaultState()).addCondition(new IsInitiatorAbove())));
         }
         if (Configuration.enableThermalFoundationJEICompat && FluidInteractionTweaker.IS_THERMALFOUNDATION_LOADED)
         {
@@ -107,16 +107,16 @@ public class JEFIPlugin implements IModPlugin
                 - adjacent blocks are set on fire or covered with snow layers
                 - redstone ore lights up
             */
-            InteractionIngredient FLOWING_MANA = new InteractionIngredient(FluidRegistry.getFluid("mana"), false);
-            addRecipeWrapper(new InteractionIngredient(Blocks.DIRT.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRASS_PATH.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.DIRT.getStateFromMeta(1)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRASS_PATH.getStateFromMeta(1)));
-            addRecipeWrapper(new InteractionIngredient(Blocks.FARMLAND.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.MYCELIUM.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.GLASS.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.SAND.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.LAPIS_ORE.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.LAPIS_BLOCK.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(BlockUtils.getBlockState("thermalfoundation:ore", 2)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(BlockUtils.getBlockState("thermalfoundation:ore", 8)));
-            addRecipeWrapper(new InteractionIngredient(BlockUtils.getBlockState("thermalfoundation:ore", 3)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GOLD_ORE.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(BlockUtils.getBlockState("thermalfoundation:storage", 2)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(BlockUtils.getBlockState("thermalfoundation:storage", 8)));
-            addRecipeWrapper(new InteractionIngredient(BlockUtils.getBlockState("thermalfoundation:storage", 3)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GOLD_BLOCK.getDefaultState()));
+            WorldIngredient FLOWING_MANA = new WorldIngredient(FluidRegistry.getFluid("mana"), false);
+            addRecipeWrapper(new WorldIngredient(Blocks.DIRT.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRASS_PATH.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.DIRT.getStateFromMeta(1)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRASS_PATH.getStateFromMeta(1)));
+            addRecipeWrapper(new WorldIngredient(Blocks.FARMLAND.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.MYCELIUM.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.GLASS.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.SAND.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.LAPIS_ORE.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.LAPIS_BLOCK.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(BlockUtils.getBlockState("thermalfoundation:ore", 2)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(BlockUtils.getBlockState("thermalfoundation:ore", 8)));
+            addRecipeWrapper(new WorldIngredient(BlockUtils.getBlockState("thermalfoundation:ore", 3)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GOLD_ORE.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(BlockUtils.getBlockState("thermalfoundation:storage", 2)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(BlockUtils.getBlockState("thermalfoundation:storage", 8)));
+            addRecipeWrapper(new WorldIngredient(BlockUtils.getBlockState("thermalfoundation:storage", 3)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GOLD_BLOCK.getDefaultState()));
 
             /*
                 Pyrotheum Todos:
@@ -124,16 +124,16 @@ public class JEFIPlugin implements IModPlugin
                 - flammable blocks are instantly destroyed
                 - creepers instantly explode
             */
-            InteractionIngredient FLOWING_PYROTHEUM = new InteractionIngredient(FluidRegistry.getFluid("pyrotheum"), false);
-            addRecipeWrapper(new InteractionIngredient(Blocks.COBBLESTONE.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.GRASS.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.DIRT.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.SAND.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GLASS.getDefaultState()));
-            addRecipeWrapper(InteractionIngredient.FLOWING_WATER, true, FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.ICE.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.CLAY.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.HARDENED_CLAY.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.SNOW.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.AIR.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.SNOW_LAYER.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.AIR.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.STONE_STAIRS.getStateFromMeta(0)), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE_BRICK_STAIRS.getStateFromMeta(0)));
+            WorldIngredient FLOWING_PYROTHEUM = new WorldIngredient(FluidRegistry.getFluid("pyrotheum"), false);
+            addRecipeWrapper(new WorldIngredient(Blocks.COBBLESTONE.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.GRASS.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.DIRT.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.SAND.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GLASS.getDefaultState()));
+            addRecipeWrapper(WorldIngredient.FLOWING_WATER, true, FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.ICE.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.CLAY.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.HARDENED_CLAY.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.SNOW.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.AIR.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.SNOW_LAYER.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.AIR.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.STONE_STAIRS.getStateFromMeta(0)), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE_BRICK_STAIRS.getStateFromMeta(0)));
 
             /*
                 Cryotheum Todos:
@@ -144,27 +144,27 @@ public class JEFIPlugin implements IModPlugin
                 - blazes take 10 damage instead of 2
                 - snow golems and blizzes are given the effects Speed I and Regeneration I for 6 seconds
             */
-            InteractionIngredient FLOWING_CRYOTHEUM = new InteractionIngredient(FluidRegistry.getFluid("cryotheum"), false);
-            addRecipeWrapper(new InteractionIngredient(Blocks.GRASS.getDefaultState()), FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.DIRT.getDefaultState()));
-            addRecipeWrapper(InteractionIngredient.SOURCE_WATER, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.ICE.getDefaultState()));
-            addRecipeWrapper(InteractionIngredient.FLOWING_WATER, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.SNOW.getDefaultState()));
-            addRecipeWrapper(InteractionIngredient.SOURCE_LAVA, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.OBSIDIAN.getDefaultState()));
-            addRecipeWrapper(InteractionIngredient.FLOWING_LAVA, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(FluidRegistry.getFluid("glowstone"), true), FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GLOWSTONE.getDefaultState()));
+            WorldIngredient FLOWING_CRYOTHEUM = new WorldIngredient(FluidRegistry.getFluid("cryotheum"), false);
+            addRecipeWrapper(new WorldIngredient(Blocks.GRASS.getDefaultState()), FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.DIRT.getDefaultState()));
+            addRecipeWrapper(WorldIngredient.SOURCE_WATER, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.ICE.getDefaultState()));
+            addRecipeWrapper(WorldIngredient.FLOWING_WATER, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.SNOW.getDefaultState()));
+            addRecipeWrapper(WorldIngredient.SOURCE_LAVA, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.OBSIDIAN.getDefaultState()));
+            addRecipeWrapper(WorldIngredient.FLOWING_LAVA, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(FluidRegistry.getFluid("glowstone"), true), FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GLOWSTONE.getDefaultState()));
 
             /*
                 Petrotheum Todos:
                 - when touched by players and mobs, tectonic petrotheum applies the effect Haste I to them for 6 seconds
                 - if enabled, tectonic petrotheum breaks any adjacent stone- or rock-like blocks. This is disabled by default
             */
-            InteractionIngredient FLOWING_PETROTHEUM = new InteractionIngredient(FluidRegistry.getFluid("petrotheum"), false);
-            addRecipeWrapper(new InteractionIngredient(Blocks.STONE.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.COBBLESTONE.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.STONEBRICK.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.STONEBRICK.getStateFromMeta(1)), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.STONEBRICK.getStateFromMeta(2)), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.STONEBRICK.getStateFromMeta(3)), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
-            addRecipeWrapper(new InteractionIngredient(Blocks.MOSSY_COBBLESTONE.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
+            WorldIngredient FLOWING_PETROTHEUM = new WorldIngredient(FluidRegistry.getFluid("petrotheum"), false);
+            addRecipeWrapper(new WorldIngredient(Blocks.STONE.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.COBBLESTONE.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.STONEBRICK.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.STONEBRICK.getStateFromMeta(1)), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.STONEBRICK.getStateFromMeta(2)), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.STONEBRICK.getStateFromMeta(3)), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
+            addRecipeWrapper(new WorldIngredient(Blocks.MOSSY_COBBLESTONE.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
         }
         if (Configuration.enableBiomesOPlentyJEICompat && FluidInteractionTweaker.IS_BIOMESOPLENTY_LOADED)
         {

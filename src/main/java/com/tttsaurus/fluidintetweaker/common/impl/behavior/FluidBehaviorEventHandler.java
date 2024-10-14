@@ -3,7 +3,7 @@ package com.tttsaurus.fluidintetweaker.common.impl.behavior;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidBehaviorEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class FluidBehaviorEventHandler
+public final class FluidBehaviorEventHandler
 {
     @SubscribeEvent
     public static void onCustomFluidBehavior(CustomFluidBehaviorEvent event)

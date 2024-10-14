@@ -4,8 +4,8 @@ import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.impl.JEFIPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.util.StringRecipeProtocol;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import javax.annotation.Nullable;
 import java.util.*;
@@ -26,24 +26,24 @@ public final class FluidInteractionRecipeManager
     private static final HashMap<String, ComplexOutput> recipeDict = new HashMap<>();
 
     //<editor-fold desc="methods for FluidInteractionLogic">
-    static boolean ingredientAExists(InteractionIngredient ingredientA)
+    static boolean ingredientAExists(WorldIngredient ingredientA)
     {
         return recipeIngredientAList.contains(ingredientA.toString());
     }
-    static boolean ingredientBExists(InteractionIngredient ingredientB)
+    static boolean ingredientBExists(WorldIngredient ingredientB)
     {
         return recipeIngredientBList.contains(ingredientB.toString());
     }
-    static boolean recipeExists(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    static boolean recipeExists(WorldIngredient ingredientA, WorldIngredient ingredientB)
     {
         return recipeDict.containsKey(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
     }
-    static ComplexOutput getRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    static ComplexOutput getRecipeOutput(WorldIngredient ingredientA, WorldIngredient ingredientB)
     {
         return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
     }
     @Nullable
-    static ComplexOutput getNullableRecipeOutput(InteractionIngredient ingredientA, InteractionIngredient ingredientB)
+    static ComplexOutput getNullableRecipeOutput(WorldIngredient ingredientA, WorldIngredient ingredientB)
     {
         if (recipeExists(ingredientA, ingredientB))
             return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
@@ -68,7 +68,7 @@ public final class FluidInteractionRecipeManager
     {
         return addRecipe(recipe.ingredientA, recipe.ingredientB, recipe.complexOutput, recipe.extraInfoLocalizationKey);
     }
-    public static String addRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey) throws FluidInteractionTweakerRuntimeException
+    public static String addRecipe(WorldIngredient ingredientA, WorldIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey) throws FluidInteractionTweakerRuntimeException
     {
         String ingredientAKey = ingredientA.toString();
         String ingredientBKey = ingredientB.toString();
@@ -92,7 +92,7 @@ public final class FluidInteractionRecipeManager
     {
         removeRecipe(recipe.ingredientA, recipe.ingredientB);
     }
-    public static void removeRecipe(InteractionIngredient ingredientA, InteractionIngredient ingredientB) throws FluidInteractionTweakerRuntimeException
+    public static void removeRecipe(WorldIngredient ingredientA, WorldIngredient ingredientB) throws FluidInteractionTweakerRuntimeException
     {
         String key = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
         if (recipeDict.containsKey(key))

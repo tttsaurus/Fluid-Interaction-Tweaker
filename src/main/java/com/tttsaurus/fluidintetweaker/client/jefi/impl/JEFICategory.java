@@ -2,7 +2,7 @@ package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
@@ -66,8 +66,8 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
         IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
         // inputs & outputs
-        if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
-            recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        if (recipeWrapper.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
+            recipeWrapper.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiFluidStacks.init(1, true, 47, 15, 16, 16, 1000, false, null);
@@ -76,8 +76,8 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
             for (int i = 0; i < length; i++)
                 guiItemStacks.init(i, false, 116 - length * 9 + i * 18, 14);
         }
-        else if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
-                 recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
+        else if (recipeWrapper.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
+                 recipeWrapper.ingredientB.getIngredientType() == WorldIngredientType.BLOCK)
         {
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiItemStacks.init(0, true, 47, 14);
@@ -86,8 +86,8 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
             for (int i = 0; i < length; i++)
                 guiItemStacks.init(i + 1, false, 116 - length * 9 + i * 18, 14);
         }
-        else if (recipeWrapper.ingredientA.getIngredientType() == InteractionIngredientType.BLOCK &&
-                 recipeWrapper.ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        else if (recipeWrapper.ingredientA.getIngredientType() == WorldIngredientType.BLOCK &&
+                 recipeWrapper.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
             guiItemStacks.init(0, true, 7, 14);
             guiFluidStacks.init(0, true, 47, 15, 16, 16, 1000, false, null);

@@ -2,8 +2,8 @@ package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.util.StringRecipeProtocol;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionRecipeManager;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import crafttweaker.IAction;
@@ -23,13 +23,13 @@ public final class Actions
         public final List<String> recipeKeys = new ArrayList<>();
 
         //<editor-fold desc="InteractionIngredient constructor wrappers">
-        private InteractionIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
+        private WorldIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
         {
-            return new InteractionIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
+            return new WorldIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
         }
-        private InteractionIngredient buildIngredient(IBlockState blockState)
+        private WorldIngredient buildIngredient(IBlockState blockState)
         {
-            return new InteractionIngredient((net.minecraft.block.state.IBlockState)blockState.getInternal());
+            return new WorldIngredient((net.minecraft.block.state.IBlockState)blockState.getInternal());
         }
         //</editor-fold>
 

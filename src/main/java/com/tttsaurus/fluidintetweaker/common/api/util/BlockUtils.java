@@ -46,4 +46,9 @@ public final class BlockUtils
     {
         return getBlockState(id, 0);
     }
+    @SuppressWarnings("ConstantConditions")
+    public static IBlockState getBlockState(ItemStack itemStack)
+    {
+        return getBlockState(itemStack.getItem().getRegistryName().toString(), itemStack.getMetadata());
+    }
 }

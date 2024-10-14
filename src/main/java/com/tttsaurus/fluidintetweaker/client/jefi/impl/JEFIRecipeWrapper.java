@@ -6,8 +6,8 @@ import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -27,15 +27,15 @@ import java.util.List;
 @SideOnly(Side.CLIENT)
 public class JEFIRecipeWrapper implements IRecipeWrapper
 {
-    protected InteractionIngredient ingredientA;
+    protected WorldIngredient ingredientA;
     protected boolean isAnyFluidStateA = false;
-    protected InteractionIngredient ingredientB;
+    protected WorldIngredient ingredientB;
     protected boolean isAnyFluidStateB = false;
     protected ComplexOutput complexOutput;
 
     private String extraInfoLocalizationKey = null;
 
-    public JEFIRecipeWrapper(InteractionIngredient ingredientA, InteractionIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    public JEFIRecipeWrapper(WorldIngredient ingredientA, WorldIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         this.ingredientA = ingredientA;
         this.ingredientB = ingredientB;
@@ -47,21 +47,21 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     @Override
     public void getIngredients(IIngredients ingredients)
     {
-        if (ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
-            ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        if (ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
+            ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
             ingredients.setInputs(VanillaTypes.FLUID, Arrays.asList(
                     new FluidStack(ingredientA.getFluid(), 1000),
                     new FluidStack(ingredientB.getFluid(), 1000)));
         }
-        else if (ingredientA.getIngredientType() == InteractionIngredientType.FLUID &&
-                 ingredientB.getIngredientType() == InteractionIngredientType.BLOCK)
+        else if (ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
+                 ingredientB.getIngredientType() == WorldIngredientType.BLOCK)
         {
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientA.getFluid(), 1000));
             ingredients.setInput(VanillaTypes.ITEM, BlockUtils.getItemStack(ingredientB.getBlockState()));
         }
-        else if (ingredientA.getIngredientType() == InteractionIngredientType.BLOCK &&
-                 ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        else if (ingredientA.getIngredientType() == WorldIngredientType.BLOCK &&
+                 ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
             ingredients.setInput(VanillaTypes.ITEM, BlockUtils.getItemStack(ingredientA.getBlockState()));
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientB.getFluid(), 1000));
@@ -107,13 +107,13 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
     {
-        if (ingredientA.getIngredientType() == InteractionIngredientType.FLUID)
+        if (ingredientA.getIngredientType() == WorldIngredientType.FLUID)
             if (!isAnyFluidStateA)
                 minecraft.fontRenderer.drawString(ingredientA.getIsFluidSource() ?
                         I18n.format("fluidintetweaker.jefi.fluid_source") :
                         I18n.format("fluidintetweaker.jefi.fluid_flowing"), 7, 35, Color.GRAY.getRGB());
 
-        if (ingredientB.getIngredientType() == InteractionIngredientType.FLUID)
+        if (ingredientB.getIngredientType() == WorldIngredientType.FLUID)
             if (!isAnyFluidStateB)
                 minecraft.fontRenderer.drawString(ingredientB.getIsFluidSource() ?
                         I18n.format("fluidintetweaker.jefi.fluid_source") :
