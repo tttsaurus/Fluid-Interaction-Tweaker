@@ -1,6 +1,6 @@
-package com.tttsaurus.fluidintetweaker.common.impl;
+package com.tttsaurus.fluidintetweaker.common.impl.interaction;
 
-import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;

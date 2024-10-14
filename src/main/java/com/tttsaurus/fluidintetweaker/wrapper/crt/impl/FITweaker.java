@@ -1,6 +1,6 @@
 package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
-import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.ByChance;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;

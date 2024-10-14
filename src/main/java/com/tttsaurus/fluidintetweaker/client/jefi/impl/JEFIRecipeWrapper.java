@@ -3,7 +3,7 @@ package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 import com.tttsaurus.fluidintetweaker.client.api.render.EntityRenderer;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
-import com.tttsaurus.fluidintetweaker.common.api.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredient;

@@ -1,8 +1,6 @@
-package com.tttsaurus.fluidintetweaker.common.api;
+package com.tttsaurus.fluidintetweaker.common.api.interaction;
 
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.state.IBlockState;

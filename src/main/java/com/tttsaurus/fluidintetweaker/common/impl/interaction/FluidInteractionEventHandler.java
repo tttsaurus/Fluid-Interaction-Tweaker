@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.common.impl;
+package com.tttsaurus.fluidintetweaker.common.impl.interaction;
 
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
