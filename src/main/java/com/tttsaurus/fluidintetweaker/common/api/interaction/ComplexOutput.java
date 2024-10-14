@@ -70,7 +70,7 @@ public class ComplexOutput
                         }
                         else if (eventType == InteractionEventType.SpawnEntityItem)
                         {
-                            EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(event.getItem(), event.getItemAmount(), event.getItemMeta()));
+                            EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), event.getItemStack());
                             world.spawnEntity(entityItem);
                         }
                     }

@@ -7,7 +7,9 @@ import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCon
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IsInitiatorAbove;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.block.IBlockState;
+import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
+import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -243,9 +245,9 @@ public final class FITweaker
             interactionEvent = InteractionEvent.createSpawnEntityEvent(id);
             return this;
         }
-        public InteractionEventBuilder createSpawnEntityItemEvent(String id, int itemMeta, int itemAmount)
+        public InteractionEventBuilder createSpawnEntityItemEvent(IItemStack itemStack)
         {
-            interactionEvent = InteractionEvent.createSpawnEntityItemEvent(id, itemMeta, itemAmount);
+            interactionEvent = InteractionEvent.createSpawnEntityItemEvent((ItemStack)itemStack.getInternal());
             return this;
         }
         @ZenMethod

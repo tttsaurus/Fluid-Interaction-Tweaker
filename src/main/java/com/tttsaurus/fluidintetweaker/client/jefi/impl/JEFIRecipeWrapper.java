@@ -94,8 +94,9 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
             }
             else if (eventType == InteractionEventType.SpawnEntityItem)
             {
-                ItemStack itemStack = new ItemStack(event.getItem(), event.getItemAmount(), event.getItemMeta());
-                itemStack.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity_item") + " " + itemStack.getDisplayName());
+                ItemStack itemStack = event.getItemStack();
+                String i18nText = I18n.format("fluidintetweaker.jefi.interaction.spawn_entity_item");
+                if (!itemStack.getDisplayName().contains(i18nText)) itemStack.setStackDisplayName(i18nText + " " + itemStack.getDisplayName());
                 outputs.add(itemStack);
             }
         }
@@ -134,7 +135,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                 float y = 14 - 1;
                 if (entityRenderer == null) entityRenderer = new EntityRenderer(minecraft, interactionEvent.getEntityEntry());
                 // entity is behind the screen
-                // dist describes how far is the entity
+                // dist describes how far the entity is
                 float dist = 9f;
                 double angle = Math.atan((mouseX - x)/dist) / (2f * 3.14159f) * 360f;
                 entityRenderer.render(x, y, 0, (float)angle, 0);

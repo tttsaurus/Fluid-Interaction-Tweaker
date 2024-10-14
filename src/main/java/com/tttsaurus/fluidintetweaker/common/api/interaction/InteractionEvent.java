@@ -2,7 +2,7 @@ package com.tttsaurus.fluidintetweaker.common.api.interaction;
 
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -31,12 +31,8 @@ public class InteractionEvent
     public EntityEntry getEntityEntry() { return entityEntry; }
 
     // InteractionEventType.SpawnEntityItem
-    private Item item;
-    private int itemMeta;
-    private int itemAmount;
-    public Item getItem() { return item; }
-    public int getItemMeta() { return itemMeta; }
-    public int getItemAmount() { return itemAmount; }
+    private ItemStack itemStack;
+    public ItemStack getItemStack() { return itemStack; }
 
     private InteractionEvent(InteractionEventType eventType)
     {
@@ -62,12 +58,10 @@ public class InteractionEvent
         event.entityEntry = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
         return event;
     }
-    public static InteractionEvent createSpawnEntityItemEvent(String id, int itemMeta, int itemAmount)
+    public static InteractionEvent createSpawnEntityItemEvent(ItemStack itemStack)
     {
         InteractionEvent event = new InteractionEvent(InteractionEventType.SpawnEntityItem);
-        event.item = Item.REGISTRY.getObject(new ResourceLocation(id));
-        event.itemMeta = itemMeta;
-        event.itemAmount = itemAmount;
+        event.itemStack = itemStack;
         return event;
     }
     public InteractionEvent addCondition(IEventCondition condition)
