@@ -2,7 +2,7 @@ package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredientType;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;

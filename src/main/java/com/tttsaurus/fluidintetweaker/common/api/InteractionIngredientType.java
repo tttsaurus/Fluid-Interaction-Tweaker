@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.common.api.interaction;
+package com.tttsaurus.fluidintetweaker.common.api;
 
 public enum InteractionIngredientType
 {

@@ -4,7 +4,7 @@ import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.impl.JEFIPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.util.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import javax.annotation.Nullable;

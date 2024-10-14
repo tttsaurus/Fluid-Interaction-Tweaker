@@ -8,7 +8,7 @@ import com.cleanroommc.groovyscript.registry.VirtualizedRegistry;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionRecipeManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fluids.Fluid;

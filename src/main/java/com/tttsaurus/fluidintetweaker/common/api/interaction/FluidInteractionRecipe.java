@@ -1,5 +1,7 @@
 package com.tttsaurus.fluidintetweaker.common.api.interaction;
 
+import com.tttsaurus.fluidintetweaker.common.api.InteractionIngredient;
+
 public class FluidInteractionRecipe
 {
     public InteractionIngredient ingredientA;

@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.common.api.interaction;
+package com.tttsaurus.fluidintetweaker.common.api;
 
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
 import net.minecraft.block.Block;
