@@ -58,10 +58,11 @@ public class InteractionEvent
         event.entityEntry = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
         return event;
     }
-    public static InteractionEvent createSpawnEntityItemEvent(ItemStack itemStack)
+    public static InteractionEvent createSpawnEntityItemEvent(ItemStack itemStack, int amount)
     {
         InteractionEvent event = new InteractionEvent(InteractionEventType.SpawnEntityItem);
-        event.itemStack = itemStack;
+        itemStack.setCount(amount);
+        event.itemStack = itemStack.copy();
         return event;
     }
     public InteractionEvent addCondition(IEventCondition condition)

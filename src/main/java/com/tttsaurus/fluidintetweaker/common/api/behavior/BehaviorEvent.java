@@ -25,9 +25,9 @@ public class BehaviorEvent
     public PotionEffect getPotionEffect() { return potionEffect; }
 
     // BehaviorEventType.EntityConversion
-    private EntityEntry entityEntryFrom;
+    private String entityIDFrom;
     private EntityEntry entityEntryTo;
-    public EntityEntry getEntityEntryFrom() { return entityEntryFrom; }
+    public String getEntityIDFrom() { return entityIDFrom; }
     public EntityEntry getEntityEntryTo() { return entityEntryTo; }
 
     // BehaviorEventType.ExtinguishFire
@@ -57,7 +57,7 @@ public class BehaviorEvent
     public static BehaviorEvent createEntityConversionEvent(String idFrom, String idTo)
     {
         BehaviorEvent event = new BehaviorEvent(BehaviorEventType.EntityConversion);
-        event.entityEntryFrom = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(idFrom));
+        event.entityIDFrom = idFrom;
         event.entityEntryTo = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(idTo));
         return event;
     }

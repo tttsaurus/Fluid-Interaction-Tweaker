@@ -245,9 +245,9 @@ public final class FITweaker
             interactionEvent = InteractionEvent.createSpawnEntityEvent(id);
             return this;
         }
-        public InteractionEventBuilder createSpawnEntityItemEvent(IItemStack itemStack)
+        public InteractionEventBuilder createSpawnEntityItemEvent(IItemStack itemStack, int amount)
         {
-            interactionEvent = InteractionEvent.createSpawnEntityItemEvent((ItemStack)itemStack.getInternal());
+            interactionEvent = InteractionEvent.createSpawnEntityItemEvent((ItemStack)itemStack.getInternal(), amount);
             return this;
         }
         @ZenMethod

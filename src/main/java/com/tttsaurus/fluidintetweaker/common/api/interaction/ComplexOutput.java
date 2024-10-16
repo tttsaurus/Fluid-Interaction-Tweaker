@@ -6,7 +6,6 @@ import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDeleg
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import java.util.ArrayList;
@@ -42,37 +41,37 @@ public class ComplexOutput
             @Override
             public void doAction()
             {
+                if (world.isRemote) return;
                 for (InteractionEvent event: events)
                 {
                     List<IEventCondition> conditions = event.getConditions();
                     boolean flag = true;
-                    for (IEventCondition condition: conditions)
+                    for (IEventCondition condition : conditions)
                     {
                         flag = condition.judge(fluidInteractionEvent);
                         if (!flag) break;
                     }
-                    if (flag)
+                    if (!flag) continue;
+
+                    InteractionEventType eventType = event.getEventType();
+                    if (eventType == InteractionEventType.SetBlock)
                     {
-                        InteractionEventType eventType = event.getEventType();
-                        if (eventType == InteractionEventType.SetBlock)
-                        {
-                            world.setBlockState(pos, event.getBlockState());
-                        }
-                        else if (eventType == InteractionEventType.Explosion)
-                        {
-                            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), event.getStrength(), event.getDamagesTerrain()).doExplosionB(true);
-                        }
-                        else if (eventType == InteractionEventType.SpawnEntity)
-                        {
-                            Entity entity = event.getEntityEntry().newInstance(world);
-                            entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
-                            world.spawnEntity(entity);
-                        }
-                        else if (eventType == InteractionEventType.SpawnEntityItem)
-                        {
-                            EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), event.getItemStack());
-                            world.spawnEntity(entityItem);
-                        }
+                        world.setBlockState(pos, event.getBlockState());
+                    }
+                    else if (eventType == InteractionEventType.Explosion)
+                    {
+                        world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), event.getStrength(), event.getDamagesTerrain()).doExplosionB(true);
+                    }
+                    else if (eventType == InteractionEventType.SpawnEntity)
+                    {
+                        Entity entity = event.getEntityEntry().newInstance(world);
+                        entity.setPosition(pos.getX(), pos.getY(), pos.getZ());
+                        world.spawnEntity(entity);
+                    }
+                    else if (eventType == InteractionEventType.SpawnEntityItem)
+                    {
+                        EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), event.getItemStack().copy());
+                        world.spawnEntity(entityItem);
                     }
                 }
             }
