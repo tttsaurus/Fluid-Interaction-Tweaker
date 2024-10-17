@@ -18,6 +18,9 @@ public interface ICustomFluidInteractionEvent extends IEventCancelable, IEventPo
     @ZenGetter("isLiquidAboveAndBelowCase")
     boolean getIsFluidAboveAndBelowCase();
 
+    @ZenGetter("isInitiatorAbove")
+    boolean getIsInitiatorAbove();
+
     @ZenGetter("blockStateBeforeInteraction")
     IBlockState getBlockStateBeforeInteraction();
 

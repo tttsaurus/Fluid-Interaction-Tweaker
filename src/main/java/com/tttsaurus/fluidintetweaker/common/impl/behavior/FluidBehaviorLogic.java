@@ -33,6 +33,7 @@ public final class FluidBehaviorLogic
                     world,
                     pos,
                     null,
+                    ingredient,
                     complexOutput));
         }
 
@@ -53,6 +54,7 @@ public final class FluidBehaviorLogic
                     world,
                     neighborPos,
                     null,
+                    neighborIngredient,
                     complexOutput));
         }
     }
@@ -76,6 +78,7 @@ public final class FluidBehaviorLogic
                 world,
                 pos,
                 entityLivingBase,
+                ingredient,
                 complexOutput));
     }
 }

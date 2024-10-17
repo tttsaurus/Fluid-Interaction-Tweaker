@@ -14,7 +14,7 @@ import youyihj.zenutils.api.reload.Reloadable;
 import youyihj.zenutils.api.util.ReflectionInvoked;
 import java.util.*;
 
-public final class Actions
+public final class FITActions
 {
     @Reloadable
     public static final class AddRecipesAction implements IAction
@@ -22,7 +22,7 @@ public final class Actions
         private final List<FluidInteractionRecipe> recipeList = new ArrayList<>();
         public final List<String> recipeKeys = new ArrayList<>();
 
-        //<editor-fold desc="InteractionIngredient constructor wrappers">
+        //<editor-fold desc="WorldIngredient constructor wrappers">
         private WorldIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
         {
             return new WorldIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
@@ -159,6 +159,7 @@ public final class Actions
         }
     }
 
+    /*
     @Reloadable
     public static final class RemoveAllRecipesAction implements IAction
     {
@@ -188,4 +189,5 @@ public final class Actions
             return "Removed all fluid interaction recipes";
         }
     }
+    */
 }

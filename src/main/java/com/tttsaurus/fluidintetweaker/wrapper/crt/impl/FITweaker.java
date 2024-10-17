@@ -29,7 +29,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, IBlockState outputBlock, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 liquidSurrounding,
@@ -42,7 +42,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, IBlockState outputBlock, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 liquidSurrounding,
@@ -54,7 +54,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, IBlockState outputBlock, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 liquidSurrounding,
                 ComplexOutput.createSimpleBlockOutput((net.minecraft.block.state.IBlockState)outputBlock.getInternal()),
@@ -66,7 +66,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, IBlockState blockSurrounding, IBlockState outputBlock, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 blockSurrounding,
@@ -78,7 +78,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, IBlockState blockSurrounding, IBlockState outputBlock, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 blockSurrounding,
                 ComplexOutput.createSimpleBlockOutput((net.minecraft.block.state.IBlockState)outputBlock.getInternal()),
@@ -90,7 +90,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(IBlockState blockInitiator, ILiquidStack liquidSurrounding, boolean isSourceB, IBlockState outputBlock, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 blockInitiator,
                 liquidSurrounding,
                 isSourceB,
@@ -102,7 +102,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(IBlockState blockInitiator, ILiquidStack liquidSurrounding, IBlockState outputBlock, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 blockInitiator,
                 liquidSurrounding,
                 ComplexOutput.createSimpleBlockOutput((net.minecraft.block.state.IBlockState)outputBlock.getInternal()),
@@ -116,7 +116,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutput output, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 liquidSurrounding,
@@ -129,7 +129,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 liquidSurrounding,
@@ -141,7 +141,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 liquidSurrounding,
                 output,
@@ -153,7 +153,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, IBlockState blockSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 blockSurrounding,
@@ -165,7 +165,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(ILiquidStack liquidInitiator, IBlockState blockSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 blockSurrounding,
                 output,
@@ -177,7 +177,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(IBlockState blockInitiator, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutput output, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 blockInitiator,
                 liquidSurrounding,
                 isSourceB,
@@ -189,7 +189,7 @@ public final class FITweaker
     @ZenMethod
     public static List<String> addRecipe(IBlockState blockInitiator, ILiquidStack liquidSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
     {
-        Actions.AddRecipesAction action = new Actions.AddRecipesAction(
+        FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 blockInitiator,
                 liquidSurrounding,
                 output,
@@ -199,13 +199,15 @@ public final class FITweaker
     }
     //</editor-fold>
 
+    /*
     //<editor-fold desc="removeAllRecipes">
     @ZenMethod
     public static void removeAllRecipes()
     {
-        CraftTweakerAPI.apply(new Actions.RemoveAllRecipesAction());
+        CraftTweakerAPI.apply(new FITActions.RemoveAllRecipesAction());
     }
     //</editor-fold>
+    */
 
     public static class ComplexOutputBuilder
     {
@@ -240,11 +242,13 @@ public final class FITweaker
             interactionEvent = InteractionEvent.createExplosionEvent(strength, damagesTerrain);
             return this;
         }
+        @ZenMethod
         public InteractionEventBuilder createSpawnEntityEvent(String id)
         {
             interactionEvent = InteractionEvent.createSpawnEntityEvent(id);
             return this;
         }
+        @ZenMethod
         public InteractionEventBuilder createSpawnEntityItemEvent(IItemStack itemStack, int amount)
         {
             interactionEvent = InteractionEvent.createSpawnEntityItemEvent((ItemStack)itemStack.getInternal(), amount);
