@@ -270,7 +270,7 @@ public final class FITweaker
             {
                 condition = new IsInitiatorAbove();
             }
-            else if(className.equals("FluidLevel"))
+            else if (className.equals("FluidLevel"))
             {
                 condition = new FluidLevel((int)params[0], (int)params[0]);
             }

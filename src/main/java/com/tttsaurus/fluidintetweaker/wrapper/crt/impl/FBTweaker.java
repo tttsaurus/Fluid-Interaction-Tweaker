@@ -20,7 +20,7 @@ import java.util.List;
 public final class FBTweaker
 {
     @ZenMethod
-    public static ComplexOutputBuilder outputBuilder() {return new ComplexOutputBuilder();}
+    public static ComplexOutputBuilder outputBuilder() { return new ComplexOutputBuilder(); }
     @ZenMethod
     public static BehaviorEventBuilder eventBuilder() { return new BehaviorEventBuilder(); }
 
