@@ -31,6 +31,7 @@
 - Add `abyssalcraft` jei compat
 - Add more conditions for interaction and behavior
 - Add `abyssalcraft`-like limited fluid spread mechanism
+- Add jei compat for fluid behavior
 
 ## Credit
 This mod is created using [GregTechCEu's Buildscripts](https://github.com/GregTechCEu/Buildscripts)
