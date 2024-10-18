@@ -85,13 +85,16 @@ public class WorldIngredient
         ResourceLocation rl = block.getRegistryName();
         if (rl == null) return AIR;
 
-        WorldIngredient ingredient = new WorldIngredient();
         String registryName = rl.toString();
 
         // air
         if (registryName.equals("minecraft:air")) return AIR;
+
+        WorldIngredient ingredient = new WorldIngredient();
+        ingredient.blockState = blockState;
+
         // vanilla liquid
-        else if (block instanceof BlockLiquid)
+        if (block instanceof BlockLiquid)
         {
             ingredient.ingredientType = WorldIngredientType.FLUID;
             if (registryName.equals("minecraft:water") || registryName.equals("minecraft:flowing_water"))
@@ -113,7 +116,6 @@ public class WorldIngredient
         else
         {
             ingredient.ingredientType = WorldIngredientType.BLOCK;
-            ingredient.blockState = blockState;
         }
         return ingredient;
     }

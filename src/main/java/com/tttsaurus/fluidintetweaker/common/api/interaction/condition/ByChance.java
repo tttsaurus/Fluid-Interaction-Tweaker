@@ -1,6 +1,7 @@
 package com.tttsaurus.fluidintetweaker.common.api.interaction.condition;
 
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
 import net.minecraft.client.resources.I18n;
 
 public class ByChance implements IEventCondition
@@ -19,8 +20,8 @@ public class ByChance implements IEventCondition
     }
 
     @Override
-    public String getDesc()
+    public String getDesc(FluidInteractionRecipe recipe)
     {
-        return I18n.format("fluidintetweaker.jefi.condition.by_chance").replace("p",  (int)(probability * 100) + "%");
+        return I18n.format("fluidintetweaker.jefi.condition.by_chance", (int)(probability * 100) + "%");
     }
 }

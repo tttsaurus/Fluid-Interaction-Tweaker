@@ -1,12 +1,11 @@
 package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 
 import com.tttsaurus.fluidintetweaker.client.api.render.EntityRenderer;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
@@ -27,48 +26,40 @@ import java.util.List;
 @SideOnly(Side.CLIENT)
 public class JEFIRecipeWrapper implements IRecipeWrapper
 {
-    protected WorldIngredient ingredientA;
+    protected FluidInteractionRecipe recipe;
     protected boolean isAnyFluidStateA = false;
-    protected WorldIngredient ingredientB;
     protected boolean isAnyFluidStateB = false;
-    protected ComplexOutput complexOutput;
 
-    private String extraInfoLocalizationKey = null;
-
-    public JEFIRecipeWrapper(WorldIngredient ingredientA, WorldIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    public JEFIRecipeWrapper(FluidInteractionRecipe recipe)
     {
-        this.ingredientA = ingredientA;
-        this.ingredientB = ingredientB;
-        this.complexOutput = complexOutput;
-        if (!(extraInfoLocalizationKey == null || extraInfoLocalizationKey.isEmpty()))
-            this.extraInfoLocalizationKey = extraInfoLocalizationKey;
+        this.recipe = recipe;
     }
 
     @Override
     public void getIngredients(IIngredients ingredients)
     {
-        if (ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
-            ingredientB.getIngredientType() == WorldIngredientType.FLUID)
+        if (recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
+            recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
             ingredients.setInputs(VanillaTypes.FLUID, Arrays.asList(
-                    new FluidStack(ingredientA.getFluid(), 1000),
-                    new FluidStack(ingredientB.getFluid(), 1000)));
+                    new FluidStack(recipe.ingredientA.getFluid(), 1000),
+                    new FluidStack(recipe.ingredientB.getFluid(), 1000)));
         }
-        else if (ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
-                 ingredientB.getIngredientType() == WorldIngredientType.BLOCK)
+        else if (recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
+                 recipe.ingredientB.getIngredientType() == WorldIngredientType.BLOCK)
         {
-            ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientA.getFluid(), 1000));
-            ingredients.setInput(VanillaTypes.ITEM, BlockUtils.getItemStack(ingredientB.getBlockState()));
+            ingredients.setInput(VanillaTypes.FLUID, new FluidStack(recipe.ingredientA.getFluid(), 1000));
+            ingredients.setInput(VanillaTypes.ITEM, BlockUtils.getItemStack(recipe.ingredientB.getBlockState()));
         }
-        else if (ingredientA.getIngredientType() == WorldIngredientType.BLOCK &&
-                 ingredientB.getIngredientType() == WorldIngredientType.FLUID)
+        else if (recipe.ingredientA.getIngredientType() == WorldIngredientType.BLOCK &&
+                 recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
-            ingredients.setInput(VanillaTypes.ITEM, BlockUtils.getItemStack(ingredientA.getBlockState()));
-            ingredients.setInput(VanillaTypes.FLUID, new FluidStack(ingredientB.getFluid(), 1000));
+            ingredients.setInput(VanillaTypes.ITEM, BlockUtils.getItemStack(recipe.ingredientA.getBlockState()));
+            ingredients.setInput(VanillaTypes.FLUID, new FluidStack(recipe.ingredientB.getFluid(), 1000));
         }
 
         List<ItemStack> outputs = new ArrayList<>();
-        for (InteractionEvent event: complexOutput.getEvents())
+        for (InteractionEvent event: recipe.complexOutput.getEvents())
         {
             InteractionEventType eventType = event.getEventType();
             if (eventType == InteractionEventType.SetBlock)
@@ -107,26 +98,26 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
     @Override
     public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY)
     {
-        if (ingredientA.getIngredientType() == WorldIngredientType.FLUID)
+        if (recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID)
             if (!isAnyFluidStateA)
-                minecraft.fontRenderer.drawString(ingredientA.getIsFluidSource() ?
+                minecraft.fontRenderer.drawString(recipe.ingredientA.getIsFluidSource() ?
                         I18n.format("fluidintetweaker.jefi.fluid_source") :
                         I18n.format("fluidintetweaker.jefi.fluid_flowing"), 7, 35, Color.GRAY.getRGB());
 
-        if (ingredientB.getIngredientType() == WorldIngredientType.FLUID)
+        if (recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
             if (!isAnyFluidStateB)
-                minecraft.fontRenderer.drawString(ingredientB.getIsFluidSource() ?
+                minecraft.fontRenderer.drawString(recipe.ingredientB.getIsFluidSource() ?
                         I18n.format("fluidintetweaker.jefi.fluid_source") :
                         I18n.format("fluidintetweaker.jefi.fluid_flowing"), 47, 35, Color.GRAY.getRGB());
 
-        int length = complexOutput.getEvents().size();
+        int length = recipe.complexOutput.getEvents().size();
         if (mouseX >= (116 - length * 9) && mouseX <= (116 + length * 9) && mouseY >= 14 && mouseY <= 31)
         {
             List<String> tooltip = new ArrayList<>();
 
             int hoverIndex = (mouseX - 116 + length * 9) / 18;
             hoverIndex = hoverIndex >= length ? length - 1 : hoverIndex;
-            InteractionEvent interactionEvent = complexOutput.getEvents().get(hoverIndex);
+            InteractionEvent interactionEvent = recipe.complexOutput.getEvents().get(hoverIndex);
 
             //<editor-fold desc="entity rendering">
             if (interactionEvent.getEventType() == InteractionEventType.SpawnEntity)
@@ -145,7 +136,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
             //<editor-fold desc="tooltip">
             for (IEventCondition condition: interactionEvent.getConditions())
             {
-                String desc = condition.getDesc();
+                String desc = condition.getDesc(recipe);
                 if (desc != null)
                 {
                     String[] lines = desc.split("<br>");
@@ -154,9 +145,9 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
             }
             if (!tooltip.isEmpty())
                 tooltip.add(0, I18n.format("fluidintetweaker.jefi.condition_tips"));
-            if (extraInfoLocalizationKey != null)
+            if (!(recipe.extraInfoLocalizationKey == null || recipe.extraInfoLocalizationKey.isEmpty()))
             {
-                String text = I18n.format(extraInfoLocalizationKey);
+                String text = I18n.format(recipe.extraInfoLocalizationKey);
                 String[] lines = text.split("<br>");
                 tooltip.addAll(Arrays.asList(lines));
             }

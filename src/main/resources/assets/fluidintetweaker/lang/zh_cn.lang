@@ -6,8 +6,10 @@ fluidintetweaker.jefi.interaction.explosion=§r爆炸
 fluidintetweaker.jefi.interaction.spawn_entity=§r生物:
 fluidintetweaker.jefi.interaction.spawn_entity_item=§r物品:
 fluidintetweaker.jefi.condition_tips=§d这只在以下条件满足时发生:
-fluidintetweaker.jefi.condition.by_chance=§e  - p
-fluidintetweaker.jefi.condition.is_initiator_above=§e  - 发起者（第一个槽位）在上时
+fluidintetweaker.jefi.condition.by_chance=§e  - %s
+fluidintetweaker.jefi.condition.is_initiator_above=§e  - %s 在上时
+fluidintetweaker.jefi.condition.fluid_level_0=§e  - %s 的流体高度等于 %d
+fluidintetweaker.jefi.condition.fluid_level_1=§e  - %s 的流体高度等于 %d
 
 groovyscript.wiki.fluidintetweaker.fitweaker.title=FITweaker
 groovyscript.wiki.fluidintetweaker.fitweaker.description=这将帮助你添加自定义的流体交互配方。对于进阶交互逻辑，请监听事件 com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent。

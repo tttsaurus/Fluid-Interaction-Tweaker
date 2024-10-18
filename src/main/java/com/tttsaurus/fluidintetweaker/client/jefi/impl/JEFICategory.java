@@ -66,33 +66,33 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
         IGuiFluidStackGroup guiFluidStacks = recipeLayout.getFluidStacks();
 
         // inputs & outputs
-        if (recipeWrapper.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
-            recipeWrapper.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
+        if (recipeWrapper.recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
+            recipeWrapper.recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiFluidStacks.init(1, true, 47, 15, 16, 16, 1000, false, null);
 
-            int length = recipeWrapper.complexOutput.getEvents().size();
+            int length = recipeWrapper.recipe.complexOutput.getEvents().size();
             for (int i = 0; i < length; i++)
                 guiItemStacks.init(i, false, 116 - length * 9 + i * 18, 14);
         }
-        else if (recipeWrapper.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
-                 recipeWrapper.ingredientB.getIngredientType() == WorldIngredientType.BLOCK)
+        else if (recipeWrapper.recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
+                 recipeWrapper.recipe.ingredientB.getIngredientType() == WorldIngredientType.BLOCK)
         {
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiItemStacks.init(0, true, 47, 14);
 
-            int length = recipeWrapper.complexOutput.getEvents().size();
+            int length = recipeWrapper.recipe.complexOutput.getEvents().size();
             for (int i = 0; i < length; i++)
                 guiItemStacks.init(i + 1, false, 116 - length * 9 + i * 18, 14);
         }
-        else if (recipeWrapper.ingredientA.getIngredientType() == WorldIngredientType.BLOCK &&
-                 recipeWrapper.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
+        else if (recipeWrapper.recipe.ingredientA.getIngredientType() == WorldIngredientType.BLOCK &&
+                 recipeWrapper.recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
             guiItemStacks.init(0, true, 7, 14);
             guiFluidStacks.init(0, true, 47, 15, 16, 16, 1000, false, null);
 
-            int length = recipeWrapper.complexOutput.getEvents().size();
+            int length = recipeWrapper.recipe.complexOutput.getEvents().size();
             for (int i = 0; i < length; i++)
                 guiItemStacks.init(i + 1, false, 116 - length * 9 + i * 18, 14);
         }

@@ -4,6 +4,7 @@ import com.tttsaurus.fluidintetweaker.Configuration;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
@@ -27,65 +28,67 @@ public class JEFIPlugin implements IModPlugin
 {
     private static final LinkedHashMap<String, JEFIRecipeWrapper> recipeWrapperDict = new LinkedHashMap<>();
 
-    private static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, ComplexOutput complexOutput)
+    //<editor-fold desc="adding recipe wrappers manually">
+    public static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, ComplexOutput complexOutput)
     {
         addRecipeWrapper(ingredientA, isAnyFluidStateA, ingredientB, complexOutput, null);
     }
-    private static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    public static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         addRecipeWrapper(ingredientA, isAnyFluidStateA, ingredientB, false, complexOutput, extraInfoLocalizationKey);
     }
-    private static void addRecipeWrapper(WorldIngredient ingredientA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput)
+    public static void addRecipeWrapper(WorldIngredient ingredientA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput)
     {
         addRecipeWrapper(ingredientA, ingredientB, isAnyFluidStateB, complexOutput, null);
     }
-    private static void addRecipeWrapper(WorldIngredient ingredientA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    public static void addRecipeWrapper(WorldIngredient ingredientA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
         addRecipeWrapper(ingredientA, false, ingredientB, isAnyFluidStateB, complexOutput, extraInfoLocalizationKey);
     }
-    private static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput)
+    public static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput)
     {
         addRecipeWrapper(ingredientA, isAnyFluidStateA, ingredientB, isAnyFluidStateB, complexOutput, null);
     }
-    private static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    public static void addRecipeWrapper(WorldIngredient ingredientA, boolean isAnyFluidStateA, WorldIngredient ingredientB, boolean isAnyFluidStateB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
     {
-        JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(ingredientA, ingredientB, complexOutput, extraInfoLocalizationKey);
+        JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(new FluidInteractionRecipe(ingredientA, ingredientB, complexOutput, extraInfoLocalizationKey));
         recipeWrapper.isAnyFluidStateA = isAnyFluidStateA;
         recipeWrapper.isAnyFluidStateB = isAnyFluidStateB;
 
         recipeWrapperDict.put(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB), recipeWrapper);
     }
+    //</editor-fold>
 
-    public static void addRecipeWrapper(String recipeKey, WorldIngredient ingredientA, WorldIngredient ingredientB, ComplexOutput complexOutput, String extraInfoLocalizationKey)
+    public static void addRecipeWrapper(String recipeKey, FluidInteractionRecipe recipe)
     {
-        JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(ingredientA, ingredientB, complexOutput, extraInfoLocalizationKey);
+        JEFIRecipeWrapper recipeWrapper = new JEFIRecipeWrapper(recipe);
         recipeWrapperDict.put(recipeKey, recipeWrapper);
 
         //<editor-fold desc="combine `source` and `flowing` if they both exist">
-        if (ingredientA.getIngredientType() == WorldIngredientType.FLUID)
+        if (recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID)
         {
-            ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
-            String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
+            recipe.ingredientA.setIsFluidSource(!recipe.ingredientA.getIsFluidSource());
+            String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(recipe.ingredientA, recipe.ingredientB);
             if (recipeWrapperDict.containsKey(newKey) &&
-                recipeWrapperDict.get(newKey).complexOutput.equals(complexOutput))
+                recipeWrapperDict.get(newKey).recipe.complexOutput.equals(recipe.complexOutput))
             {
                 recipeWrapperDict.remove(newKey);
                 recipeWrapper.isAnyFluidStateA = true;
             }
-            ingredientA.setIsFluidSource(!ingredientA.getIsFluidSource());
+            recipe.ingredientA.setIsFluidSource(!recipe.ingredientA.getIsFluidSource());
         }
 
-        if (ingredientB.getIngredientType() == WorldIngredientType.FLUID)
+        if (recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
         {
-            ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
-            String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
+            recipe.ingredientB.setIsFluidSource(!recipe.ingredientB.getIsFluidSource());
+            String newKey = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(recipe.ingredientA, recipe.ingredientB);
             if (recipeWrapperDict.containsKey(newKey) &&
-                recipeWrapperDict.get(newKey).complexOutput.equals(complexOutput))
+                recipeWrapperDict.get(newKey).recipe.complexOutput.equals(recipe.complexOutput))
             {
                 recipeWrapperDict.remove(newKey);
                 recipeWrapper.isAnyFluidStateB = true;
             }
-            ingredientB.setIsFluidSource(!ingredientB.getIsFluidSource());
+            recipe.ingredientB.setIsFluidSource(!recipe.ingredientB.getIsFluidSource());
         }
         //</editor-fold>
     }

@@ -3,6 +3,7 @@ package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.ByChance;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.FluidLevel;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IsInitiatorAbove;
 import crafttweaker.CraftTweakerAPI;
@@ -268,6 +269,10 @@ public final class FITweaker
             else if (className.equals("IsInitiatorAbove"))
             {
                 condition = new IsInitiatorAbove();
+            }
+            else if(className.equals("FluidLevel"))
+            {
+                condition = new FluidLevel((int)params[0], (int)params[0]);
             }
 
             if (condition == null) return this;

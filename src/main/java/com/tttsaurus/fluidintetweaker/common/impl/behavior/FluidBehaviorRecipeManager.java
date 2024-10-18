@@ -22,28 +22,20 @@ public final class FluidBehaviorRecipeManager
     //</editor-fold>
 
     //<editor-fold desc="methods for wrappers">
-    public static String addRecipe(FluidBehaviorRecipe recipe)
+    public static String addRecipe(FluidBehaviorRecipe recipe) throws FluidInteractionTweakerRuntimeException
     {
-        return addRecipe(recipe.ingredient, recipe.complexOutput);
-    }
-    public static String addRecipe(WorldIngredient ingredient, ComplexOutput complexOutput) throws FluidInteractionTweakerRuntimeException
-    {
-        String key = ingredient.toString();
+        String key = recipe.ingredient.toString();
         if (recipeDict.containsKey(key))
             throw new FluidInteractionTweakerRuntimeException("FluidBehaviorRecipeManager.addRecipe() fails to execute. The same recipe key " + key + " has been added.");
         else
         {
-            recipeDict.put(key, complexOutput);
+            recipeDict.put(key, recipe.complexOutput);
             return key;
         }
     }
-    public static void removeRecipe(FluidBehaviorRecipe recipe)
+    public static void removeRecipe(FluidBehaviorRecipe recipe) throws FluidInteractionTweakerRuntimeException
     {
-        removeRecipe(recipe.ingredient);
-    }
-    public static void removeRecipe(WorldIngredient ingredient) throws FluidInteractionTweakerRuntimeException
-    {
-        String key = ingredient.toString();
+        String key = recipe.ingredient.toString();
         if (recipeDict.containsKey(key))
             recipeDict.remove(key);
         else
