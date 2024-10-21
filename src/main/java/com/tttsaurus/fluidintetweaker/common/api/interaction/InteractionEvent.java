@@ -4,6 +4,7 @@ import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCon
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.ArrayList;
@@ -34,6 +35,14 @@ public class InteractionEvent
     private ItemStack itemStack;
     public ItemStack getItemStack() { return itemStack; }
 
+    // SetFluid
+    private Fluid fluid;
+    private boolean isSpreadingUpward = false;
+    //private IBlockState limitBarrier = Blocks.STONE.getDefaultState();
+    public Fluid getFluid() { return fluid; }
+    public boolean getIsSpreadingUpward() { return isSpreadingUpward; }
+    //public IBlockState getLimitBarrier() { return limitBarrier; }
+
     private InteractionEvent(InteractionEventType eventType)
     {
         this.eventType = eventType;
@@ -63,6 +72,20 @@ public class InteractionEvent
         InteractionEvent event = new InteractionEvent(InteractionEventType.SpawnEntityItem);
         itemStack.setCount(amount);
         event.itemStack = itemStack.copy();
+        return event;
+    }
+    public static InteractionEvent createSetFluidEvent(Fluid fluid, boolean isSpreadingUpward/*, IBlockState limitBarrier*/)
+    {
+        InteractionEvent event = new InteractionEvent(InteractionEventType.SetFluid);
+        event.fluid = fluid;
+        event.isSpreadingUpward = isSpreadingUpward;
+        //event.limitBarrier = limitBarrier;
+        return event;
+    }
+    public static InteractionEvent createSetFluidEvent(Fluid fluid)
+    {
+        InteractionEvent event = new InteractionEvent(InteractionEventType.SetFluid);
+        event.fluid = fluid;
         return event;
     }
     public InteractionEvent addCondition(IEventCondition condition)

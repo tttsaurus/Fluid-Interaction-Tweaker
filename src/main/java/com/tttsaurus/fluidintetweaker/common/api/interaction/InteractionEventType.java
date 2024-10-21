@@ -5,5 +5,6 @@ public enum InteractionEventType
     SetBlock,
     Explosion,
     SpawnEntity,
-    SpawnEntityItem
+    SpawnEntityItem,
+    SetFluid
 }

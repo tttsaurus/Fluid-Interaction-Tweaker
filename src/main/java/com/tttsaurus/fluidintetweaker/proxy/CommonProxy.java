@@ -1,6 +1,7 @@
 package com.tttsaurus.fluidintetweaker.proxy;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
+import com.tttsaurus.fluidintetweaker.common.api.task.TaskScheduler;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorEventHandler;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorLogic;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionEventHandler;
@@ -27,6 +28,8 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(FluidInteractionEventHandler.class);
         MinecraftForge.EVENT_BUS.register(FluidBehaviorLogic.class);
         MinecraftForge.EVENT_BUS.register(FluidBehaviorEventHandler.class);
+
+        MinecraftForge.EVENT_BUS.register(TaskScheduler.class);
 
         MinecraftForge.EVENT_BUS.register(CrTEventManager.Handler.class);
     }

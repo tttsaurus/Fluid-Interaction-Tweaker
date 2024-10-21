@@ -1,13 +1,18 @@
 package com.tttsaurus.fluidintetweaker.common.api.interaction;
 
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
+import com.tttsaurus.fluidintetweaker.common.impl.task.SetBlockStateTask;
+import com.tttsaurus.fluidintetweaker.common.api.task.TaskScheduler;
 import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,6 +77,50 @@ public class ComplexOutput
                     {
                         EntityItem entityItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), event.getItemStack().copy());
                         world.spawnEntity(entityItem);
+                    }
+                    else if (eventType == InteractionEventType.SetFluid)
+                    {
+                        Fluid fluid = event.getFluid();
+                        String fluidName = fluid.getName();
+                        IBlockState blockState = fluid.getBlock().getDefaultState();
+
+                        // check fluid spreading recipe
+                        WorldIngredient ingredientB = fluidInteractionEvent.getIngredientB();
+                        if (ingredientB.getIngredientType() == WorldIngredientType.FLUID &&
+                            ingredientB.getFluid().getName().equals(fluidName) &&
+                            (event.getIsSpreadingUpward() || !fluidInteractionEvent.getIsInitiatorAbove()))
+                        {
+                            // todo: spreading limit
+                            /*
+                            IBlockState blockStateSurrounding = ingredientB.getBlockState();
+
+                            int spreadCounter = 0;
+                            if (blockStateSurrounding.getPropertyKeys().contains(FluidSpreadHelper.FLUID_SPREAD_COUNTER))
+                                spreadCounter = blockStateSurrounding.getValue(FluidSpreadHelper.FLUID_SPREAD_COUNTER) + 1;
+
+                            if (spreadCounter < 16)
+                            {
+                                blockState = FluidSpreadHelper.getSpreadCountableFluid(fluid);
+                                blockState = blockState.withProperty(FluidSpreadHelper.FLUID_SPREAD_COUNTER, spreadCounter);
+
+                                boolean goUp = event.getIsSpreadingUpward() && fluidInteractionEvent.getIsInitiatorAbove();
+                                BlockPos finalPos = goUp ? pos.add(0, 1, 0) : pos;
+                                int flags = goUp ? 3 : 2;
+                                TaskScheduler.scheduleTask(new SetBlockStateTask(10, world, finalPos, blockState, flags));
+                            }
+                            else
+                                world.setBlockState(pos, event.getLimitBarrier(), 2);
+                            */
+
+                            boolean goUp = event.getIsSpreadingUpward() && fluidInteractionEvent.getIsInitiatorAbove();
+                            BlockPos finalPos = goUp ? pos.add(0, 1, 0) : pos;
+                            // 3 for notifying neighbors
+                            // 2 for not notifying neighbors
+                            int flags = goUp ? 3 : 2;
+                            TaskScheduler.scheduleTask(new SetBlockStateTask(10, world, finalPos, blockState, flags));
+                        }
+                        else
+                            world.setBlockState(pos, blockState);
                     }
                 }
             }

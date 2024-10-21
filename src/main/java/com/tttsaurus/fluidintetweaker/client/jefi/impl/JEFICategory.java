@@ -3,6 +3,8 @@ package com.tttsaurus.fluidintetweaker.client.jefi.impl;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
@@ -14,6 +16,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
@@ -72,9 +76,22 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiFluidStacks.init(1, true, 47, 15, 16, 16, 1000, false, null);
 
-            int length = recipeWrapper.recipe.complexOutput.getEvents().size();
-            for (int i = 0; i < length; i++)
-                guiItemStacks.init(i, false, 116 - length * 9 + i * 18, 14);
+            List<InteractionEvent> events = recipeWrapper.recipe.complexOutput.getEvents();
+            int length = events.size();
+            int i = 0;
+            int j = 0;
+            for (InteractionEvent event: events)
+            {
+                int x = 116 - length * 9 + i * 18;
+                if (event.getEventType() == InteractionEventType.SetFluid)
+                    guiFluidStacks.init(2, false, x, 15, 16, 16, 1000, false, null);
+                else
+                {
+                    guiItemStacks.init(j, false, x, 14);
+                    j++;
+                }
+                i++;
+            }
         }
         else if (recipeWrapper.recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
                  recipeWrapper.recipe.ingredientB.getIngredientType() == WorldIngredientType.BLOCK)
@@ -82,9 +99,22 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
             guiFluidStacks.init(0, true, 7, 15, 16, 16, 1000, false, null);
             guiItemStacks.init(0, true, 47, 14);
 
-            int length = recipeWrapper.recipe.complexOutput.getEvents().size();
-            for (int i = 0; i < length; i++)
-                guiItemStacks.init(i + 1, false, 116 - length * 9 + i * 18, 14);
+            List<InteractionEvent> events = recipeWrapper.recipe.complexOutput.getEvents();
+            int length = events.size();
+            int i = 0;
+            int j = 1;
+            for (InteractionEvent event: events)
+            {
+                int x = 116 - length * 9 + i * 18;
+                if (event.getEventType() == InteractionEventType.SetFluid)
+                    guiFluidStacks.init(1, false, x, 15, 16, 16, 1000, false, null);
+                else
+                {
+                    guiItemStacks.init(j, false, x, 14);
+                    j++;
+                }
+                i++;
+            }
         }
         else if (recipeWrapper.recipe.ingredientA.getIngredientType() == WorldIngredientType.BLOCK &&
                  recipeWrapper.recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
@@ -92,9 +122,22 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
             guiItemStacks.init(0, true, 7, 14);
             guiFluidStacks.init(0, true, 47, 15, 16, 16, 1000, false, null);
 
-            int length = recipeWrapper.recipe.complexOutput.getEvents().size();
-            for (int i = 0; i < length; i++)
-                guiItemStacks.init(i + 1, false, 116 - length * 9 + i * 18, 14);
+            List<InteractionEvent> events = recipeWrapper.recipe.complexOutput.getEvents();
+            int length = events.size();
+            int i = 0;
+            int j = 1;
+            for (InteractionEvent event: events)
+            {
+                int x = 116 - length * 9 + i * 18;
+                if (event.getEventType() == InteractionEventType.SetFluid)
+                    guiFluidStacks.init(1, false, x, 15, 16, 16, 1000, false, null);
+                else
+                {
+                    guiItemStacks.init(j, false, x, 14);
+                    j++;
+                }
+                i++;
+            }
         }
 
         guiItemStacks.set(ingredients);

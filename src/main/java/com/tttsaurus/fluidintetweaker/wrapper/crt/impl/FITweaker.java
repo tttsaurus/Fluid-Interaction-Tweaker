@@ -11,6 +11,7 @@ import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -256,11 +257,21 @@ public final class FITweaker
             return this;
         }
         @ZenMethod
+        public InteractionEventBuilder createSetFluidEvent(ILiquidStack liquidStack, boolean isSpreadingUpward/*, IBlockState limitBarrier*/)
+        {
+            interactionEvent = InteractionEvent.createSetFluidEvent(((FluidStack)liquidStack.getInternal()).getFluid(), isSpreadingUpward/*, (net.minecraft.block.state.IBlockState)limitBarrier.getInternal()*/);
+            return this;
+        }
+        @ZenMethod
+        public InteractionEventBuilder createSetFluidEvent(ILiquidStack liquidStack)
+        {
+            interactionEvent = InteractionEvent.createSetFluidEvent(((FluidStack)liquidStack.getInternal()).getFluid());
+            return this;
+        }
+        @ZenMethod
         public InteractionEventBuilder addCondition(String className, Object[] params)
         {
             IEventCondition condition = null;
-
-            // todo: abstract factory by reflection
 
             if (className.equals("ByChance"))
             {
@@ -275,7 +286,7 @@ public final class FITweaker
                 condition = new FluidLevel((int)params[0], (int)params[0]);
             }
 
-            if (condition == null) return this;
+            if (condition == null || interactionEvent == null) return this;
             interactionEvent.addCondition(condition);
             return this;
         }

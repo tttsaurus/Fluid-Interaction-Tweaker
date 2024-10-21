@@ -113,14 +113,12 @@ public final class FBTweaker
         {
             IEventCondition condition = null;
 
-            // todo: abstract factory by reflection
-
             if (className.equals("ByChance"))
             {
                 condition = new ByChance((float)params[0]);
             }
 
-            if (condition == null) return this;
+            if (condition == null || behaviorEvent == null) return this;
             behaviorEvent.addCondition(condition);
             return this;
         }

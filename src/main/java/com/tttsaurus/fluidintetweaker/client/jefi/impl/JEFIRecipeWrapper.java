@@ -58,19 +58,20 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
             ingredients.setInput(VanillaTypes.FLUID, new FluidStack(recipe.ingredientB.getFluid(), 1000));
         }
 
-        List<ItemStack> outputs = new ArrayList<>();
+        List<ItemStack> itemOutputs = new ArrayList<>();
+        List<FluidStack> fluidOutputs = new ArrayList<>();
         for (InteractionEvent event: recipe.complexOutput.getEvents())
         {
             InteractionEventType eventType = event.getEventType();
             if (eventType == InteractionEventType.SetBlock)
             {
-                outputs.add(BlockUtils.getItemStack(event.getBlockState()));
+                itemOutputs.add(BlockUtils.getItemStack(event.getBlockState()));
             }
             else if (eventType == InteractionEventType.Explosion)
             {
                 ItemStack tnt = new ItemStack(Items.TNT_MINECART);
                 tnt.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.explosion"));
-                outputs.add(tnt);
+                itemOutputs.add(tnt);
             }
             else if (eventType == InteractionEventType.SpawnEntity)
             {
@@ -81,17 +82,22 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                 nbt2.setTag("EntityTag", nbt1);
                 egg.setTagCompound(nbt2);
                 egg.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity") + " " + egg.getDisplayName());
-                outputs.add(egg);
+                itemOutputs.add(egg);
             }
             else if (eventType == InteractionEventType.SpawnEntityItem)
             {
                 ItemStack itemStack = event.getItemStack();
                 String i18nText = I18n.format("fluidintetweaker.jefi.interaction.spawn_entity_item");
                 if (!itemStack.getDisplayName().contains(i18nText)) itemStack.setStackDisplayName(i18nText + " " + itemStack.getDisplayName());
-                outputs.add(itemStack);
+                itemOutputs.add(itemStack);
+            }
+            else if (eventType == InteractionEventType.SetFluid)
+            {
+                fluidOutputs.add(new FluidStack(event.getFluid(), 1000));
             }
         }
-        ingredients.setOutputs(VanillaTypes.ITEM, outputs);
+        ingredients.setOutputs(VanillaTypes.ITEM, itemOutputs);
+        ingredients.setOutputs(VanillaTypes.FLUID, fluidOutputs);
     }
 
     private EntityRenderer entityRenderer = null;
