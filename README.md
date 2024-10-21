@@ -13,6 +13,7 @@
   - Explosion
   - Spawning an entity
   - Spawning an item
+  - Placing a fluid (experimental)
 ### Fluid Behavior
 - Fluids can perform a series of actions. The available actions are as follows:
   - Applying potion effects
@@ -21,7 +22,7 @@
   - Igniting nearby blocks
   - Covering nearby blocks with snow
   - Teleporting entities
-  - Breaking blocks (supports OreDict)
+  - Breaking blocks (experimental; only supports OreDict for now)
 
 ## Todo List
 - Expose `JEFIPlugin.addRecipeWrapper` to both crt and groovy

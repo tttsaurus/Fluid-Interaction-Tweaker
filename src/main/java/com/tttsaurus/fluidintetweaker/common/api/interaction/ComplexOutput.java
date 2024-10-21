@@ -114,10 +114,7 @@ public class ComplexOutput
 
                             boolean goUp = event.getIsSpreadingUpward() && fluidInteractionEvent.getIsInitiatorAbove();
                             BlockPos finalPos = goUp ? pos.add(0, 1, 0) : pos;
-                            // 3 for notifying neighbors
-                            // 2 for not notifying neighbors
-                            int flags = goUp ? 3 : 2;
-                            TaskScheduler.scheduleTask(new SetBlockStateTask(10, world, finalPos, blockState, flags));
+                            TaskScheduler.scheduleTask(new SetBlockStateTask(10, world, finalPos, blockState, 3));
                         }
                         else
                             world.setBlockState(pos, blockState);
