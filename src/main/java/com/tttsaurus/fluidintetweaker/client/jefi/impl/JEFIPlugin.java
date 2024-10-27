@@ -104,12 +104,6 @@ public class JEFIPlugin implements IModPlugin
         }
         if (Configuration.enableThermalFoundationJEICompat && FluidInteractionTweaker.IS_THERMALFOUNDATION_LOADED)
         {
-            /*
-                Primal Mana Todos:
-                - entities that come into contact with primal mana may be teleported to a random destination in a radius of 8 blocks
-                - adjacent blocks are set on fire or covered with snow layers
-                - redstone ore lights up
-            */
             WorldIngredient FLOWING_MANA = new WorldIngredient(FluidRegistry.getFluid("mana"), false);
             addRecipeWrapper(new WorldIngredient(Blocks.DIRT.getDefaultState()), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRASS_PATH.getDefaultState()));
             addRecipeWrapper(new WorldIngredient(Blocks.DIRT.getStateFromMeta(1)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRASS_PATH.getStateFromMeta(1)));
@@ -121,12 +115,6 @@ public class JEFIPlugin implements IModPlugin
             addRecipeWrapper(new WorldIngredient(BlockUtils.getBlockState("thermalfoundation:storage", 2)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(BlockUtils.getBlockState("thermalfoundation:storage", 8)));
             addRecipeWrapper(new WorldIngredient(BlockUtils.getBlockState("thermalfoundation:storage", 3)), FLOWING_MANA, true, ComplexOutput.createSimpleBlockOutput(Blocks.GOLD_BLOCK.getDefaultState()));
 
-            /*
-                Pyrotheum Todos:
-                - instantly starting fires on top of every adjacent block
-                - flammable blocks are instantly destroyed
-                - creepers instantly explode
-            */
             WorldIngredient FLOWING_PYROTHEUM = new WorldIngredient(FluidRegistry.getFluid("pyrotheum"), false);
             addRecipeWrapper(new WorldIngredient(Blocks.COBBLESTONE.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
             addRecipeWrapper(new WorldIngredient(Blocks.GRASS.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.DIRT.getDefaultState()));
@@ -138,15 +126,6 @@ public class JEFIPlugin implements IModPlugin
             addRecipeWrapper(new WorldIngredient(Blocks.SNOW_LAYER.getDefaultState()), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.AIR.getDefaultState()));
             addRecipeWrapper(new WorldIngredient(Blocks.STONE_STAIRS.getStateFromMeta(0)), FLOWING_PYROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE_BRICK_STAIRS.getStateFromMeta(0)));
 
-            /*
-                Cryotheum Todos:
-                - adjacent blocks are covered with snow layers
-                - grass and leaves are instantly destroyed
-                - fire is extinguished
-                - zombies and creepers are turned into snow golems
-                - blazes take 10 damage instead of 2
-                - snow golems and blizzes are given the effects Speed I and Regeneration I for 6 seconds
-            */
             WorldIngredient FLOWING_CRYOTHEUM = new WorldIngredient(FluidRegistry.getFluid("cryotheum"), false);
             addRecipeWrapper(new WorldIngredient(Blocks.GRASS.getDefaultState()), FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.DIRT.getDefaultState()));
             addRecipeWrapper(WorldIngredient.SOURCE_WATER, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.ICE.getDefaultState()));
@@ -155,11 +134,6 @@ public class JEFIPlugin implements IModPlugin
             addRecipeWrapper(WorldIngredient.FLOWING_LAVA, FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.STONE.getDefaultState()));
             addRecipeWrapper(new WorldIngredient(FluidRegistry.getFluid("glowstone"), true), FLOWING_CRYOTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GLOWSTONE.getDefaultState()));
 
-            /*
-                Petrotheum Todos:
-                - when touched by players and mobs, tectonic petrotheum applies the effect Haste I to them for 6 seconds
-                - if enabled, tectonic petrotheum breaks any adjacent stone- or rock-like blocks. This is disabled by default
-            */
             WorldIngredient FLOWING_PETROTHEUM = new WorldIngredient(FluidRegistry.getFluid("petrotheum"), false);
             addRecipeWrapper(new WorldIngredient(Blocks.STONE.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));
             addRecipeWrapper(new WorldIngredient(Blocks.COBBLESTONE.getDefaultState()), FLOWING_PETROTHEUM, true, ComplexOutput.createSimpleBlockOutput(Blocks.GRAVEL.getDefaultState()));

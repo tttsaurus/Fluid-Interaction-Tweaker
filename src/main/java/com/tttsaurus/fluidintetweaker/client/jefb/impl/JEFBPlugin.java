@@ -1,16 +1,24 @@
 package com.tttsaurus.fluidintetweaker.client.jefb.impl;
 
+import com.tttsaurus.fluidintetweaker.Configuration;
+import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.jefb.JustEnoughFluidBehavior;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEvent;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreIngredient;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 @SuppressWarnings("all")
@@ -55,6 +63,56 @@ public class JEFBPlugin implements IModPlugin
     @Override
     public void register(@NotNull IModRegistry registry)
     {
+        if (Configuration.enableThermalFoundationJEICompat && FluidInteractionTweaker.IS_THERMALFOUNDATION_LOADED)
+        {
+            /*
+                ignored traits of Primal Mana:
+                - redstone ore lights up
+            */
+            WorldIngredient FLOWING_MANA = new WorldIngredient(FluidRegistry.getFluid("mana"), false);
+            addRecipeWrapper(FLOWING_MANA, true, ComplexOutput.create()
+                    .addEvent(BehaviorEvent.createTeleportEvent(8, 8))
+                    .addEvent(BehaviorEvent.createSetFireEvent())
+                    .addEvent(BehaviorEvent.createSetSnowEvent()));
+
+            /*
+                ignored traits of Pyrotheum:
+                - flammable blocks are instantly destroyed
+                - creepers instantly explode
+
+                flammable?
+            */
+            WorldIngredient FLOWING_PYROTHEUM = new WorldIngredient(FluidRegistry.getFluid("pyrotheum"), false);
+            addRecipeWrapper(FLOWING_PYROTHEUM, true, ComplexOutput.create()
+                    .addEvent(BehaviorEvent.createSetFireEvent()));
+
+            /*
+                ignored traits of Cryotheum:
+                - grass and leaves are instantly destroyed
+                - zombies and creepers are turned into snow golems
+                - blazes take 10 damage instead of 2
+                - snow golems and blizzes are given the effects Speed I and Regeneration I for 6 seconds
+
+                Cryotheum doesn't use oredict for its breaking logic
+            */
+            WorldIngredient FLOWING_CRYOTHEUM = new WorldIngredient(FluidRegistry.getFluid("cryotheum"), false);
+            addRecipeWrapper(FLOWING_CRYOTHEUM, true, ComplexOutput.create()
+                    .addEvent(BehaviorEvent.createSetSnowEvent())
+                    //.addEvent(BehaviorEvent.createBreakSurroundingEvent(Ingredient.merge(Arrays.asList(new Ingredient[]{new OreIngredient("treeLeaves"), new OreIngredient("plantGrass")}))))
+                    .addEvent(BehaviorEvent.createExtinguishFireEvent())
+                    //.addEvent(BehaviorEvent.createEntityConversionEvent("minecraft:zombie", "minecraft:snowman"))
+                    //.addEvent(BehaviorEvent.createEntityConversionEvent("minecraft:creeper", "minecraft:snowman"))
+                    );
+
+            /*
+                ignored traits of Petrotheum:
+                - if enabled, tectonic petrotheum breaks any adjacent stone- or rock-like blocks. This is disabled by default
+            */
+            WorldIngredient FLOWING_PETROTHEUM = new WorldIngredient(FluidRegistry.getFluid("petrotheum"), false);
+            addRecipeWrapper(FLOWING_PETROTHEUM, true, ComplexOutput.create()
+                    .addEvent(BehaviorEvent.createPotionEffectEvent("haste", 120, 0)));
+        }
+
         registry.addRecipes(recipeWrapperDict.values(), JustEnoughFluidBehavior.UID);
     }
 
