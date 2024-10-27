@@ -26,8 +26,10 @@ public class BehaviorEvent
 
     // BehaviorEventType.EntityConversion
     private String entityIDFrom;
+    private EntityEntry entityEntryFrom;
     private EntityEntry entityEntryTo;
     public String getEntityIDFrom() { return entityIDFrom; }
+    public EntityEntry getEntityEntryFrom() { return entityEntryFrom; }
     public EntityEntry getEntityEntryTo() { return entityEntryTo; }
 
     // BehaviorEventType.ExtinguishFire
@@ -58,6 +60,7 @@ public class BehaviorEvent
     {
         BehaviorEvent event = new BehaviorEvent(BehaviorEventType.EntityConversion);
         event.entityIDFrom = idFrom;
+        event.entityEntryFrom = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(idFrom));
         event.entityEntryTo = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(idTo));
         return event;
     }

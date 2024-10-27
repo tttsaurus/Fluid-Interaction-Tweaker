@@ -16,9 +16,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import java.util.List;
 
+@SuppressWarnings("all")
 @SideOnly(Side.CLIENT)
 public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
 {
@@ -82,15 +82,11 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
             int j = 0;
             for (InteractionEvent event: events)
             {
-                int x = 116 - length * 9 + i * 18;
+                int x = 116 - length * 9 + i++ * 18;
                 if (event.getEventType() == InteractionEventType.SetFluid)
                     guiFluidStacks.init(2, false, x, 15, 16, 16, 1000, false, null);
                 else
-                {
-                    guiItemStacks.init(j, false, x, 14);
-                    j++;
-                }
-                i++;
+                    guiItemStacks.init(j++, false, x, 14);
             }
         }
         else if (recipeWrapper.recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID &&
@@ -105,15 +101,11 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
             int j = 1;
             for (InteractionEvent event: events)
             {
-                int x = 116 - length * 9 + i * 18;
+                int x = 116 - length * 9 + i++ * 18;
                 if (event.getEventType() == InteractionEventType.SetFluid)
                     guiFluidStacks.init(1, false, x, 15, 16, 16, 1000, false, null);
                 else
-                {
-                    guiItemStacks.init(j, false, x, 14);
-                    j++;
-                }
-                i++;
+                    guiItemStacks.init(j++, false, x, 14);
             }
         }
         else if (recipeWrapper.recipe.ingredientA.getIngredientType() == WorldIngredientType.BLOCK &&
@@ -128,15 +120,11 @@ public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
             int j = 1;
             for (InteractionEvent event: events)
             {
-                int x = 116 - length * 9 + i * 18;
+                int x = 116 - length * 9 + i++ * 18;
                 if (event.getEventType() == InteractionEventType.SetFluid)
                     guiFluidStacks.init(1, false, x, 15, 16, 16, 1000, false, null);
                 else
-                {
-                    guiItemStacks.init(j, false, x, 14);
-                    j++;
-                }
-                i++;
+                    guiItemStacks.init(j++, false, x, 14);
             }
         }
 

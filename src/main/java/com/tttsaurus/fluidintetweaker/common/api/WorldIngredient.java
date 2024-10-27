@@ -78,9 +78,8 @@ public class WorldIngredient
     }
     private WorldIngredient() { }
 
-    public static WorldIngredient getFrom(@Nonnull World world, @Nonnull BlockPos pos)
+    public static WorldIngredient getFrom(@Nonnull IBlockState blockState)
     {
-        IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
         ResourceLocation rl = block.getRegistryName();
         if (rl == null) return AIR;
@@ -110,7 +109,7 @@ public class WorldIngredient
             ingredient.ingredientType = WorldIngredientType.FLUID;
             ingredient.fluid = fluidBase.getFluid();
 
-            ingredient.isFluidSource = fluidBase.canDrain(world, pos);
+            ingredient.isFluidSource = blockState.getValue(BlockLiquid.LEVEL) == 0;
         }
         // solid block
         else
@@ -118,5 +117,10 @@ public class WorldIngredient
             ingredient.ingredientType = WorldIngredientType.BLOCK;
         }
         return ingredient;
+    }
+    public static WorldIngredient getFrom(@Nonnull World world, @Nonnull BlockPos pos)
+    {
+        IBlockState blockState = world.getBlockState(pos);
+        return getFrom(blockState);
     }
 }

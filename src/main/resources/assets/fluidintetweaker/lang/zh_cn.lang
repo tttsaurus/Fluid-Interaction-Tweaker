@@ -1,15 +1,27 @@
+
+fluidintetweaker.fluid_source=源头
+fluidintetweaker.fluid_flowing=流动的
+fluidintetweaker.shift_tips=§7§o按住 §r§e§o[SHIFT] §r§7§o查看详情
+fluidintetweaker.condition_tips=§d这只在以下条件满足时发生:
+
 fluidintetweaker.jefi.category=流体交互
-fluidintetweaker.jefi.fluid_source=源头
-fluidintetweaker.jefi.fluid_flowing=流动的
-fluidintetweaker.jefi.shift_tips=§o按住 [SHIFT] 查看详情
 fluidintetweaker.jefi.interaction.explosion=§r爆炸
 fluidintetweaker.jefi.interaction.spawn_entity=§r生物:
 fluidintetweaker.jefi.interaction.spawn_entity_item=§r物品:
-fluidintetweaker.jefi.condition_tips=§d这只在以下条件满足时发生:
 fluidintetweaker.jefi.condition.by_chance=§e  - %s
 fluidintetweaker.jefi.condition.is_initiator_above=§e  - %s 在上时
-fluidintetweaker.jefi.condition.fluid_level_0=§e  - %s 的流体高度等于 %d
-fluidintetweaker.jefi.condition.fluid_level_1=§e  - %s 的流体高度等于 %d
+fluidintetweaker.jefi.condition.fluid_level=§e  - %s 的流体高度等于 %d
+
+fluidintetweaker.jefb.category=流体行为
+fluidintetweaker.jefb.behavior.potion_effect=§r药水效果:
+fluidintetweaker.jefb.behavior.entity_conversion_0=§r生物进:
+fluidintetweaker.jefb.behavior.entity_conversion_1=§r生物出:
+fluidintetweaker.jefb.behavior.extinguish_fire=§r灭火
+fluidintetweaker.jefb.behavior.set_fire=§r使周围起火
+fluidintetweaker.jefb.behavior.set_snow=§r使周围覆盖上雪
+fluidintetweaker.jefb.behavior.teleport=§r传送实体
+fluidintetweaker.jefb.behavior.break=§r破坏:
+fluidintetweaker.jefb.condition.by_chance=§e  - %s
 
 groovyscript.wiki.fluidintetweaker.fitweaker.title=FITweaker
 groovyscript.wiki.fluidintetweaker.fitweaker.description=这将帮助你添加自定义的流体交互配方。对于进阶交互逻辑，请监听事件 com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent。

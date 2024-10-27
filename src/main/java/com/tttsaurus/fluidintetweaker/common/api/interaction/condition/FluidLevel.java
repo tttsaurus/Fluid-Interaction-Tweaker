@@ -33,12 +33,12 @@ public class FluidLevel implements IEventCondition
     {
         if (fluidIndex == 0 && recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID)
             return I18n.format(
-                    "fluidintetweaker.jefi.condition.fluid_level_0",
+                    "fluidintetweaker.jefi.condition.fluid_level",
                     I18n.format(recipe.ingredientA.getFluid().getUnlocalizedName()),
                     level);
         else if (fluidIndex == 1 && recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
             return I18n.format(
-                    "fluidintetweaker.jefi.condition.fluid_level_1",
+                    "fluidintetweaker.jefi.condition.fluid_level",
                     I18n.format(recipe.ingredientB.getFluid().getUnlocalizedName()),
                     level);
         return null;

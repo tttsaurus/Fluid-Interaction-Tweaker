@@ -12,9 +12,11 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.EntityList;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@SuppressWarnings("all")
 @SideOnly(Side.CLIENT)
 public class JEFIRecipeWrapper implements IRecipeWrapper
 {
@@ -75,20 +78,22 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
             }
             else if (eventType == InteractionEventType.SpawnEntity)
             {
+                String i18nKey = "entity." + EntityList.getTranslationName(event.getEntityEntry().getRegistryName()) + ".name";
+
                 ItemStack egg = new ItemStack(Items.SPAWN_EGG);
                 NBTTagCompound nbt1 = new NBTTagCompound();
                 nbt1.setString("id", event.getEntityEntry().getEgg().spawnedID.toString());
                 NBTTagCompound nbt2 = new NBTTagCompound();
                 nbt2.setTag("EntityTag", nbt1);
                 egg.setTagCompound(nbt2);
-                egg.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity") + " " + egg.getDisplayName());
+                egg.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity") + " " + TextFormatting.DARK_AQUA + I18n.format(i18nKey));
+
                 itemOutputs.add(egg);
             }
             else if (eventType == InteractionEventType.SpawnEntityItem)
             {
-                ItemStack itemStack = event.getItemStack();
-                String i18nText = I18n.format("fluidintetweaker.jefi.interaction.spawn_entity_item");
-                if (!itemStack.getDisplayName().contains(i18nText)) itemStack.setStackDisplayName(i18nText + " " + itemStack.getDisplayName());
+                ItemStack itemStack = event.getItemStack().copy();
+                itemStack.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity_item") + " " + TextFormatting.DARK_AQUA + itemStack.getDisplayName());
                 itemOutputs.add(itemStack);
             }
             else if (eventType == InteractionEventType.SetFluid)
@@ -107,14 +112,14 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
         if (recipe.ingredientA.getIngredientType() == WorldIngredientType.FLUID)
             if (!isAnyFluidStateA)
                 minecraft.fontRenderer.drawString(recipe.ingredientA.getIsFluidSource() ?
-                        I18n.format("fluidintetweaker.jefi.fluid_source") :
-                        I18n.format("fluidintetweaker.jefi.fluid_flowing"), 7, 35, Color.GRAY.getRGB());
+                        I18n.format("fluidintetweaker.fluid_source") :
+                        I18n.format("fluidintetweaker.fluid_flowing"), 7, 35, Color.GRAY.getRGB());
 
         if (recipe.ingredientB.getIngredientType() == WorldIngredientType.FLUID)
             if (!isAnyFluidStateB)
                 minecraft.fontRenderer.drawString(recipe.ingredientB.getIsFluidSource() ?
-                        I18n.format("fluidintetweaker.jefi.fluid_source") :
-                        I18n.format("fluidintetweaker.jefi.fluid_flowing"), 47, 35, Color.GRAY.getRGB());
+                        I18n.format("fluidintetweaker.fluid_source") :
+                        I18n.format("fluidintetweaker.fluid_flowing"), 47, 35, Color.GRAY.getRGB());
 
         int length = recipe.complexOutput.getEvents().size();
         if (mouseX >= (116 - length * 9) && mouseX <= (116 + length * 9) && mouseY >= 14 && mouseY <= 31)
@@ -150,7 +155,7 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                 }
             }
             if (!tooltip.isEmpty())
-                tooltip.add(0, I18n.format("fluidintetweaker.jefi.condition_tips"));
+                tooltip.add(0, I18n.format("fluidintetweaker.condition_tips"));
             if (!(recipe.extraInfoLocalizationKey == null || recipe.extraInfoLocalizationKey.isEmpty()))
             {
                 String text = I18n.format(recipe.extraInfoLocalizationKey);

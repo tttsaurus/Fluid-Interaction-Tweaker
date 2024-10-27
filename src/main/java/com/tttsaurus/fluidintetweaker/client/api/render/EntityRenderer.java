@@ -194,6 +194,7 @@ public final class EntityRenderer
         int operand0Alpha1 = GL11.glGetTexEnvi(GL11.GL_TEXTURE_ENV, OpenGlHelper.GL_OPERAND0_ALPHA);
 
         //<editor-fold desc="rendering">
+        GlStateManager.color(1, 1, 1, 1);
         GlStateManager.pushMatrix();
         GlStateManager.translate(x, y, 10);
         GlStateManager.scale(-10f, 10f, 10f);

@@ -4,6 +4,7 @@ import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 
 public class FluidBehaviorRecipe
 {
+    // this ingredient must be fluid
     public WorldIngredient ingredient;
     public ComplexOutput complexOutput;
 

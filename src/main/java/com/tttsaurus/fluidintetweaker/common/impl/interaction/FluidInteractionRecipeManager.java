@@ -11,7 +11,8 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 // this class is totally internal
-// use methods in wrappers to manage recipes
+// use methods for wrappers to manage recipes
+@SuppressWarnings("all")
 public final class FluidInteractionRecipeManager
 {
     // ingredientA is the initiator

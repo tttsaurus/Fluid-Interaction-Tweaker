@@ -35,7 +35,7 @@ public class InteractionEvent
     private ItemStack itemStack;
     public ItemStack getItemStack() { return itemStack; }
 
-    // SetFluid
+    // InteractionEventType.SetFluid
     private Fluid fluid;
     private boolean isSpreadingUpward = false;
     //private IBlockState limitBarrier = Blocks.STONE.getDefaultState();

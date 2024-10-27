@@ -5,9 +5,9 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+@SuppressWarnings("all")
 public final class BlockUtils
 {
-    @SuppressWarnings("ConstantConditions")
     public static String toString(IBlockState blockState)
     {
         if (blockState == null)
@@ -37,7 +37,6 @@ public final class BlockUtils
     {
         return Block.REGISTRY.getObject(new ResourceLocation(id));
     }
-    @SuppressWarnings("deprecation")
     public static IBlockState getBlockState(String id, int meta)
     {
         return getBlock(id).getStateFromMeta(meta);
@@ -46,7 +45,6 @@ public final class BlockUtils
     {
         return getBlockState(id, 0);
     }
-    @SuppressWarnings("ConstantConditions")
     public static IBlockState getBlockState(ItemStack itemStack)
     {
         return getBlockState(itemStack.getItem().getRegistryName().toString(), itemStack.getMetadata());

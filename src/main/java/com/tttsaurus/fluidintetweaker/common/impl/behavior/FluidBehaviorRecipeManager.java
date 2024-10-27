@@ -1,11 +1,15 @@
 package com.tttsaurus.fluidintetweaker.common.impl.behavior;
 
+import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
+import com.tttsaurus.fluidintetweaker.client.jefb.impl.JEFBPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import java.util.HashMap;
 
+// this class is totally internal
+// use methods for wrappers to manage recipes
 public final class FluidBehaviorRecipeManager
 {
     private static final HashMap<String, ComplexOutput> recipeDict = new HashMap<>();
@@ -30,6 +34,11 @@ public final class FluidBehaviorRecipeManager
         else
         {
             recipeDict.put(key, recipe.complexOutput);
+
+            // jei compat
+            if (FluidInteractionTweaker.IS_JEI_LOADED)
+                JEFBPlugin.addRecipeWrapper(key, recipe);
+
             return key;
         }
     }

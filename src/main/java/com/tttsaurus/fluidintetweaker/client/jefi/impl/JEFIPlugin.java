@@ -22,6 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
+@SuppressWarnings("all")
 @SideOnly(Side.CLIENT)
 @JEIPlugin
 public class JEFIPlugin implements IModPlugin
@@ -93,7 +94,6 @@ public class JEFIPlugin implements IModPlugin
         //</editor-fold>
     }
 
-    @SuppressWarnings({"ConstantConditions", "deprecation"})
     @Override
     public void register(@NotNull IModRegistry registry)
     {
