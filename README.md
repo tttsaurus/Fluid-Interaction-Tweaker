@@ -25,14 +25,11 @@
   - Breaking blocks (experimental; only supports OreDict for now)
 
 ## Todo List
-- Expose `JEFIPlugin.addRecipeWrapper` to both crt and groovy
 - Update groovy support
 - Finish `bop` jei compat (maybe also fixing BoP's buggy fluid interactions)
-- Finish `thermalfoundation` jei compat
 - Add `abyssalcraft` jei compat
 - Add more conditions for interaction and behavior
 - Add `abyssalcraft`-like limited fluid spread mechanism
-- Add jei compat for fluid behavior
 
 ## Credit
 This mod is created using [GregTechCEu's Buildscripts](https://github.com/GregTechCEu/Buildscripts)

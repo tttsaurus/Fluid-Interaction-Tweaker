@@ -3,7 +3,7 @@
   "modid": "fluidintetweaker",
   "name": "Fluid Interaction Tweaker",
   "description": "Help you to tweak the fluid interactions",
-  "version": "1.4.0-preview-2",
+  "version": "1.4.0",
   "mcversion": "1.12.2",
   "url": "https://github.com/tttsaurus/Fluid-Interaction-Tweaker",
   "updateUrl": "",
