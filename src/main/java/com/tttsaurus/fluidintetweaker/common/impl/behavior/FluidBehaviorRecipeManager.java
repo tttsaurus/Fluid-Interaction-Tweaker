@@ -10,8 +10,11 @@ import java.util.HashMap;
 
 // this class is totally internal
 // use methods for wrappers to manage recipes
+@SuppressWarnings("all")
 public final class FluidBehaviorRecipeManager
 {
+    public static boolean autoAddJEIRecipe = true;
+
     private static final HashMap<String, ComplexOutput> recipeDict = new HashMap<>();
 
     //<editor-fold desc="methods for FluidBehaviorLogic">
@@ -36,7 +39,7 @@ public final class FluidBehaviorRecipeManager
             recipeDict.put(key, recipe.complexOutput);
 
             // jei compat
-            if (FluidInteractionTweaker.IS_JEI_LOADED)
+            if (FluidInteractionTweaker.IS_JEI_LOADED && autoAddJEIRecipe)
                 JEFBPlugin.addRecipeWrapper(key, recipe);
 
             return key;

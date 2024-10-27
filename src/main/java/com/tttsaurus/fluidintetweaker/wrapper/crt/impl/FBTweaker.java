@@ -1,15 +1,19 @@
 package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
+import com.tttsaurus.fluidintetweaker.client.jefb.impl.JEFBPlugin;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEvent;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.condition.ByChance;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.condition.IEventCondition;
+import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorRecipeManager;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.oredict.IOreDictEntry;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreIngredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -38,6 +42,26 @@ public final class FBTweaker
         FBTActions.AddRecipesAction action = new FBTActions.AddRecipesAction(liquid, complexOutput);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="WorldIngredient constructor wrapper">
+    private static WorldIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
+    {
+        return new WorldIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
+    }
+    //</editor-fold>
+
+    @ZenMethod
+    public static void autoAddJEIRecipe(boolean flag)
+    {
+        FluidBehaviorRecipeManager.autoAddJEIRecipe = flag;
+    }
+    //<editor-fold desc="addJEIRecipeWrapper">
+    @ZenMethod
+    public static void addJEIRecipeWrapper(ILiquidStack liquid, int fluidState, ComplexOutput complexOutput)
+    {
+        JEFBPlugin.addRecipeWrapper(buildIngredient(liquid, fluidState == 0), fluidState == 2, complexOutput);
     }
     //</editor-fold>
 

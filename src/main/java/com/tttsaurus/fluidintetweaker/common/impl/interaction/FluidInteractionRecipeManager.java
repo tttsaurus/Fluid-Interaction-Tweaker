@@ -15,6 +15,8 @@ import java.util.*;
 @SuppressWarnings("all")
 public final class FluidInteractionRecipeManager
 {
+    public static boolean autoAddJEIRecipe = true;
+
     // ingredientA is the initiator
     // it's always that ingredientA turns to an output block
     // except the fluid above & fluid below case
@@ -79,7 +81,7 @@ public final class FluidInteractionRecipeManager
             recipeDict.put(key, recipe.complexOutput);
 
             // jei compat
-            if (FluidInteractionTweaker.IS_JEI_LOADED)
+            if (FluidInteractionTweaker.IS_JEI_LOADED && autoAddJEIRecipe)
                 JEFIPlugin.addRecipeWrapper(key, recipe);
 
             return key;

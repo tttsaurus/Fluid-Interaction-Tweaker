@@ -21,10 +21,12 @@ public final class FBTActions
         private final List<FluidBehaviorRecipe> recipeList = new ArrayList<>();
         public final List<String> recipeKeys = new ArrayList<>();
 
-        private WorldIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
+        //<editor-fold desc="WorldIngredient constructor wrapper">
+        private static WorldIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
         {
             return new WorldIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
         }
+        //</editor-fold>
 
         public AddRecipesAction(ILiquidStack liquid, boolean isSource, ComplexOutput complexOutput)
         {

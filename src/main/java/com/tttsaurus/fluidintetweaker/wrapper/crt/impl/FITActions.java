@@ -23,11 +23,11 @@ public final class FITActions
         public final List<String> recipeKeys = new ArrayList<>();
 
         //<editor-fold desc="WorldIngredient constructor wrappers">
-        private WorldIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
+        private static WorldIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
         {
             return new WorldIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
         }
-        private WorldIngredient buildIngredient(IBlockState blockState)
+        private static WorldIngredient buildIngredient(IBlockState blockState)
         {
             return new WorldIngredient((net.minecraft.block.state.IBlockState)blockState.getInternal());
         }

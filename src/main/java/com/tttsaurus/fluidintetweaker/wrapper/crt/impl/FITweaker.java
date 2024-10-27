@@ -1,11 +1,14 @@
 package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
+import com.tttsaurus.fluidintetweaker.client.jefi.impl.JEFIPlugin;
+import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.ByChance;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.FluidLevel;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IsInitiatorAbove;
+import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionRecipeManager;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.item.IItemStack;
@@ -198,6 +201,42 @@ public final class FITweaker
                 extraInfoLocalizationKey);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="WorldIngredient constructor wrappers">
+    private static WorldIngredient buildIngredient(ILiquidStack liquidStack, boolean isSource)
+    {
+        return new WorldIngredient(((FluidStack)liquidStack.getInternal()).getFluid(), isSource);
+    }
+    private static WorldIngredient buildIngredient(IBlockState blockState)
+    {
+        return new WorldIngredient((net.minecraft.block.state.IBlockState)blockState.getInternal());
+    }
+    //</editor-fold>
+
+    @ZenMethod
+    public static void autoAddJEIRecipe(boolean flag)
+    {
+        FluidInteractionRecipeManager.autoAddJEIRecipe = flag;
+    }
+    //<editor-fold desc="addJEIRecipeWrapper">
+    @ZenMethod
+    public static void addJEIRecipeWrapper(ILiquidStack liquidInitiator, int fluidStateA, ILiquidStack liquidSurrounding, int fluidStateB, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    {
+        JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, output, extraInfoLocalizationKey);
+    }
+
+    @ZenMethod
+    public static void addJEIRecipeWrapper(ILiquidStack liquidInitiator, int fluidStateA, IBlockState blockSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    {
+        JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(blockSurrounding), output, extraInfoLocalizationKey);
+    }
+
+    @ZenMethod
+    public static void addJEIRecipeWrapper(IBlockState blockInitiator, ILiquidStack liquidSurrounding, int fluidStateB, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    {
+        JEFIPlugin.addRecipeWrapper(buildIngredient(blockInitiator), buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, output, extraInfoLocalizationKey);
     }
     //</editor-fold>
 
