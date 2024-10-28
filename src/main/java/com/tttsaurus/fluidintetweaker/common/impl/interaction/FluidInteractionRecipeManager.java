@@ -82,7 +82,7 @@ public final class FluidInteractionRecipeManager
 
             // jei compat
             if (FluidInteractionTweaker.IS_JEI_LOADED && autoAddJEIRecipe)
-                JEFIPlugin.addRecipeWrapper(key, recipe);
+                JEFIPlugin.addRecipeWrapper(recipe);
 
             return key;
         }

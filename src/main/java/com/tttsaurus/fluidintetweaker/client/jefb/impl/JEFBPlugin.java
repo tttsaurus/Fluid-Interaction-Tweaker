@@ -41,8 +41,10 @@ public class JEFBPlugin implements IModPlugin
     }
     //</editor-fold>
 
-    public static void addRecipeWrapper(String recipeKey, FluidBehaviorRecipe recipe)
+    // this is an internal method
+    public static void addRecipeWrapper(FluidBehaviorRecipe recipe)
     {
+        String recipeKey = recipe.ingredient.toString();
         JEFBRecipeWrapper recipeWrapper = new JEFBRecipeWrapper(recipe);
         recipeWrapperDict.put(recipeKey, recipeWrapper);
 
