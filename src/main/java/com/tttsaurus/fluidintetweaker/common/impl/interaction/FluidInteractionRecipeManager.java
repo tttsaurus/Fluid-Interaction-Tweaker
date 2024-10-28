@@ -8,7 +8,6 @@ import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import com.tttsaurus.fluidintetweaker.common.api.util.CachedContainsKeyMap;
-import javax.annotation.Nullable;
 import java.util.*;
 
 // this class is totally internal
