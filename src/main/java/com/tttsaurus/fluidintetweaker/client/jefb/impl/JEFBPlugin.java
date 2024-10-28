@@ -34,7 +34,10 @@ public class JEFBPlugin implements IModPlugin
         JEFBRecipeWrapper recipeWrapper = new JEFBRecipeWrapper(new FluidBehaviorRecipe(ingredient, complexOutput));
         recipeWrapper.isAnyFluidState = isAnyFluidState;
 
-        recipeWrapperDict.put(ingredient.toString(), recipeWrapper);
+        String key = ingredient.toString();
+        if (recipeWrapperDict.containsKey(key))
+            key += recipeWrapper.hashCode();
+        recipeWrapperDict.put(key, recipeWrapper);
     }
     //</editor-fold>
 

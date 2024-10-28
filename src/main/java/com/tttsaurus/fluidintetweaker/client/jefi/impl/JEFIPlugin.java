@@ -56,7 +56,10 @@ public class JEFIPlugin implements IModPlugin
         recipeWrapper.isAnyFluidStateA = isAnyFluidStateA;
         recipeWrapper.isAnyFluidStateB = isAnyFluidStateB;
 
-        recipeWrapperDict.put(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB), recipeWrapper);
+        String key = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB);
+        if (recipeWrapperDict.containsKey(key))
+            key += recipeWrapper.hashCode();
+        recipeWrapperDict.put(key, recipeWrapper);
     }
     //</editor-fold>
 
