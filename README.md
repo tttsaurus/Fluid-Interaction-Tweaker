@@ -23,6 +23,8 @@
   - Covering nearby blocks with snow
   - Teleporting entities
   - Breaking blocks (experimental; only supports OreDict for now)
+### JEI Compatibilities
+- Thermal Foundation
 
 ## Todo List
 - Update groovy support
@@ -31,7 +33,13 @@
 - Add more conditions for interaction and behavior
 - Add `abyssalcraft`-like limited fluid spread mechanism
 
-## Credit
+## Wiki
+Here's the [Wiki Link](https://github.com/tttsaurus/Fluid-Interaction-Tweaker/wiki)
+
+## Issues
+Here's the [Issues Link](https://github.com/tttsaurus/Fluid-Interaction-Tweaker/issues)
+
+## Credits
 This mod is created using [GregTechCEu's Buildscripts](https://github.com/GregTechCEu/Buildscripts)
 
 ## Dependencies
