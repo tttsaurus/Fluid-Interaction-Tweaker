@@ -6,7 +6,7 @@ import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
-import java.util.HashMap;
+import com.tttsaurus.fluidintetweaker.common.api.util.CachedContainsKeyMap;
 
 // this class is totally internal
 // use methods for wrappers to manage recipes
@@ -15,7 +15,7 @@ public final class FluidBehaviorRecipeManager
 {
     public static boolean autoAddJEIRecipe = true;
 
-    private static final HashMap<String, ComplexOutput> recipeDict = new HashMap<>();
+    private static final CachedContainsKeyMap<String, ComplexOutput> recipeDict = new CachedContainsKeyMap<>();
 
     //<editor-fold desc="methods for FluidBehaviorLogic">
     static boolean recipeExists(WorldIngredient ingredient)

@@ -7,6 +7,7 @@ import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRec
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.api.util.CachedContainsKeyMap;
 import javax.annotation.Nullable;
 import java.util.*;
 
@@ -26,7 +27,7 @@ public final class FluidInteractionRecipeManager
     private static final List<String> recipeIngredientAList = new ArrayList<>();
     private static final List<String> recipeIngredientBList = new ArrayList<>();
 
-    private static final HashMap<String, ComplexOutput> recipeDict = new HashMap<>();
+    private static final CachedContainsKeyMap<String, ComplexOutput> recipeDict = new CachedContainsKeyMap<>();
 
     //<editor-fold desc="methods for FluidInteractionLogic">
     static boolean ingredientAExists(WorldIngredient ingredientA)
@@ -44,14 +45,6 @@ public final class FluidInteractionRecipeManager
     static ComplexOutput getRecipeOutput(WorldIngredient ingredientA, WorldIngredient ingredientB)
     {
         return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
-    }
-    @Nullable
-    static ComplexOutput getNullableRecipeOutput(WorldIngredient ingredientA, WorldIngredient ingredientB)
-    {
-        if (recipeExists(ingredientA, ingredientB))
-            return recipeDict.get(StringRecipeProtocol.getRecipeKeyFromTwoIngredients(ingredientA, ingredientB));
-        else
-            return null;
     }
     //</editor-fold>
 

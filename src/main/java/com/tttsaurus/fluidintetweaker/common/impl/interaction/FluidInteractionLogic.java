@@ -56,12 +56,12 @@ public final class FluidInteractionLogic
                 ingredient1.setIsFluidSource(false);
 
                 WorldIngredient ingredientA, ingredientB;
-                ComplexOutput complexOutput = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2);
+                ComplexOutput complexOutput = FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2);
                 if (complexOutput == null)
                 { ingredientA = ingredient2; ingredientB = ingredient1; }
                 else
                 { ingredientA = ingredient1; ingredientB = ingredient2; }
-                complexOutput = complexOutput == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1) : complexOutput;
+                complexOutput = complexOutput == null ? FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1) : complexOutput;
                 if (complexOutput == null) continue;
 
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
@@ -103,12 +103,12 @@ public final class FluidInteractionLogic
                 ingredient2.setIsFluidSource(false);
 
                 WorldIngredient ingredientA, ingredientB;
-                ComplexOutput complexOutput = FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient2, ingredient1);
+                ComplexOutput complexOutput = FluidInteractionRecipeManager.getRecipeOutput(ingredient2, ingredient1);
                 if (complexOutput == null)
                 { ingredientA = ingredient1; ingredientB = ingredient2; }
                 else
                 { ingredientA = ingredient2; ingredientB = ingredient1; }
-                complexOutput = complexOutput == null ? FluidInteractionRecipeManager.getNullableRecipeOutput(ingredient1, ingredient2) : complexOutput;
+                complexOutput = complexOutput == null ? FluidInteractionRecipeManager.getRecipeOutput(ingredient1, ingredient2) : complexOutput;
                 if (complexOutput == null) continue;
 
                 MinecraftForge.EVENT_BUS.post(new CustomFluidInteractionEvent(
