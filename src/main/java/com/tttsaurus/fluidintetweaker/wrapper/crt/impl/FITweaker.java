@@ -119,85 +119,85 @@ public final class FITweaker
 
     //<editor-fold desc="addRecipe (complex output)">
     @ZenMethod
-    public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
         FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 liquidSurrounding,
                 isSourceB,
-                output,
+                complexOutputBuilder.done(),
                 extraInfoLocalizationKey);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
     }
     @ZenMethod
-    public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, ILiquidStack liquidSurrounding, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
         FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 liquidSurrounding,
-                output,
+                complexOutputBuilder.done(),
                 extraInfoLocalizationKey);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
     }
     @ZenMethod
-    public static List<String> addRecipe(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static List<String> addRecipe(ILiquidStack liquidInitiator, ILiquidStack liquidSurrounding, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
         FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 liquidSurrounding,
-                output,
+                complexOutputBuilder.done(),
                 extraInfoLocalizationKey);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
     }
 
     @ZenMethod
-    public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, IBlockState blockSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static List<String> addRecipe(ILiquidStack liquidInitiator, boolean isSourceA, IBlockState blockSurrounding, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
         FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 isSourceA,
                 blockSurrounding,
-                output,
+                complexOutputBuilder.done(),
                 extraInfoLocalizationKey);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
     }
     @ZenMethod
-    public static List<String> addRecipe(ILiquidStack liquidInitiator, IBlockState blockSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static List<String> addRecipe(ILiquidStack liquidInitiator, IBlockState blockSurrounding, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
         FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 liquidInitiator,
                 blockSurrounding,
-                output,
+                complexOutputBuilder.done(),
                 extraInfoLocalizationKey);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
     }
 
     @ZenMethod
-    public static List<String> addRecipe(IBlockState blockInitiator, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static List<String> addRecipe(IBlockState blockInitiator, ILiquidStack liquidSurrounding, boolean isSourceB, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
         FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 blockInitiator,
                 liquidSurrounding,
                 isSourceB,
-                output,
+                complexOutputBuilder.done(),
                 extraInfoLocalizationKey);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
     }
     @ZenMethod
-    public static List<String> addRecipe(IBlockState blockInitiator, ILiquidStack liquidSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static List<String> addRecipe(IBlockState blockInitiator, ILiquidStack liquidSurrounding, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
         FITActions.AddRecipesAction action = new FITActions.AddRecipesAction(
                 blockInitiator,
                 liquidSurrounding,
-                output,
+                complexOutputBuilder.done(),
                 extraInfoLocalizationKey);
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
@@ -222,33 +222,23 @@ public final class FITweaker
     }
     //<editor-fold desc="addJEIRecipeWrapper">
     @ZenMethod
-    public static void addJEIRecipeWrapper(ILiquidStack liquidInitiator, int fluidStateA, ILiquidStack liquidSurrounding, int fluidStateB, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static void addJEIRecipeWrapper(ILiquidStack liquidInitiator, int fluidStateA, ILiquidStack liquidSurrounding, int fluidStateB, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
-        JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, output, extraInfoLocalizationKey);
+        JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, complexOutputBuilder.done(), extraInfoLocalizationKey);
     }
 
     @ZenMethod
-    public static void addJEIRecipeWrapper(ILiquidStack liquidInitiator, int fluidStateA, IBlockState blockSurrounding, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static void addJEIRecipeWrapper(ILiquidStack liquidInitiator, int fluidStateA, IBlockState blockSurrounding, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
-        JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(blockSurrounding), output, extraInfoLocalizationKey);
+        JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(blockSurrounding), complexOutputBuilder.done(), extraInfoLocalizationKey);
     }
 
     @ZenMethod
-    public static void addJEIRecipeWrapper(IBlockState blockInitiator, ILiquidStack liquidSurrounding, int fluidStateB, ComplexOutput output, @Optional String extraInfoLocalizationKey)
+    public static void addJEIRecipeWrapper(IBlockState blockInitiator, ILiquidStack liquidSurrounding, int fluidStateB, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
-        JEFIPlugin.addRecipeWrapper(buildIngredient(blockInitiator), buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, output, extraInfoLocalizationKey);
+        JEFIPlugin.addRecipeWrapper(buildIngredient(blockInitiator), buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, complexOutputBuilder.done(), extraInfoLocalizationKey);
     }
     //</editor-fold>
-
-    /*
-    //<editor-fold desc="removeAllRecipes">
-    @ZenMethod
-    public static void removeAllRecipes()
-    {
-        CraftTweakerAPI.apply(new FITActions.RemoveAllRecipesAction());
-    }
-    //</editor-fold>
-    */
 
     @ZenRegister
     @ZenClass("mods.fluidintetweaker.interaction.ComplexOutputBuilder")
@@ -257,13 +247,13 @@ public final class FITweaker
         private final ComplexOutput complexOutput = ComplexOutput.create();
 
         @ZenMethod
-        public ComplexOutputBuilder addEvent(InteractionEvent event)
+        public ComplexOutputBuilder addEvent(InteractionEventBuilder eventBuilder)
         {
+            InteractionEvent event = eventBuilder.done();
             if (event == null) return this;
             complexOutput.addEvent(event);
             return this;
         }
-        @ZenMethod
         public ComplexOutput done()
         {
             return complexOutput;
@@ -333,7 +323,6 @@ public final class FITweaker
             interactionEvent.addCondition(condition);
             return this;
         }
-        @ZenMethod
         public InteractionEvent done()
         {
             return interactionEvent;

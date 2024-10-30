@@ -30,16 +30,16 @@ public final class FBTweaker
 
     //<editor-fold desc="addRecipe">
     @ZenMethod
-    public static List<String> addRecipe(ILiquidStack liquid, boolean isSource, ComplexOutput complexOutput)
+    public static List<String> addRecipe(ILiquidStack liquid, boolean isSource, ComplexOutputBuilder complexOutputBuilder)
     {
-        FBTActions.AddRecipesAction action = new FBTActions.AddRecipesAction(liquid, isSource, complexOutput);
+        FBTActions.AddRecipesAction action = new FBTActions.AddRecipesAction(liquid, isSource, complexOutputBuilder.done());
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
     }
     @ZenMethod
-    public static List<String> addRecipe(ILiquidStack liquid, ComplexOutput complexOutput)
+    public static List<String> addRecipe(ILiquidStack liquid, ComplexOutputBuilder complexOutputBuilder)
     {
-        FBTActions.AddRecipesAction action = new FBTActions.AddRecipesAction(liquid, complexOutput);
+        FBTActions.AddRecipesAction action = new FBTActions.AddRecipesAction(liquid, complexOutputBuilder.done());
         CraftTweakerAPI.apply(action);
         return action.recipeKeys;
     }
@@ -59,9 +59,9 @@ public final class FBTweaker
     }
     //<editor-fold desc="addJEIRecipeWrapper">
     @ZenMethod
-    public static void addJEIRecipeWrapper(ILiquidStack liquid, int fluidState, ComplexOutput complexOutput)
+    public static void addJEIRecipeWrapper(ILiquidStack liquid, int fluidState, ComplexOutputBuilder complexOutputBuilder)
     {
-        JEFBPlugin.addRecipeWrapper(buildIngredient(liquid, fluidState == 0), fluidState == 2, complexOutput);
+        JEFBPlugin.addRecipeWrapper(buildIngredient(liquid, fluidState == 0), fluidState == 2, complexOutputBuilder.done());
     }
     //</editor-fold>
 
@@ -72,13 +72,13 @@ public final class FBTweaker
         private final ComplexOutput complexOutput = ComplexOutput.create();
 
         @ZenMethod
-        public ComplexOutputBuilder addEvent(BehaviorEvent event)
+        public ComplexOutputBuilder addEvent(BehaviorEventBuilder eventBuilder)
         {
+            BehaviorEvent event = eventBuilder.done();
             if (event == null) return this;
             complexOutput.addEvent(event);
             return this;
         }
-        @ZenMethod
         public ComplexOutput done()
         {
             return complexOutput;
@@ -150,7 +150,6 @@ public final class FBTweaker
             behaviorEvent.addCondition(condition);
             return this;
         }
-        @ZenMethod
         public BehaviorEvent done()
         {
             return behaviorEvent;
