@@ -250,6 +250,8 @@ public final class FITweaker
     //</editor-fold>
     */
 
+    @ZenRegister
+    @ZenClass("mods.fluidintetweaker.interaction.ComplexOutputBuilder")
     public static class ComplexOutputBuilder
     {
         private final ComplexOutput complexOutput = ComplexOutput.create();
@@ -267,6 +269,8 @@ public final class FITweaker
             return complexOutput;
         }
     }
+    @ZenRegister
+    @ZenClass("mods.fluidintetweaker.interaction.InteractionEventBuilder")
     public static class InteractionEventBuilder
     {
         private InteractionEvent interactionEvent = null;

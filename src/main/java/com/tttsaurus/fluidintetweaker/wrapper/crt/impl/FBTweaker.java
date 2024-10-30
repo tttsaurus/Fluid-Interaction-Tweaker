@@ -65,6 +65,8 @@ public final class FBTweaker
     }
     //</editor-fold>
 
+    @ZenRegister
+    @ZenClass("mods.fluidintetweaker.behavior.ComplexOutputBuilder")
     public static class ComplexOutputBuilder
     {
         private final ComplexOutput complexOutput = ComplexOutput.create();
@@ -82,6 +84,8 @@ public final class FBTweaker
             return complexOutput;
         }
     }
+    @ZenRegister
+    @ZenClass("mods.fluidintetweaker.behavior.BehaviorEventBuilder")
     public static class BehaviorEventBuilder
     {
         private BehaviorEvent behaviorEvent = null;
