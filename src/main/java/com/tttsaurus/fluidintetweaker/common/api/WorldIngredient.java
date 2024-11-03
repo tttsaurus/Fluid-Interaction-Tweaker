@@ -44,9 +44,9 @@ public class WorldIngredient
     @Override
     public String toString()
     {
-        if (ingredientType == WorldIngredientType.BLOCK)
+        if (ingredientType == WorldIngredientType.BLOCK && blockState != null)
             return KEYWORD_BLOCK + "{" + BlockUtils.toString(blockState) + "}";
-        else if (ingredientType == WorldIngredientType.FLUID)
+        else if (ingredientType == WorldIngredientType.FLUID && fluid != null)
         {
             if (isFluidSource)
                 return KEYWORD_FLUID_SOURCE + "{" + fluid.getName() + "}";
@@ -54,7 +54,7 @@ public class WorldIngredient
                 return KEYWORD_FLUID_FLOWING + "{" + fluid.getName() + "}";
         }
         else
-            return null;
+            return "";
     }
     @Override
     public boolean equals(Object object)
