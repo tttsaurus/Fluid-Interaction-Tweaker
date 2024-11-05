@@ -11,10 +11,12 @@ import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IsInitiat
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionRecipeManager;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.block.IBlockState;
+import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -278,9 +280,9 @@ public final class FITweaker
             return this;
         }
         @ZenMethod
-        public InteractionEventBuilder createSpawnEntityEvent(String id)
+        public InteractionEventBuilder createSpawnEntityEvent(IEntityDefinition entityDefinition)
         {
-            interactionEvent = InteractionEvent.createSpawnEntityEvent(id);
+            interactionEvent = InteractionEvent.createSpawnEntityEvent((EntityEntry)entityDefinition.getInternal());
             return this;
         }
         @ZenMethod

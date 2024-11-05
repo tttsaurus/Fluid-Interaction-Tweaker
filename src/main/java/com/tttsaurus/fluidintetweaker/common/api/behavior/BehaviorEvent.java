@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("all")
 public class BehaviorEvent
 {
     private final BehaviorEventType eventType;
@@ -62,6 +63,14 @@ public class BehaviorEvent
         event.entityIDFrom = idFrom;
         event.entityEntryFrom = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(idFrom));
         event.entityEntryTo = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(idTo));
+        return event;
+    }
+    public static BehaviorEvent createEntityConversionEvent(EntityEntry entityEntryFrom, EntityEntry entityEntryTo)
+    {
+        BehaviorEvent event = new BehaviorEvent(BehaviorEventType.EntityConversion);
+        event.entityIDFrom = entityEntryFrom.getName();
+        event.entityEntryFrom = entityEntryFrom;
+        event.entityEntryTo = entityEntryTo;
         return event;
     }
     public static BehaviorEvent createExtinguishFireEvent()

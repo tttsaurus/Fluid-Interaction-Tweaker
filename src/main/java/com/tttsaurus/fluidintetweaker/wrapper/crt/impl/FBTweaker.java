@@ -9,11 +9,13 @@ import com.tttsaurus.fluidintetweaker.common.api.behavior.condition.IEventCondit
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorRecipeManager;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
+import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.oredict.IOreDictEntry;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.oredict.OreIngredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -97,9 +99,9 @@ public final class FBTweaker
             return this;
         }
         @ZenMethod
-        public BehaviorEventBuilder createEntityConversionEvent(String idFrom, String idTo)
+        public BehaviorEventBuilder createEntityConversionEvent(IEntityDefinition entityDefinitionFrom, IEntityDefinition entityDefinitionTo)
         {
-            behaviorEvent = BehaviorEvent.createEntityConversionEvent(idFrom, idTo);
+            behaviorEvent = BehaviorEvent.createEntityConversionEvent((EntityEntry)entityDefinitionFrom.getInternal(), (EntityEntry)entityDefinitionTo.getInternal());
             return this;
         }
         @ZenMethod

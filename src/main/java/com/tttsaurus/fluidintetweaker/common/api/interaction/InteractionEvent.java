@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("all")
 public class InteractionEvent
 {
     private final InteractionEventType eventType;
@@ -65,6 +66,12 @@ public class InteractionEvent
     {
         InteractionEvent event = new InteractionEvent(InteractionEventType.SpawnEntity);
         event.entityEntry = ForgeRegistries.ENTITIES.getValue(new ResourceLocation(id));
+        return event;
+    }
+    public static InteractionEvent createSpawnEntityEvent(EntityEntry entityEntry)
+    {
+        InteractionEvent event = new InteractionEvent(InteractionEventType.SpawnEntity);
+        event.entityEntry = entityEntry;
         return event;
     }
     public static InteractionEvent createSpawnEntityItemEvent(ItemStack itemStack, int amount)
