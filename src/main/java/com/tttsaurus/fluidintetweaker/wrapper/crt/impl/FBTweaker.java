@@ -17,14 +17,31 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.oredict.OreIngredient;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
+import stanhebben.zenscript.annotations.*;
 import java.util.List;
 
 @ZenRegister
 @ZenClass("mods.fluidintetweaker.FBTweaker")
 public final class FBTweaker
 {
+    public enum EnumCondition
+    {
+        ByChance
+    }
+    @ZenRegister
+    @ZenClass("mods.fluidintetweaker.behavior.Condition")
+    public static class EnumConditionWrapper
+    {
+        protected final EnumCondition enumCondition;
+        private EnumConditionWrapper(EnumCondition enumCondition)
+        {
+            this.enumCondition = enumCondition;
+        }
+
+        @ZenProperty
+        public static final EnumConditionWrapper byChance = new EnumConditionWrapper(EnumCondition.ByChance);
+    }
+
     @ZenMethod
     public static ComplexOutputBuilder outputBuilder() { return new ComplexOutputBuilder(); }
     @ZenMethod
@@ -139,14 +156,13 @@ public final class FBTweaker
             return this;
         }
         @ZenMethod
-        public BehaviorEventBuilder addCondition(String className, Object[] params)
+        public BehaviorEventBuilder addCondition(EnumConditionWrapper conditionWrapper, Object[] params)
         {
             IEventCondition condition = null;
+            EnumCondition enumCondition = conditionWrapper.enumCondition;
 
-            if (className.equals("ByChance"))
-            {
+            if (enumCondition == EnumCondition.ByChance)
                 condition = new ByChance((float)params[0]);
-            }
 
             if (condition == null || behaviorEvent == null) return this;
             behaviorEvent.addCondition(condition);

@@ -17,9 +17,7 @@ import crafttweaker.api.liquid.ILiquidStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.EntityEntry;
-import stanhebben.zenscript.annotations.Optional;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
+import stanhebben.zenscript.annotations.*;
 import crafttweaker.annotations.ZenRegister;
 import java.util.List;
 
@@ -27,6 +25,30 @@ import java.util.List;
 @ZenClass("mods.fluidintetweaker.FITweaker")
 public final class FITweaker
 {
+    public enum EnumCondition
+    {
+        ByChance,
+        IsInitiatorAbove,
+        FluidLevel
+    }
+    @ZenRegister
+    @ZenClass("mods.fluidintetweaker.interaction.Condition")
+    public static class EnumConditionWrapper
+    {
+        protected final EnumCondition enumCondition;
+        private EnumConditionWrapper(EnumCondition enumCondition)
+        {
+            this.enumCondition = enumCondition;
+        }
+
+        @ZenProperty
+        public static final EnumConditionWrapper byChance = new EnumConditionWrapper(EnumCondition.ByChance);
+        @ZenProperty
+        public static final EnumConditionWrapper isInitiatorAbove = new EnumConditionWrapper(EnumCondition.IsInitiatorAbove);
+        @ZenProperty
+        public static final EnumConditionWrapper fluidLevel = new EnumConditionWrapper(EnumCondition.FluidLevel);
+    }
+
     @ZenMethod
     public static ComplexOutputBuilder outputBuilder() { return new ComplexOutputBuilder(); }
     @ZenMethod
@@ -304,22 +326,17 @@ public final class FITweaker
             return this;
         }
         @ZenMethod
-        public InteractionEventBuilder addCondition(String className, Object[] params)
+        public InteractionEventBuilder addCondition(EnumConditionWrapper conditionWrapper, Object[] params)
         {
             IEventCondition condition = null;
+            EnumCondition enumCondition = conditionWrapper.enumCondition;
 
-            if (className.equals("ByChance"))
-            {
+            if (enumCondition == EnumCondition.ByChance)
                 condition = new ByChance((float)params[0]);
-            }
-            else if (className.equals("IsInitiatorAbove"))
-            {
+            else if (enumCondition == EnumCondition.IsInitiatorAbove)
                 condition = new IsInitiatorAbove();
-            }
-            else if (className.equals("FluidLevel"))
-            {
+            else if (enumCondition == EnumCondition.FluidLevel)
                 condition = new FluidLevel((int)params[0], (int)params[0]);
-            }
 
             if (condition == null || interactionEvent == null) return this;
             interactionEvent.addCondition(condition);

@@ -11,13 +11,10 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreIngredient;
 import org.jetbrains.annotations.NotNull;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 @SuppressWarnings("all")
