@@ -30,10 +30,12 @@ If you like this project, don't forget to give it a star⭐!
 
 ## Todo List
 - Update groovy support
-- Finish `bop` jei compat (maybe also fixing BoP's buggy fluid interactions)
-- Add `abyssalcraft` jei compat
+- Finish `bop`-jei compat (maybe also fixing `bop`'s buggy fluid interactions)
+- Add `abyssalcraft`-jei compat
 - Add more conditions for interaction and behavior
 - Add `abyssalcraft`-like limited fluid spread mechanism
+- Add configurable particles for interactions
+- Add configurable particles and sounds for explosions
 
 ## Wiki
 Here's the [Wiki Link](https://github.com/tttsaurus/Fluid-Interaction-Tweaker/wiki)
