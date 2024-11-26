@@ -1,6 +1,12 @@
+[![Versions](https://img.shields.io/curseforge/game-versions/1094214?logo=curseforge&label=Game%20Version)](https://www.curseforge.com/minecraft/mc-mods/fluid-interaction-tweaker)
+
+[![Downloads](https://img.shields.io/curseforge/dt/1094214?logo=curseforge&label=Downloads)](https://www.curseforge.com/minecraft/mc-mods/fluid-interaction-tweaker)
+
+If you like this project, don't forget to give it a star⭐!
+
 ## Overview
 - This is a (1.12.2 Minecraft Forge) CraftTweaker/GroovyScript addon that enables you to add more fluid interactions using the `zenscript`/`groovyscript`.
-- This mod doesn't change anything about the vanilla water and lava interaction. Instead, the mod creates a new general system for fluid interactions.
+- This mod doesn't extend anything about the vanilla water and lava interaction system. Instead, the mod creates a new general system for fluid interactions.
 - It can also act as a library mod for fluid interactions.
 
 ## Features
@@ -28,10 +34,12 @@
 
 ## Todo List
 - Update groovy support
-- Finish `bop` jei compat (maybe also fixing BoP's buggy fluid interactions)
-- Add `abyssalcraft` jei compat
+- Finish `bop`-jei compat (maybe also fixing `bop`'s buggy fluid interactions)
+- Add `abyssalcraft`-jei compat
 - Add more conditions for interaction and behavior
 - Add `abyssalcraft`-like limited fluid spread mechanism
+- Add configurable particles for interactions
+- Add configurable particles and sounds for explosions
 
 ## Wiki
 Here's the [Wiki Link](https://github.com/tttsaurus/Fluid-Interaction-Tweaker/wiki)
