@@ -7,6 +7,7 @@ import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import com.tttsaurus.fluidintetweaker.common.api.util.CachedContainsKeyMap;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 
 // this class is totally internal
 // use methods for wrappers to manage recipes
@@ -39,7 +40,7 @@ public final class FluidBehaviorRecipeManager
             recipeDict.put(key, recipe.complexOutput);
 
             // jei compat
-            if (FluidInteractionTweaker.IS_JEI_LOADED && autoAddJEIRecipe)
+            if (FluidInteractionTweaker.IS_JEI_LOADED && autoAddJEIRecipe && FMLCommonHandler.instance().getSide().isClient())
                 JEFBPlugin.addRecipeWrapper(recipe);
 
             return key;

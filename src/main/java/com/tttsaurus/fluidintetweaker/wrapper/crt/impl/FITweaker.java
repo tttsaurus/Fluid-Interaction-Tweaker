@@ -16,6 +16,7 @@ import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import stanhebben.zenscript.annotations.*;
 import crafttweaker.annotations.ZenRegister;
@@ -248,19 +249,22 @@ public final class FITweaker
     @ZenMethod
     public static void addJEIRecipeWrapper(ILiquidStack liquidInitiator, int fluidStateA, ILiquidStack liquidSurrounding, int fluidStateB, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
-        JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, complexOutputBuilder.done(), extraInfoLocalizationKey);
+        if (FMLCommonHandler.instance().getSide().isClient())
+            JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, complexOutputBuilder.done(), extraInfoLocalizationKey);
     }
 
     @ZenMethod
     public static void addJEIRecipeWrapper(ILiquidStack liquidInitiator, int fluidStateA, IBlockState blockSurrounding, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
-        JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(blockSurrounding), complexOutputBuilder.done(), extraInfoLocalizationKey);
+        if (FMLCommonHandler.instance().getSide().isClient())
+            JEFIPlugin.addRecipeWrapper(buildIngredient(liquidInitiator, fluidStateA == 0), fluidStateA == 2, buildIngredient(blockSurrounding), complexOutputBuilder.done(), extraInfoLocalizationKey);
     }
 
     @ZenMethod
     public static void addJEIRecipeWrapper(IBlockState blockInitiator, ILiquidStack liquidSurrounding, int fluidStateB, ComplexOutputBuilder complexOutputBuilder, @Optional String extraInfoLocalizationKey)
     {
-        JEFIPlugin.addRecipeWrapper(buildIngredient(blockInitiator), buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, complexOutputBuilder.done(), extraInfoLocalizationKey);
+        if (FMLCommonHandler.instance().getSide().isClient())
+            JEFIPlugin.addRecipeWrapper(buildIngredient(blockInitiator), buildIngredient(liquidSurrounding, fluidStateB == 0), fluidStateB == 2, complexOutputBuilder.done(), extraInfoLocalizationKey);
     }
     //</editor-fold>
 

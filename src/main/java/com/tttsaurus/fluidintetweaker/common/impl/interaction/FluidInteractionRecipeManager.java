@@ -8,6 +8,7 @@ import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
 import com.tttsaurus.fluidintetweaker.common.api.util.CachedContainsKeyMap;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import java.util.*;
 
 // this class is totally internal
@@ -73,7 +74,7 @@ public final class FluidInteractionRecipeManager
             recipeDict.put(key, recipe.complexOutput);
 
             // jei compat
-            if (FluidInteractionTweaker.IS_JEI_LOADED && autoAddJEIRecipe)
+            if (FluidInteractionTweaker.IS_JEI_LOADED && autoAddJEIRecipe && FMLCommonHandler.instance().getSide().isClient())
                 JEFIPlugin.addRecipeWrapper(recipe);
 
             return key;

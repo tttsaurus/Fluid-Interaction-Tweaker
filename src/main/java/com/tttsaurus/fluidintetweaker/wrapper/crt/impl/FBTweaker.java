@@ -15,6 +15,7 @@ import crafttweaker.api.liquid.ILiquidStack;
 import crafttweaker.api.oredict.IOreDictEntry;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.oredict.OreIngredient;
 import stanhebben.zenscript.annotations.*;
@@ -80,7 +81,8 @@ public final class FBTweaker
     @ZenMethod
     public static void addJEIRecipeWrapper(ILiquidStack liquid, int fluidState, ComplexOutputBuilder complexOutputBuilder)
     {
-        JEFBPlugin.addRecipeWrapper(buildIngredient(liquid, fluidState == 0), fluidState == 2, complexOutputBuilder.done());
+        if (FMLCommonHandler.instance().getSide().isClient())
+            JEFBPlugin.addRecipeWrapper(buildIngredient(liquid, fluidState == 0), fluidState == 2, complexOutputBuilder.done());
     }
     //</editor-fold>
 
