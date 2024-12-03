@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.client.api.render;
+package com.tttsaurus.fluidintetweaker.client.impl;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

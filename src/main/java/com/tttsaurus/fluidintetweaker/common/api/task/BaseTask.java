@@ -1,6 +1,6 @@
 package com.tttsaurus.fluidintetweaker.common.api.task;
 
-public class BaseTask
+public abstract class BaseTask
 {
     public int delay;
     public boolean deferrable;
@@ -10,10 +10,7 @@ public class BaseTask
         this.delay = delay;
         deferrable = true;
     }
-    public void run()
-    {
-
-    }
+    public abstract void run();
     public boolean compare(BaseTask task)
     {
         return this.equals(task);

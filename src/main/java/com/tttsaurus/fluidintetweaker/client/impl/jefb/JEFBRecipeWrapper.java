@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.client.jefb.impl;
+package com.tttsaurus.fluidintetweaker.client.impl.jefb;
 
 import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEvent;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEventType;

@@ -1,6 +1,6 @@
-package com.tttsaurus.fluidintetweaker.client.jefi.impl;
+package com.tttsaurus.fluidintetweaker.client.impl.jefi;
 
-import com.tttsaurus.fluidintetweaker.client.api.render.EntityRenderer;
+import com.tttsaurus.fluidintetweaker.client.impl.EntityRenderer;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;

@@ -5,7 +5,7 @@ import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.impl.task.SetBlockStateTask;
-import com.tttsaurus.fluidintetweaker.common.api.task.TaskScheduler;
+import com.tttsaurus.fluidintetweaker.common.impl.task.TaskScheduler;
 import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
 package com.tttsaurus.fluidintetweaker.common.impl.behavior;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.client.jefb.impl.JEFBPlugin;
+import com.tttsaurus.fluidintetweaker.client.impl.jefb.JEFBPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;

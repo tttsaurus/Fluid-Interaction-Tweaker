@@ -1,14 +1,13 @@
-package com.tttsaurus.fluidintetweaker.client.jefi.impl;
+package com.tttsaurus.fluidintetweaker.client.impl.jefi;
 
 import com.tttsaurus.fluidintetweaker.Configuration;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.client.jefi.JustEnoughFluidInteractions;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IsInitiatorAbove;
+import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.IsInitiatorAbove;
 import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
 import mezz.jei.api.IModPlugin;

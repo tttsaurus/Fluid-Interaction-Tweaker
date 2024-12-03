@@ -1,10 +1,8 @@
-package com.tttsaurus.fluidintetweaker.client.jefb.impl;
+package com.tttsaurus.fluidintetweaker.client.impl.jefb;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.client.jefb.JustEnoughFluidBehavior;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEvent;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEventType;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
@@ -16,7 +14,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
 import java.util.List;
 
 @SuppressWarnings("all")

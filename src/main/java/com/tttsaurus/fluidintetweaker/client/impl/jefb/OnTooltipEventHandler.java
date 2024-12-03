@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.client.jefb.impl;
+package com.tttsaurus.fluidintetweaker.client.impl.jefb;
 
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

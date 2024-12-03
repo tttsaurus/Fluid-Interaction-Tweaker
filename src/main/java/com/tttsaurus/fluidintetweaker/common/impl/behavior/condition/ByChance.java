@@ -1,6 +1,7 @@
-package com.tttsaurus.fluidintetweaker.common.api.behavior.condition;
+package com.tttsaurus.fluidintetweaker.common.impl.behavior.condition;
 
 import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
+import com.tttsaurus.fluidintetweaker.common.api.behavior.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidBehaviorEvent;
 import net.minecraft.client.resources.I18n;
 

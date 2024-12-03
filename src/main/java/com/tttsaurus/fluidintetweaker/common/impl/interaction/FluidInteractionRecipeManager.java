@@ -1,7 +1,7 @@
 package com.tttsaurus.fluidintetweaker.common.impl.interaction;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.client.jefi.impl.JEFIPlugin;
+import com.tttsaurus.fluidintetweaker.client.impl.jefi.JEFIPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;

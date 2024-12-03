@@ -1,7 +1,7 @@
 package com.tttsaurus.fluidintetweaker.proxy;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.common.api.task.TaskScheduler;
+import com.tttsaurus.fluidintetweaker.common.impl.task.TaskScheduler;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorEventHandler;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorLogic;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionEventHandler;

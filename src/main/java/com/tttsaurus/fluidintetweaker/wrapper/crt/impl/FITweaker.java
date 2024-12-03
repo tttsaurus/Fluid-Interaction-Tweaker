@@ -1,13 +1,13 @@
 package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
-import com.tttsaurus.fluidintetweaker.client.jefi.impl.JEFIPlugin;
+import com.tttsaurus.fluidintetweaker.client.impl.jefi.JEFIPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.ByChance;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.FluidLevel;
+import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.ByChance;
+import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.FluidLevel;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IsInitiatorAbove;
+import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.IsInitiatorAbove;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionRecipeManager;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.block.IBlockState;

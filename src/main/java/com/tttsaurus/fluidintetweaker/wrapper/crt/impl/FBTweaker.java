@@ -1,10 +1,10 @@
 package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
 
-import com.tttsaurus.fluidintetweaker.client.jefb.impl.JEFBPlugin;
+import com.tttsaurus.fluidintetweaker.client.impl.jefb.JEFBPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEvent;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.condition.ByChance;
+import com.tttsaurus.fluidintetweaker.common.impl.behavior.condition.ByChance;
 import com.tttsaurus.fluidintetweaker.common.api.behavior.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorRecipeManager;
 import crafttweaker.CraftTweakerAPI;
