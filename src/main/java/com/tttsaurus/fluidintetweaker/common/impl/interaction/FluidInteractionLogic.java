@@ -9,13 +9,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.event.world.BlockEvent.NeighborNotifyEvent;
 import java.util.*;
 
 public final class FluidInteractionLogic
 {
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onNeighborNotify(NeighborNotifyEvent event)
     {
         World world = event.getWorld();
