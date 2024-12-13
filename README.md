@@ -37,8 +37,6 @@ If you like this project, don't forget to give it a star⭐!
 - Add `abyssalcraft`-jei compat
 - Add more conditions for interaction and behavior
 - Add `abyssalcraft`-like limited fluid spread mechanism
-- Add configurable particles for interactions
-- Add configurable particles and sounds for explosions
 
 Suggestions/PRs are welcome!
 
