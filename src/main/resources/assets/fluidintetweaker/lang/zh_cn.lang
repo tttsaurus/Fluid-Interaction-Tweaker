@@ -11,6 +11,7 @@ fluidintetweaker.jefi.interaction.spawn_entity_item=§r物品:
 fluidintetweaker.jefi.condition.by_chance=§e  - %s
 fluidintetweaker.jefi.condition.is_initiator_above=§e  - %s 在上时
 fluidintetweaker.jefi.condition.fluid_level=§e  - %s 的流体高度等于 %d
+fluidintetweaker.jefi.condition.biome=§e  - 处于群系 %s
 
 fluidintetweaker.jefb.category=流体行为
 fluidintetweaker.jefb.behavior.potion_effect=§r药水效果:

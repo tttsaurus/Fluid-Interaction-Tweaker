@@ -4,6 +4,7 @@ import com.tttsaurus.fluidintetweaker.client.impl.jefi.JEFIPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.Biome;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.ByChance;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.FluidLevel;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
@@ -14,7 +15,6 @@ import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -34,7 +34,8 @@ public final class FITweaker
     {
         ByChance,
         IsInitiatorAbove,
-        FluidLevel
+        FluidLevel,
+        Biome
     }
     @ZenRegister
     @ZenClass("mods.fluidintetweaker.interaction.Condition")
@@ -52,6 +53,8 @@ public final class FITweaker
         public static final EnumConditionWrapper isInitiatorAbove = new EnumConditionWrapper(EnumCondition.IsInitiatorAbove);
         @ZenProperty
         public static final EnumConditionWrapper fluidLevel = new EnumConditionWrapper(EnumCondition.FluidLevel);
+        @ZenProperty
+        public static final EnumConditionWrapper biome = new EnumConditionWrapper(EnumCondition.Biome);
     }
 
     @ZenMethod
@@ -345,6 +348,8 @@ public final class FITweaker
                 condition = new IsInitiatorAbove();
             else if (enumCondition == EnumCondition.FluidLevel)
                 condition = new FluidLevel((int)params[0], (int)params[0]);
+            else if (enumCondition == EnumCondition.Biome)
+                condition = new Biome((String)params[0]);
 
             if (condition == null || interactionEvent == null) return this;
             interactionEvent.addCondition(condition);
