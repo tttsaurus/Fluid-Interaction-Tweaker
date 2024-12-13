@@ -27,8 +27,10 @@ public class InteractionEvent
     // InteractionEventType.Explosion
     private float strength;
     private boolean damagesTerrain;
+    private boolean hasParticles;
     public float getStrength() { return strength; }
     public boolean getDamagesTerrain() { return damagesTerrain; }
+    public boolean getHasParticles() { return hasParticles; }
 
     // InteractionEventType.SpawnEntity
     private EntityEntry entityEntry;
@@ -57,11 +59,12 @@ public class InteractionEvent
         event.blockState = blockState;
         return event;
     }
-    public static InteractionEvent createExplosionEvent(float strength, boolean damagesTerrain)
+    public static InteractionEvent createExplosionEvent(float strength, boolean damagesTerrain, boolean hasParticles)
     {
         InteractionEvent event = new InteractionEvent(InteractionEventType.Explosion);
         event.strength = strength;
         event.damagesTerrain = damagesTerrain;
+        event.hasParticles = hasParticles;
         return event;
     }
     public static InteractionEvent createSpawnEntityEvent(String id)

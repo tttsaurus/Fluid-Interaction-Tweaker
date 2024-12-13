@@ -74,7 +74,7 @@ public class ComplexOutput
                     }
                     else if (eventType == InteractionEventType.Explosion)
                     {
-                        world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), event.getStrength(), event.getDamagesTerrain()).doExplosionB(true);
+                        world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), event.getStrength(), event.getDamagesTerrain()).doExplosionB(event.getHasParticles());
                     }
                     else if (eventType == InteractionEventType.SpawnEntity)
                     {

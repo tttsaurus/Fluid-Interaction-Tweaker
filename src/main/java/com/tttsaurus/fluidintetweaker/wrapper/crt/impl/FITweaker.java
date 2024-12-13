@@ -307,9 +307,9 @@ public final class FITweaker
             return this;
         }
         @ZenMethod
-        public InteractionEventBuilder createExplosionEvent(float strength, boolean damagesTerrain)
+        public InteractionEventBuilder createExplosionEvent(float strength, boolean damagesTerrain, boolean hasParticles)
         {
-            interactionEvent = InteractionEvent.createExplosionEvent(strength, damagesTerrain);
+            interactionEvent = InteractionEvent.createExplosionEvent(strength, damagesTerrain, hasParticles);
             return this;
         }
         @ZenMethod
