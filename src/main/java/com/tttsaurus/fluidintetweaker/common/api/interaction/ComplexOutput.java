@@ -10,6 +10,7 @@ import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDeleg
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
@@ -57,6 +58,14 @@ public class ComplexOutput
                         if (!flag) break;
                     }
                     if (!flag) continue;
+
+                    if (event.getSoundEvent() != null)
+                        world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), event.getSoundEvent(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    if (event.getParticleType() != null)
+                        for (int i = 0; i < 10; i++)
+                            world.spawnParticle(event.getParticleType(),
+                                    pos.getX() + world.rand.nextFloat(), pos.getY(), pos.getZ() + world.rand.nextFloat(),
+                                    0.0D, 0.1D, 0.0D);
 
                     InteractionEventType eventType = event.getEventType();
                     if (eventType == InteractionEventType.SetBlock)

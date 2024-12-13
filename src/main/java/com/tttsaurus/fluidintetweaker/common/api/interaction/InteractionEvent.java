@@ -3,7 +3,9 @@ package com.tttsaurus.fluidintetweaker.common.api.interaction;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -98,6 +100,22 @@ public class InteractionEvent
     public InteractionEvent addCondition(IEventCondition condition)
     {
         conditions.add(condition);
+        return this;
+    }
+
+    private SoundEvent soundEvent = null;
+    public SoundEvent getSoundEvent() { return soundEvent; }
+    private EnumParticleTypes particleType = null;
+    public EnumParticleTypes getParticleType() { return particleType; }
+
+    public InteractionEvent setSoundEvent(SoundEvent soundEvent)
+    {
+        this.soundEvent = soundEvent;
+        return this;
+    }
+    public InteractionEvent setParticleType(EnumParticleTypes particleType)
+    {
+        this.particleType = particleType;
         return this;
     }
 }

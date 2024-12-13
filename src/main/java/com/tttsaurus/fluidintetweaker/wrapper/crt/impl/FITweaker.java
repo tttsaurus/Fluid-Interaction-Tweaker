@@ -14,7 +14,11 @@ import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.liquid.ILiquidStack;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -346,6 +350,23 @@ public final class FITweaker
             interactionEvent.addCondition(condition);
             return this;
         }
+        @ZenMethod
+        public InteractionEventBuilder setSound(String sound)
+        {
+            if (interactionEvent == null) return this;
+            SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(new ResourceLocation(sound));
+            if (soundEvent != null) interactionEvent.setSoundEvent(soundEvent);
+            return this;
+        }
+        @ZenMethod
+        public InteractionEventBuilder setParticle(String particle)
+        {
+            if (interactionEvent == null) return this;
+            EnumParticleTypes particleType = EnumParticleTypes.getByName(particle);
+            if (particleType != null) interactionEvent.setParticleType(particleType);
+            return this;
+        }
+
         public InteractionEvent done()
         {
             return interactionEvent;
