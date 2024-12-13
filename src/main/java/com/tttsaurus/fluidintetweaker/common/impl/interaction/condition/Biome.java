@@ -5,6 +5,7 @@ import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRec
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 public class Biome implements IEventCondition
 {
@@ -23,9 +24,18 @@ public class Biome implements IEventCondition
         return rl.toString().equals(biomeName);
     }
 
+    private String localizedBiomeName = "";
     @Override
     public String getDesc(FluidInteractionRecipe recipe)
     {
-        return I18n.format("fluidintetweaker.jefi.condition.biome");
+        if (localizedBiomeName.isEmpty())
+        {
+            net.minecraft.world.biome.Biome biome = ForgeRegistries.BIOMES.getValue(new ResourceLocation(biomeName));
+            if (biome == null)
+                localizedBiomeName = "Invalid biomeName";
+            else
+                localizedBiomeName = biome.getBiomeName();
+        }
+        return I18n.format("fluidintetweaker.jefi.condition.biome", localizedBiomeName);
     }
 }

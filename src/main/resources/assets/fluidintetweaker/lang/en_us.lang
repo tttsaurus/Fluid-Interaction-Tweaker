@@ -12,6 +12,7 @@ fluidintetweaker.jefi.condition.by_chance=§e  - %s
 fluidintetweaker.jefi.condition.is_initiator_above=§e  - %s is above
 fluidintetweaker.jefi.condition.fluid_level=§e  - %s's fluid level equals %d
 fluidintetweaker.jefi.condition.biome=§e  - Under biome %s
+fluidintetweaker.jefi.condition.dimension=§e  - Under dimension %s
 
 fluidintetweaker.jefb.category=Fluid Behavior
 fluidintetweaker.jefb.behavior.potion_effect=§rPotion Effect:

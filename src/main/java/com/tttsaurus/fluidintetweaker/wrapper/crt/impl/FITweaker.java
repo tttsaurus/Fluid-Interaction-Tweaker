@@ -4,11 +4,8 @@ import com.tttsaurus.fluidintetweaker.client.impl.jefi.JEFIPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.Biome;
-import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.ByChance;
-import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.FluidLevel;
+import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.*;
 import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
-import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.IsInitiatorAbove;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionRecipeManager;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.block.IBlockState;
@@ -35,7 +32,8 @@ public final class FITweaker
         ByChance,
         IsInitiatorAbove,
         FluidLevel,
-        Biome
+        Biome,
+        Dimension
     }
     @ZenRegister
     @ZenClass("mods.fluidintetweaker.interaction.Condition")
@@ -55,6 +53,8 @@ public final class FITweaker
         public static final EnumConditionWrapper fluidLevel = new EnumConditionWrapper(EnumCondition.FluidLevel);
         @ZenProperty
         public static final EnumConditionWrapper biome = new EnumConditionWrapper(EnumCondition.Biome);
+        @ZenProperty
+        public static final EnumConditionWrapper dimension = new EnumConditionWrapper(EnumCondition.Dimension);
     }
 
     @ZenMethod
@@ -350,6 +350,8 @@ public final class FITweaker
                 condition = new FluidLevel((int)params[0], (int)params[0]);
             else if (enumCondition == EnumCondition.Biome)
                 condition = new Biome((String)params[0]);
+            else if (enumCondition == EnumCondition.Dimension)
+                condition = new Dimension((Integer)params[0]);
 
             if (condition == null || interactionEvent == null) return this;
             interactionEvent.addCondition(condition);
