@@ -86,14 +86,14 @@ public class JEFIRecipeWrapper implements IRecipeWrapper
                 NBTTagCompound nbt2 = new NBTTagCompound();
                 nbt2.setTag("EntityTag", nbt1);
                 egg.setTagCompound(nbt2);
-                egg.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity") + " " + TextFormatting.DARK_AQUA + I18n.format(i18nKey));
+                egg.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity") + " " + TextFormatting.DARK_AQUA + I18n.format(i18nKey) + TextFormatting.RESET);
 
                 itemOutputs.add(egg);
             }
             else if (eventType == InteractionEventType.SpawnEntityItem)
             {
                 ItemStack itemStack = event.getItemStack().copy();
-                itemStack.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity_item") + " " + TextFormatting.DARK_AQUA + itemStack.getDisplayName());
+                itemStack.setStackDisplayName(I18n.format("fluidintetweaker.jefi.interaction.spawn_entity_item") + " " + TextFormatting.DARK_AQUA + itemStack.getDisplayName() + TextFormatting.RESET);
                 itemOutputs.add(itemStack);
             }
             else if (eventType == InteractionEventType.SetFluid)

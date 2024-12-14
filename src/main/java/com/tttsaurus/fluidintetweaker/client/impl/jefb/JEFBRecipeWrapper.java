@@ -62,7 +62,7 @@ public class JEFBRecipeWrapper implements IRecipeWrapper
                         TextFormatting.DARK_AQUA +
                         I18n.format(event.getPotionEffect().getPotion().getName()) +
                         " (" + amplifierNotation + ") " + TextFormatting.RESET +
-                        duration + "s");
+                        duration + "s" + TextFormatting.RESET);
                 itemOutputs.add(Collections.singletonList(itemStack));
             }
             else if (eventType == BehaviorEventType.EntityConversion)
@@ -76,7 +76,7 @@ public class JEFBRecipeWrapper implements IRecipeWrapper
                 NBTTagCompound nbt2 = new NBTTagCompound();
                 nbt2.setTag("EntityTag", nbt1);
                 egg1.setTagCompound(nbt2);
-                egg1.setStackDisplayName(I18n.format("fluidintetweaker.jefb.behavior.entity_conversion_0") + " " + TextFormatting.DARK_AQUA + I18n.format(i18nKey1));
+                egg1.setStackDisplayName(I18n.format("fluidintetweaker.jefb.behavior.entity_conversion_0") + " " + TextFormatting.DARK_AQUA + I18n.format(i18nKey1) + TextFormatting.RESET);
 
                 ItemStack egg2 = new ItemStack(Items.SPAWN_EGG);
                 nbt1 = new NBTTagCompound();
@@ -84,7 +84,7 @@ public class JEFBRecipeWrapper implements IRecipeWrapper
                 nbt2 = new NBTTagCompound();
                 nbt2.setTag("EntityTag", nbt1);
                 egg2.setTagCompound(nbt2);
-                egg2.setStackDisplayName(I18n.format("fluidintetweaker.jefb.behavior.entity_conversion_1") + " " + TextFormatting.DARK_AQUA + I18n.format(i18nKey2));
+                egg2.setStackDisplayName(I18n.format("fluidintetweaker.jefb.behavior.entity_conversion_1") + " " + TextFormatting.DARK_AQUA + I18n.format(i18nKey2) + TextFormatting.RESET);
 
                 itemOutputs.add(Collections.singletonList(egg1));
                 itemOutputs.add(Collections.singletonList(egg2));
@@ -119,7 +119,7 @@ public class JEFBRecipeWrapper implements IRecipeWrapper
                 for (IBlockState blockState: event.getBlockStates())
                 {
                     ItemStack itemStack = BlockUtils.getItemStack(blockState);
-                    itemStack.setStackDisplayName(I18n.format("fluidintetweaker.jefb.behavior.break") + " " + TextFormatting.DARK_AQUA + itemStack.getDisplayName());
+                    itemStack.setStackDisplayName(I18n.format("fluidintetweaker.jefb.behavior.break") + " " + TextFormatting.DARK_AQUA + itemStack.getDisplayName() + TextFormatting.RESET);
                     itemStacks.add(itemStack);
                 }
                 itemOutputs.add(itemStacks);
