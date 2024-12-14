@@ -68,7 +68,7 @@ public class BehaviorEvent
     public static BehaviorEvent createEntityConversionEvent(EntityEntry entityEntryFrom, EntityEntry entityEntryTo)
     {
         BehaviorEvent event = new BehaviorEvent(BehaviorEventType.EntityConversion);
-        event.entityIDFrom = entityEntryFrom.getName();
+        event.entityIDFrom = entityEntryFrom.getRegistryName().toString();
         event.entityEntryFrom = entityEntryFrom;
         event.entityEntryTo = entityEntryTo;
         return event;

@@ -72,7 +72,7 @@ public class JEFBRecipeWrapper implements IRecipeWrapper
 
                 ItemStack egg1 = new ItemStack(Items.SPAWN_EGG);
                 NBTTagCompound nbt1 = new NBTTagCompound();
-                nbt1.setString("id", event.getEntityEntryFrom().getName());
+                nbt1.setString("id", event.getEntityEntryFrom().getRegistryName().toString());
                 NBTTagCompound nbt2 = new NBTTagCompound();
                 nbt2.setTag("EntityTag", nbt1);
                 egg1.setTagCompound(nbt2);
@@ -80,7 +80,7 @@ public class JEFBRecipeWrapper implements IRecipeWrapper
 
                 ItemStack egg2 = new ItemStack(Items.SPAWN_EGG);
                 nbt1 = new NBTTagCompound();
-                nbt1.setString("id", event.getEntityEntryTo().getName());
+                nbt1.setString("id", event.getEntityEntryTo().getRegistryName().toString());
                 nbt2 = new NBTTagCompound();
                 nbt2.setTag("EntityTag", nbt1);
                 egg2.setTagCompound(nbt2);
