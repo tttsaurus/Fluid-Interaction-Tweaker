@@ -1,7 +1,7 @@
-package com.tttsaurus.fluidintetweaker.wrapper.crt.impl.event;
+package com.tttsaurus.fluidintetweaker.plugin.crt.impl.event;
 
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidBehaviorEvent;
-import com.tttsaurus.fluidintetweaker.wrapper.crt.api.event.ICustomFluidBehaviorEvent;
+import com.tttsaurus.fluidintetweaker.plugin.crt.api.event.ICustomFluidBehaviorEvent;
 import crafttweaker.api.world.IBlockPos;
 import crafttweaker.api.world.IWorld;
 import crafttweaker.mc1120.entity.MCEntityLivingBase;

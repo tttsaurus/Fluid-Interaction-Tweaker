@@ -13,9 +13,9 @@ public final class TaskScheduler
     private static final List<BaseTask> tasks = new ArrayList<>();
     // tasks to be run at this tick
     private static final List<BaseTask> toRun = new ArrayList<>();
-    // stores indexes referring to `tasks`
+    // stores indexes of `tasks`
     private static final List<Integer> toRunIndexes = new ArrayList<>();
-    // stores some elements, indexes referring to `tasks`, from `toRunIndexes`
+    // stores indexes of `tasks` from `toRunIndexes`
     // then remove some tasks from `tasks` based on the `toRemove`
     private static final List<Integer> toRemove = new ArrayList<>();
 
@@ -33,6 +33,8 @@ public final class TaskScheduler
     @SubscribeEvent
     public static void onTick(TickEvent.ServerTickEvent event)
     {
+        if (tasks.isEmpty()) return;
+
         for (int i = 0; i < tasks.size(); i++)
         {
             BaseTask task = tasks.get(i);

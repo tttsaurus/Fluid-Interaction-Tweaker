@@ -6,7 +6,7 @@ import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorEventHan
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorLogic;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionEventHandler;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionLogic;
-import com.tttsaurus.fluidintetweaker.wrapper.crt.impl.CrTEventManager;
+import com.tttsaurus.fluidintetweaker.plugin.crt.impl.CrTEventManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;

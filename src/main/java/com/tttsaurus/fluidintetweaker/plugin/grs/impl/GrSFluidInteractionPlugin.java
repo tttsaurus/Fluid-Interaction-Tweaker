@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.wrapper.grs.impl;
+package com.tttsaurus.fluidintetweaker.plugin.grs.impl;
 
 import com.cleanroommc.groovyscript.api.GroovyBlacklist;
 import com.cleanroommc.groovyscript.api.GroovyPlugin;

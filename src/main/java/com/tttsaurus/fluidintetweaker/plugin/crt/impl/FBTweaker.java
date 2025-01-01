@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
+package com.tttsaurus.fluidintetweaker.plugin.crt.impl;
 
 import com.tttsaurus.fluidintetweaker.client.impl.jefb.JEFBPlugin;
 import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;

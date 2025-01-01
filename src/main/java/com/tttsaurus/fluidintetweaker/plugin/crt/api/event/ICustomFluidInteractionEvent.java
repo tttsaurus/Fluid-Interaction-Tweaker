@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.wrapper.crt.api.event;
+package com.tttsaurus.fluidintetweaker.plugin.crt.api.event;
 
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.block.IBlockState;

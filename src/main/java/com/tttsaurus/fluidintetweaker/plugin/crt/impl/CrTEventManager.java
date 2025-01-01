@@ -1,11 +1,11 @@
-package com.tttsaurus.fluidintetweaker.wrapper.crt.impl;
+package com.tttsaurus.fluidintetweaker.plugin.crt.impl;
 
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidBehaviorEvent;
 import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
-import com.tttsaurus.fluidintetweaker.wrapper.crt.api.event.ICustomFluidBehaviorEvent;
-import com.tttsaurus.fluidintetweaker.wrapper.crt.api.event.ICustomFluidInteractionEvent;
-import com.tttsaurus.fluidintetweaker.wrapper.crt.impl.event.MCCustomFluidBehaviorEvent;
-import com.tttsaurus.fluidintetweaker.wrapper.crt.impl.event.MCCustomFluidInteractionEvent;
+import com.tttsaurus.fluidintetweaker.plugin.crt.api.event.ICustomFluidBehaviorEvent;
+import com.tttsaurus.fluidintetweaker.plugin.crt.api.event.ICustomFluidInteractionEvent;
+import com.tttsaurus.fluidintetweaker.plugin.crt.impl.event.MCCustomFluidBehaviorEvent;
+import com.tttsaurus.fluidintetweaker.plugin.crt.impl.event.MCCustomFluidInteractionEvent;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.event.IEventHandle;
 import crafttweaker.api.event.IEventManager;
