@@ -10,7 +10,7 @@ import com.tttsaurus.fluidintetweaker.common.api.util.CachedContainsKeyMap;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 // this class is totally internal
-// use methods for wrappers to manage recipes
+// use methods for plugins to manage recipes
 @SuppressWarnings("all")
 public final class FluidBehaviorRecipeManager
 {
@@ -29,7 +29,7 @@ public final class FluidBehaviorRecipeManager
     }
     //</editor-fold>
 
-    //<editor-fold desc="methods for wrappers">
+    //<editor-fold desc="methods for plugins">
     public static String addRecipe(FluidBehaviorRecipe recipe) throws FluidInteractionTweakerRuntimeException
     {
         String key = recipe.ingredient.toString();

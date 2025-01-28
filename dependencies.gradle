@@ -50,4 +50,8 @@ dependencies {
 
     compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweaker_version}"
     runtimeOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweaker_version}"
+
+    // ometweaks-1.1.1
+    compileOnly "curse.maven:ome-tweaks-1159298:6000074"
+    runtimeOnly "curse.maven:ome-tweaks-1159298:6000074"
 }

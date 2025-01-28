@@ -13,16 +13,21 @@ import com.tttsaurus.fluidintetweaker.proxy.CommonProxy;
 @Mod(modid = FluidInteractionTweaker.MODID,
      name = FluidInteractionTweaker.NAME,
      version = FluidInteractionTweaker.VERSION,
-     dependencies = "after:jei@[4.12,);after:thermalfoundation;after:biomesoplenty")
+     dependencies =
+             "after:jei@[4.12,);" +
+             "after:thermalfoundation;" +
+             "after:biomesoplenty;" +
+             "after:ometweaks")
 public final class FluidInteractionTweaker
 {
-    public static final String MODID = "fluidintetweaker";
-    public static final String NAME = "Fluid Interaction Tweaker";
-    public static final String VERSION = "1.5.1";
+    public final static String MODID = "fluidintetweaker";
+    public final static String NAME = "Fluid Interaction Tweaker";
+    public final static String VERSION = "1.5.1";
 
-    public static boolean IS_JEI_LOADED = Loader.isModLoaded("jei");
-    public static boolean IS_THERMALFOUNDATION_LOADED = Loader.isModLoaded("thermalfoundation");
-    public static boolean IS_BIOMESOPLENTY_LOADED = Loader.isModLoaded("biomesoplenty");
+    public final static boolean IS_JEI_LOADED = Loader.isModLoaded("jei");
+    public final static boolean IS_THERMALFOUNDATION_LOADED = Loader.isModLoaded("thermalfoundation");
+    public final static boolean IS_BIOMESOPLENTY_LOADED = Loader.isModLoaded("biomesoplenty");
+    public final static boolean IS_OMETWEAKS_LOADED = Loader.isModLoaded("ometweaks");
 
     @SidedProxy(
             clientSide = "com.tttsaurus.fluidintetweaker.proxy.ClientProxy",
