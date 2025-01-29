@@ -31,7 +31,8 @@ public class CommonProxy
 
         MinecraftForge.EVENT_BUS.register(TaskScheduler.class);
 
-        MinecraftForge.EVENT_BUS.register(CrTEventManager.Handler.class);
+        if (FluidInteractionTweaker.IS_CRAFTTWEAKER_LOADED)
+            MinecraftForge.EVENT_BUS.register(CrTEventManager.Handler.class);
     }
 
     public void postInit(FMLPostInitializationEvent event, Logger logger)

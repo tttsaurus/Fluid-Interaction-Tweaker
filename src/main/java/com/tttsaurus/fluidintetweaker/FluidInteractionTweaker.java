@@ -22,12 +22,13 @@ public final class FluidInteractionTweaker
 {
     public final static String MODID = "fluidintetweaker";
     public final static String NAME = "Fluid Interaction Tweaker";
-    public final static String VERSION = "1.5.1";
+    public final static String VERSION = "1.5.2";
 
     public final static boolean IS_JEI_LOADED = Loader.isModLoaded("jei");
     public final static boolean IS_THERMALFOUNDATION_LOADED = Loader.isModLoaded("thermalfoundation");
     public final static boolean IS_BIOMESOPLENTY_LOADED = Loader.isModLoaded("biomesoplenty");
     public final static boolean IS_OMETWEAKS_LOADED = Loader.isModLoaded("ometweaks");
+    public final static boolean IS_CRAFTTWEAKER_LOADED = Loader.isModLoaded("crafttweaker");
 
     @SidedProxy(
             clientSide = "com.tttsaurus.fluidintetweaker.proxy.ClientProxy",
