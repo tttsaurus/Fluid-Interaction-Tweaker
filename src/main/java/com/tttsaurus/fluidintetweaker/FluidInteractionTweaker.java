@@ -10,9 +10,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 import com.tttsaurus.fluidintetweaker.proxy.CommonProxy;
 
-@Mod(modid = FluidInteractionTweaker.MODID,
-     name = FluidInteractionTweaker.NAME,
-     version = FluidInteractionTweaker.VERSION,
+@Mod(modid = Tags.MODID,
+     name = Tags.MODNAME,
+     version = Tags.VERSION,
      dependencies =
              "after:jei@[4.12,);" +
              "after:thermalfoundation;" +
@@ -20,10 +20,6 @@ import com.tttsaurus.fluidintetweaker.proxy.CommonProxy;
              "after:ometweaks")
 public final class FluidInteractionTweaker
 {
-    public final static String MODID = "fluidintetweaker";
-    public final static String NAME = "Fluid Interaction Tweaker";
-    public final static String VERSION = "1.5.2";
-
     public final static boolean IS_JEI_LOADED = Loader.isModLoaded("jei");
     public final static boolean IS_THERMALFOUNDATION_LOADED = Loader.isModLoaded("thermalfoundation");
     public final static boolean IS_BIOMESOPLENTY_LOADED = Loader.isModLoaded("biomesoplenty");
@@ -48,7 +44,7 @@ public final class FluidInteractionTweaker
     public void init(FMLInitializationEvent event)
     {
         proxy.init(event, logger);
-        logger.info(FluidInteractionTweaker.NAME + " initialized.");
+        logger.info(Tags.MODNAME + " initialized.");
     }
 
     @EventHandler

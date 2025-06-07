@@ -5,10 +5,10 @@ import com.cleanroommc.groovyscript.api.GroovyLog;
 import com.cleanroommc.groovyscript.api.documentation.annotations.*;
 import com.cleanroommc.groovyscript.helper.recipe.AbstractRecipeBuilder;
 import com.cleanroommc.groovyscript.registry.VirtualizedRegistry;
-import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.Tags;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.FluidInteractionRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionRecipeManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraftforge.fluids.Fluid;
@@ -16,7 +16,7 @@ import net.minecraftforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
-@RegistryDescription(linkGenerator = FluidInteractionTweaker.MODID,
+@RegistryDescription(linkGenerator = Tags.MODID,
                      title = "groovyscript.wiki.fluidintetweaker.fitweaker.title",
                      description = "groovyscript.wiki.fluidintetweaker.fitweaker.description")
 public class FITweaker extends VirtualizedRegistry<FluidInteractionRecipe>

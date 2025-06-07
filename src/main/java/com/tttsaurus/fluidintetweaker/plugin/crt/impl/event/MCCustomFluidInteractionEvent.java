@@ -1,6 +1,6 @@
 package com.tttsaurus.fluidintetweaker.plugin.crt.impl.event;
 
-import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidInteractionEvent;
 import com.tttsaurus.fluidintetweaker.plugin.crt.api.event.ICustomFluidInteractionEvent;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.world.IBlockPos;

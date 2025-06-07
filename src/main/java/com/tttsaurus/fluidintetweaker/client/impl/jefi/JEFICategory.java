@@ -1,9 +1,9 @@
 package com.tttsaurus.fluidintetweaker.client.impl.jefi;
 
-import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
+import com.tttsaurus.fluidintetweaker.Tags;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredientType;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.InteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.InteractionEventType;
 import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.gui.IDrawable;
 import mezz.jei.api.gui.IGuiFluidStackGroup;
@@ -21,8 +21,8 @@ import java.util.List;
 @SideOnly(Side.CLIENT)
 public class JEFICategory implements IRecipeCategory<JEFIRecipeWrapper>
 {
-    public static final ResourceLocation BACKGROUND = new ResourceLocation(FluidInteractionTweaker.MODID, "textures/gui/jefi/background.png");
-    public static final ResourceLocation ICON = new ResourceLocation(FluidInteractionTweaker.MODID, "textures/gui/jefi/icon.png");
+    public static final ResourceLocation BACKGROUND = new ResourceLocation(Tags.MODID, "textures/gui/jefi/background.png");
+    public static final ResourceLocation ICON = new ResourceLocation(Tags.MODID, "textures/gui/jefi/icon.png");
 
     private final IDrawable backgroud, icon;
 

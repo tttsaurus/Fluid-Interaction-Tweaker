@@ -1,10 +1,10 @@
 package com.tttsaurus.fluidintetweaker.common.impl.interaction.condition;
 
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
-import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
-import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredientType;
+import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidInteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.FluidInteractionRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.condition.IEventCondition;
+import com.tttsaurus.fluidintetweaker.common.core.util.BlockUtils;
 import net.minecraft.client.resources.I18n;
 
 public class IsInitiatorAbove implements IEventCondition

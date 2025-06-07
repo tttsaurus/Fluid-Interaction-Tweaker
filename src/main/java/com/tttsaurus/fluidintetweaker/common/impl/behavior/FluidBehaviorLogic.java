@@ -1,8 +1,8 @@
 package com.tttsaurus.fluidintetweaker.common.impl.behavior;
 
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidBehaviorEvent;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidBehaviorEvent;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;

@@ -1,12 +1,12 @@
 package com.tttsaurus.fluidintetweaker.client.impl.jefi;
 
 import com.tttsaurus.fluidintetweaker.client.impl.EntityRenderer;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.condition.IEventCondition;
-import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEventType;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.FluidInteractionRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.condition.IEventCondition;
+import com.tttsaurus.fluidintetweaker.common.core.util.BlockUtils;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.InteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.InteractionEventType;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredientType;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;

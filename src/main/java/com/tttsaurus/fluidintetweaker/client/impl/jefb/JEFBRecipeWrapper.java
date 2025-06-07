@@ -1,11 +1,11 @@
 package com.tttsaurus.fluidintetweaker.client.impl.jefb;
 
-import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEvent;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEventType;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.condition.IEventCondition;
-import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
-import com.tttsaurus.fluidintetweaker.common.api.util.RomanNumberUtils;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.BehaviorEvent;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.BehaviorEventType;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.FluidBehaviorRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.condition.IEventCondition;
+import com.tttsaurus.fluidintetweaker.common.core.util.BlockUtils;
+import com.tttsaurus.fluidintetweaker.common.core.util.RomanNumberUtils;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;

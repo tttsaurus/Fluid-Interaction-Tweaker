@@ -2,11 +2,11 @@ package com.tttsaurus.fluidintetweaker.common.impl.behavior;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
 import com.tttsaurus.fluidintetweaker.client.impl.jefb.JEFBPlugin;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
-import com.tttsaurus.fluidintetweaker.common.api.util.CachedContainsKeyMap;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.FluidBehaviorRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.core.util.CachedContainsKeyMap;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 // this class is totally internal

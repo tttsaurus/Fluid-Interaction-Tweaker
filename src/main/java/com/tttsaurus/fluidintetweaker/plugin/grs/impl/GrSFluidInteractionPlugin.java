@@ -5,7 +5,7 @@ import com.cleanroommc.groovyscript.api.GroovyPlugin;
 import com.cleanroommc.groovyscript.compat.mods.GroovyContainer;
 import com.cleanroommc.groovyscript.compat.mods.GroovyPropertyContainer;
 import com.cleanroommc.groovyscript.documentation.linkgenerator.LinkGeneratorHooks;
-import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
+import com.tttsaurus.fluidintetweaker.Tags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -17,13 +17,13 @@ public final class GrSFluidInteractionPlugin implements GroovyPlugin
     @Override
     public @NotNull String getModId()
     {
-        return FluidInteractionTweaker.MODID;
+        return Tags.MODID;
     }
 
     @Override
     public @NotNull String getContainerName()
     {
-        return FluidInteractionTweaker.NAME;
+        return Tags.MODNAME;
     }
 
     @Override

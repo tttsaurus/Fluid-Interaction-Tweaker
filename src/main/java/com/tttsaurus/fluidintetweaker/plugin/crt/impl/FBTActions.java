@@ -1,9 +1,9 @@
 package com.tttsaurus.fluidintetweaker.plugin.crt.impl;
 
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.exception.FluidInteractionTweakerRuntimeException;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.FluidBehaviorRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorRecipeManager;
 import crafttweaker.IAction;
 import crafttweaker.api.liquid.ILiquidStack;

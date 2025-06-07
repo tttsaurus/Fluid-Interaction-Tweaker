@@ -2,10 +2,10 @@ package com.tttsaurus.fluidintetweaker.client.impl.jefb;
 
 import com.tttsaurus.fluidintetweaker.Configuration;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.BehaviorEvent;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.BehaviorEvent;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.FluidBehaviorRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;

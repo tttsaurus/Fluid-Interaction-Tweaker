@@ -1,8 +1,8 @@
 package com.tttsaurus.fluidintetweaker.common.impl.behavior.condition;
 
-import com.tttsaurus.fluidintetweaker.common.api.behavior.FluidBehaviorRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.behavior.condition.IEventCondition;
-import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidBehaviorEvent;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.FluidBehaviorRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.behavior.condition.IEventCondition;
+import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidBehaviorEvent;
 import net.minecraft.client.resources.I18n;
 
 public class ByChance implements IEventCondition

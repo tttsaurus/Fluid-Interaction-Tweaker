@@ -1,6 +1,7 @@
 package com.tttsaurus.fluidintetweaker.proxy;
 
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
+import com.tttsaurus.fluidintetweaker.Tags;
 import com.tttsaurus.fluidintetweaker.common.impl.task.TaskScheduler;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorEventHandler;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorLogic;
@@ -22,7 +23,7 @@ public class CommonProxy
 
     public void init(FMLInitializationEvent event, Logger logger)
     {
-        logger.info(FluidInteractionTweaker.NAME + " starts initializing.");
+        logger.info(Tags.MODNAME + " starts initializing.");
 
         MinecraftForge.EVENT_BUS.register(FluidInteractionLogic.class);
         MinecraftForge.EVENT_BUS.register(FluidInteractionEventHandler.class);

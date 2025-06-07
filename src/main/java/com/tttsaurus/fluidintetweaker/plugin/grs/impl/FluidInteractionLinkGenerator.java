@@ -1,14 +1,14 @@
 package com.tttsaurus.fluidintetweaker.plugin.grs.impl;
 
 import com.cleanroommc.groovyscript.documentation.linkgenerator.BasicLinkGenerator;
-import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
+import com.tttsaurus.fluidintetweaker.Tags;
 
 public class FluidInteractionLinkGenerator extends BasicLinkGenerator
 {
     @Override
     public String id()
     {
-        return FluidInteractionTweaker.MODID;
+        return Tags.MODID;
     }
     @Override
     protected String domain()

@@ -1,6 +1,6 @@
 package com.tttsaurus.fluidintetweaker.common.impl.behavior;
 
-import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidBehaviorEvent;
+import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidBehaviorEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public final class FluidBehaviorEventHandler

@@ -2,15 +2,16 @@ package com.tttsaurus.fluidintetweaker.client.impl.jefi;
 
 import com.tttsaurus.fluidintetweaker.Configuration;
 import com.tttsaurus.fluidintetweaker.FluidInteractionTweaker;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.FluidInteractionRecipe;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.InteractionEvent;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.FluidInteractionRecipe;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.InteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredientType;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.condition.IsInitiatorAbove;
-import com.tttsaurus.fluidintetweaker.common.api.util.BlockUtils;
-import com.tttsaurus.fluidintetweaker.common.api.interaction.StringRecipeProtocol;
+import com.tttsaurus.fluidintetweaker.common.core.util.BlockUtils;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.StringRecipeProtocol;
 import com.tttsaurus.ometweaks.OMEConfig;
+import com.tttsaurus.ometweaks.integration.thermalfoundation.ThermalFoundationModule;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.JEIPlugin;
@@ -116,12 +117,12 @@ public class JEFIPlugin implements IModPlugin
 
             if (FluidInteractionTweaker.IS_OMETWEAKS_LOADED)
             {
-                if (OMEConfig.ENABLE && OMEConfig.ENABLE_TF_MODULE)
+                if (OMEConfig.ENABLE && ThermalFoundationModule.ENABLE_TF_MODULE)
                 {
-                    if (OMEConfig.DISABLE_TF_MANA_INTERACTIONS) enableMana = false;
-                    if (OMEConfig.DISABLE_TF_PYROTHEUM_INTERACTIONS) enablePyrotheum = false;
-                    if (OMEConfig.DISABLE_TF_CRYOTHEUM_INTERACTIONS) enableCryotheum = false;
-                    if (OMEConfig.DISABLE_TF_PETROTHEUM_INTERACTIONS) enablePetrotheum = false;
+                    if (ThermalFoundationModule.DISABLE_TF_MANA_INTERACTIONS) enableMana = false;
+                    if (ThermalFoundationModule.DISABLE_TF_PYROTHEUM_INTERACTIONS) enablePyrotheum = false;
+                    if (ThermalFoundationModule.DISABLE_TF_CRYOTHEUM_INTERACTIONS) enableCryotheum = false;
+                    if (ThermalFoundationModule.DISABLE_TF_PETROTHEUM_INTERACTIONS) enablePetrotheum = false;
                 }
             }
 

@@ -1,9 +1,9 @@
 package com.tttsaurus.fluidintetweaker.common.impl.interaction;
 
-import com.tttsaurus.fluidintetweaker.common.api.interaction.ComplexOutput;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredient;
-import com.tttsaurus.fluidintetweaker.common.api.WorldIngredientType;
-import com.tttsaurus.fluidintetweaker.common.api.event.CustomFluidInteractionEvent;
+import com.tttsaurus.fluidintetweaker.common.core.interaction.ComplexOutput;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
+import com.tttsaurus.fluidintetweaker.common.core.WorldIngredientType;
+import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidInteractionEvent;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3i;
