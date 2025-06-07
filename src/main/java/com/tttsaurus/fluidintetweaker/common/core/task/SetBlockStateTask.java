@@ -1,6 +1,5 @@
-package com.tttsaurus.fluidintetweaker.common.impl.task;
+package com.tttsaurus.fluidintetweaker.common.core.task;
 
-import com.tttsaurus.fluidintetweaker.common.core.task.BaseTask;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

@@ -5,7 +5,7 @@ import com.tttsaurus.fluidintetweaker.common.core.interaction.FluidInteractionRe
 import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.core.interaction.StringRecipeProtocol;
 import com.tttsaurus.fluidintetweaker.common.impl.interaction.FluidInteractionRecipeManager;
-import com.tttsaurus.fluidintetweaker.common.core.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.core.exception.FITweakerRuntimeException;
 import crafttweaker.IAction;
 import crafttweaker.api.block.IBlockState;
 import crafttweaker.api.liquid.ILiquidStack;
@@ -129,14 +129,14 @@ public final class FITActions
         //</editor-fold>
 
         @ReflectionInvoked
-        public void undo() throws FluidInteractionTweakerRuntimeException
+        public void undo() throws FITweakerRuntimeException
         {
             for (FluidInteractionRecipe recipe: recipeList)
                 FluidInteractionRecipeManager.removeRecipe(recipe);
             FluidInteractionRecipeManager.refreshIngredientABLists();
         }
         @Override
-        public void apply() throws FluidInteractionTweakerRuntimeException
+        public void apply() throws FITweakerRuntimeException
         {
             for (FluidInteractionRecipe recipe: recipeList)
                 recipeKeys.add(FluidInteractionRecipeManager.addRecipe(recipe));

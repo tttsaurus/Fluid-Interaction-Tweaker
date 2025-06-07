@@ -1,6 +1,5 @@
-package com.tttsaurus.fluidintetweaker.common.impl.task;
+package com.tttsaurus.fluidintetweaker.common.core.task;
 
-import com.tttsaurus.fluidintetweaker.common.core.task.BaseTask;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import java.util.ArrayList;

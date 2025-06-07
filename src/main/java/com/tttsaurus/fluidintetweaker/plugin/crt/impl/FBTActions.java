@@ -2,7 +2,7 @@ package com.tttsaurus.fluidintetweaker.plugin.crt.impl;
 
 import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.core.behavior.FluidBehaviorRecipe;
-import com.tttsaurus.fluidintetweaker.common.core.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.core.exception.FITweakerRuntimeException;
 import com.tttsaurus.fluidintetweaker.common.core.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.impl.behavior.FluidBehaviorRecipeManager;
 import crafttweaker.IAction;
@@ -45,13 +45,13 @@ public final class FBTActions
         }
 
         @ReflectionInvoked
-        public void undo() throws FluidInteractionTweakerRuntimeException
+        public void undo() throws FITweakerRuntimeException
         {
             for (FluidBehaviorRecipe recipe: recipeList)
                 FluidBehaviorRecipeManager.removeRecipe(recipe);
         }
         @Override
-        public void apply() throws FluidInteractionTweakerRuntimeException
+        public void apply() throws FITweakerRuntimeException
         {
             for (FluidBehaviorRecipe recipe: recipeList)
                 recipeKeys.add(FluidBehaviorRecipeManager.addRecipe(recipe));

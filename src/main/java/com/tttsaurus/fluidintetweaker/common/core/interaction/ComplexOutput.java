@@ -4,8 +4,8 @@ import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.core.WorldIngredientType;
 import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidInteractionEvent;
 import com.tttsaurus.fluidintetweaker.common.core.interaction.condition.IEventCondition;
-import com.tttsaurus.fluidintetweaker.common.impl.task.SetBlockStateTask;
-import com.tttsaurus.fluidintetweaker.common.impl.task.TaskScheduler;
+import com.tttsaurus.fluidintetweaker.common.core.task.SetBlockStateTask;
+import com.tttsaurus.fluidintetweaker.common.core.task.TaskScheduler;
 import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -99,28 +99,6 @@ public class ComplexOutput
                             ingredientB.getFluid().getName().equals(fluidName) &&
                             (event.getIsSpreadingUpward() || !fluidInteractionEvent.getIsInitiatorAbove()))
                         {
-                            // todo: spreading limit
-                            /*
-                            IBlockState blockStateSurrounding = ingredientB.getBlockState();
-
-                            int spreadCounter = 0;
-                            if (blockStateSurrounding.getPropertyKeys().contains(FluidSpreadHelper.FLUID_SPREAD_COUNTER))
-                                spreadCounter = blockStateSurrounding.getValue(FluidSpreadHelper.FLUID_SPREAD_COUNTER) + 1;
-
-                            if (spreadCounter < 16)
-                            {
-                                blockState = FluidSpreadHelper.getSpreadCountableFluid(fluid);
-                                blockState = blockState.withProperty(FluidSpreadHelper.FLUID_SPREAD_COUNTER, spreadCounter);
-
-                                boolean goUp = event.getIsSpreadingUpward() && fluidInteractionEvent.getIsInitiatorAbove();
-                                BlockPos finalPos = goUp ? pos.add(0, 1, 0) : pos;
-                                int flags = goUp ? 3 : 2;
-                                TaskScheduler.scheduleTask(new SetBlockStateTask(10, world, finalPos, blockState, flags));
-                            }
-                            else
-                                world.setBlockState(pos, event.getLimitBarrier(), 2);
-                            */
-
                             boolean goUp = event.getIsSpreadingUpward() && fluidInteractionEvent.getIsInitiatorAbove();
                             BlockPos finalPos = goUp ? pos.add(0, 1, 0) : pos;
                             TaskScheduler.scheduleTask(new SetBlockStateTask(10, world, finalPos, blockState, 3));

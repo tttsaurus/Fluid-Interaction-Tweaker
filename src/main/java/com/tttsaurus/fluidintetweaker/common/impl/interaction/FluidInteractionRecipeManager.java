@@ -6,7 +6,7 @@ import com.tttsaurus.fluidintetweaker.common.core.interaction.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.core.interaction.FluidInteractionRecipe;
 import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.core.interaction.StringRecipeProtocol;
-import com.tttsaurus.fluidintetweaker.common.core.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.core.exception.FITweakerRuntimeException;
 import com.tttsaurus.fluidintetweaker.common.core.util.CachedContainsKeyMap;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import java.util.*;
@@ -60,13 +60,13 @@ public final class FluidInteractionRecipeManager
             if (!recipeIngredientBList.contains(strings[1])) recipeIngredientBList.add(strings[1]);
         }
     }
-    public static String addRecipe(FluidInteractionRecipe recipe) throws FluidInteractionTweakerRuntimeException
+    public static String addRecipe(FluidInteractionRecipe recipe) throws FITweakerRuntimeException
     {
         String ingredientAKey = recipe.ingredientA.toString();
         String ingredientBKey = recipe.ingredientB.toString();
         String key = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(recipe.ingredientA, recipe.ingredientB);
         if (recipeDict.containsKey(key))
-            throw new FluidInteractionTweakerRuntimeException("FluidInteractionRecipeManager.addRecipe() fails to execute. The same recipe key " + key + " has been added.");
+            throw new FITweakerRuntimeException("FluidInteractionRecipeManager.addRecipe() fails to execute. The same recipe key " + key + " has been added.");
         else
         {
             if (!recipeIngredientAList.contains(ingredientAKey)) recipeIngredientAList.add(ingredientAKey);
@@ -80,13 +80,13 @@ public final class FluidInteractionRecipeManager
             return key;
         }
     }
-    public static void removeRecipe(FluidInteractionRecipe recipe) throws FluidInteractionTweakerRuntimeException
+    public static void removeRecipe(FluidInteractionRecipe recipe) throws FITweakerRuntimeException
     {
         String key = StringRecipeProtocol.getRecipeKeyFromTwoIngredients(recipe.ingredientA, recipe.ingredientB);
         if (recipeDict.containsKey(key))
             recipeDict.remove(key);
         else
-            throw new FluidInteractionTweakerRuntimeException("FluidInteractionRecipeManager.removeRecipe() fails to execute. The recipe key " + key + " being removed doesn't exist.");
+            throw new FITweakerRuntimeException("FluidInteractionRecipeManager.removeRecipe() fails to execute. The recipe key " + key + " being removed doesn't exist.");
     }
     public static void removeAllRecipes()
     {

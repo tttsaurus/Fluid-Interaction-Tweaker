@@ -5,7 +5,7 @@ import com.tttsaurus.fluidintetweaker.client.impl.jefb.JEFBPlugin;
 import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.core.behavior.ComplexOutput;
 import com.tttsaurus.fluidintetweaker.common.core.behavior.FluidBehaviorRecipe;
-import com.tttsaurus.fluidintetweaker.common.core.exception.FluidInteractionTweakerRuntimeException;
+import com.tttsaurus.fluidintetweaker.common.core.exception.FITweakerRuntimeException;
 import com.tttsaurus.fluidintetweaker.common.core.util.CachedContainsKeyMap;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
@@ -30,11 +30,11 @@ public final class FluidBehaviorRecipeManager
     //</editor-fold>
 
     //<editor-fold desc="methods for plugins">
-    public static String addRecipe(FluidBehaviorRecipe recipe) throws FluidInteractionTweakerRuntimeException
+    public static String addRecipe(FluidBehaviorRecipe recipe) throws FITweakerRuntimeException
     {
         String key = recipe.ingredient.toString();
         if (recipeDict.containsKey(key))
-            throw new FluidInteractionTweakerRuntimeException("FluidBehaviorRecipeManager.addRecipe() fails to execute. The same recipe key " + key + " has been added.");
+            throw new FITweakerRuntimeException("FluidBehaviorRecipeManager.addRecipe() fails to execute. The same recipe key " + key + " has been added.");
         else
         {
             recipeDict.put(key, recipe.complexOutput);
@@ -46,13 +46,13 @@ public final class FluidBehaviorRecipeManager
             return key;
         }
     }
-    public static void removeRecipe(FluidBehaviorRecipe recipe) throws FluidInteractionTweakerRuntimeException
+    public static void removeRecipe(FluidBehaviorRecipe recipe) throws FITweakerRuntimeException
     {
         String key = recipe.ingredient.toString();
         if (recipeDict.containsKey(key))
             recipeDict.remove(key);
         else
-            throw new FluidInteractionTweakerRuntimeException("FluidBehaviorRecipeManager.removeRecipe() fails to execute. The recipe key " + key + " being removed doesn't exist.");
+            throw new FITweakerRuntimeException("FluidBehaviorRecipeManager.removeRecipe() fails to execute. The recipe key " + key + " being removed doesn't exist.");
     }
     public static void removeAllRecipes()
     {
