@@ -4,7 +4,7 @@ import com.tttsaurus.fluidintetweaker.common.core.WorldIngredient;
 import com.tttsaurus.fluidintetweaker.common.core.WorldIngredientType;
 import com.tttsaurus.fluidintetweaker.common.core.behavior.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidBehaviorEvent;
-import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidBehaviorDelegate;
+import com.tttsaurus.fluidintetweaker.common.core.delegate.IFluidBehaviorDelegate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -38,12 +38,12 @@ public class ComplexOutput
     }
 
     private static final EnumSet<EnumFacing> surrounding = EnumSet.of(EnumFacing.NORTH, EnumFacing.SOUTH, EnumFacing.EAST, EnumFacing.WEST);
-    public FluidBehaviorDelegate getOutputDelegate(CustomFluidBehaviorEvent fluidBehaviorEvent)
+    public IFluidBehaviorDelegate getOutputDelegate(CustomFluidBehaviorEvent fluidBehaviorEvent)
     {
         World world = fluidBehaviorEvent.getWorld();
         BlockPos pos = fluidBehaviorEvent.getPos();
         EntityLivingBase entityLivingBase = fluidBehaviorEvent.getEntityLivingBase();
-        return new FluidBehaviorDelegate()
+        return new IFluidBehaviorDelegate()
         {
             @Override
             public void doAction()

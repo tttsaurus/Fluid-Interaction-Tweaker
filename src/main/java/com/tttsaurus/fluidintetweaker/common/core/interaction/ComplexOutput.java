@@ -6,7 +6,7 @@ import com.tttsaurus.fluidintetweaker.common.core.event.CustomFluidInteractionEv
 import com.tttsaurus.fluidintetweaker.common.core.interaction.condition.IEventCondition;
 import com.tttsaurus.fluidintetweaker.common.core.task.SetBlockStateTask;
 import com.tttsaurus.fluidintetweaker.common.core.task.TaskScheduler;
-import com.tttsaurus.fluidintetweaker.common.impl.delegate.FluidInteractionDelegate;
+import com.tttsaurus.fluidintetweaker.common.core.delegate.IFluidInteractionDelegate;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -38,11 +38,11 @@ public class ComplexOutput
         return this;
     }
 
-    public FluidInteractionDelegate getOutputDelegate(CustomFluidInteractionEvent fluidInteractionEvent)
+    public IFluidInteractionDelegate getOutputDelegate(CustomFluidInteractionEvent fluidInteractionEvent)
     {
         World world = fluidInteractionEvent.getWorld();
         BlockPos pos = fluidInteractionEvent.getPos();
-        return new FluidInteractionDelegate()
+        return new IFluidInteractionDelegate()
         {
             @Override
             public void doAction()

@@ -1,6 +1,6 @@
 package com.tttsaurus.fluidintetweaker.common.core.delegate;
 
-public interface IDelegate
+public interface IFluidInteractionDelegate
 {
     void doAction();
 }
