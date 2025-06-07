@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.plugin.grs.impl;
+package com.tttsaurus.fluidintetweaker.plugin.grs;
 
 import com.cleanroommc.groovyscript.api.GroovyBlacklist;
 import com.cleanroommc.groovyscript.api.GroovyPlugin;
@@ -7,7 +7,6 @@ import com.cleanroommc.groovyscript.compat.mods.GroovyPropertyContainer;
 import com.cleanroommc.groovyscript.documentation.linkgenerator.LinkGeneratorHooks;
 import com.tttsaurus.fluidintetweaker.Tags;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public final class GrSFluidInteractionPlugin implements GroovyPlugin
 {
@@ -27,7 +26,7 @@ public final class GrSFluidInteractionPlugin implements GroovyPlugin
     }
 
     @Override
-    public @Nullable GroovyPropertyContainer createGroovyPropertyContainer()
+    public GroovyPropertyContainer createGroovyPropertyContainer()
     {
         propertyContainerInstance = new GrSFluidInteractionPropertyContainer();
         return propertyContainerInstance;

@@ -1,4 +1,4 @@
-package com.tttsaurus.fluidintetweaker.plugin.grs.impl;
+package com.tttsaurus.fluidintetweaker.plugin.grs;
 
 import com.cleanroommc.groovyscript.documentation.linkgenerator.BasicLinkGenerator;
 import com.tttsaurus.fluidintetweaker.Tags;
