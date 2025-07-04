@@ -23,6 +23,12 @@ public class ByChance implements IEventCondition
     @Override
     public String getDesc(FluidBehaviorRecipe recipe)
     {
-        return I18n.format("fluidintetweaker.jefb.condition.by_chance", (int)(probability * 100) + "%");
+        String p;
+        if (probability < 0.01f)
+            p = String.format("%.2f", probability * 100f) + "%";
+        else
+            p = (int)(probability * 100) + "%";
+
+        return I18n.format("fluidintetweaker.jefb.condition.by_chance", p);
     }
 }

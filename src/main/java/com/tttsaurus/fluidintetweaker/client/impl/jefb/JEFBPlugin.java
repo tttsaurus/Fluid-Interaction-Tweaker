@@ -100,8 +100,7 @@ public class JEFBPlugin implements IModPlugin
                     //.addEvent(BehaviorEvent.createBreakSurroundingEvent(Ingredient.merge(Arrays.asList(new Ingredient[]{new OreIngredient("treeLeaves"), new OreIngredient("plantGrass")}))))
                     .addEvent(BehaviorEvent.createExtinguishFireEvent())
                     .addEvent(BehaviorEvent.createEntityConversionEvent("minecraft:zombie", "minecraft:snowman"))
-                    .addEvent(BehaviorEvent.createEntityConversionEvent("minecraft:creeper", "minecraft:snowman"))
-                    );
+                    .addEvent(BehaviorEvent.createEntityConversionEvent("minecraft:creeper", "minecraft:snowman")));
 
             /*
                 ignored traits of Petrotheum:

@@ -36,19 +36,20 @@ public final class EntityRenderer
         floatBuffer.flip();
     }
 
-    private final IntBuffer intBuffer = ByteBuffer.allocateDirect(16 << 2).order(ByteOrder.nativeOrder()).asIntBuffer();
-    private final FloatBuffer floatBuffer = ByteBuffer.allocateDirect(16 << 2).order(ByteOrder.nativeOrder()).asFloatBuffer();
+    private final static IntBuffer INT_BUFFER = ByteBuffer.allocateDirect(16 << 2).order(ByteOrder.nativeOrder()).asIntBuffer();
+    private final static FloatBuffer FLOAT_BUFFER = ByteBuffer.allocateDirect(16 << 2).order(ByteOrder.nativeOrder()).asFloatBuffer();
+
     public void render(float x, float y, float rotationX, float rotationY, float rotationZ)
     {
-        intBuffer.clear();
-        floatBuffer.clear();
+        INT_BUFFER.clear();
+        FLOAT_BUFFER.clear();
 
         // color
-        GL11.glGetFloat(GL11.GL_CURRENT_COLOR, floatBuffer);
-        float colorR = floatBuffer.get(0);
-        float colorG = floatBuffer.get(1);
-        float colorB = floatBuffer.get(2);
-        float colorA = floatBuffer.get(3);
+        GL11.glGetFloat(GL11.GL_CURRENT_COLOR, FLOAT_BUFFER);
+        float colorR = FLOAT_BUFFER.get(0);
+        float colorG = FLOAT_BUFFER.get(1);
+        float colorB = FLOAT_BUFFER.get(2);
+        float colorA = FLOAT_BUFFER.get(3);
 
         // blendState
         boolean blendState = GL11.glIsEnabled(GL11.GL_BLEND);
@@ -78,87 +79,87 @@ public final class EntityRenderer
         boolean lighting = GL11.glIsEnabled(GL11.GL_LIGHTING);
 
         // colorMatFace & colorMatMode
-        GL11.glGetInteger(GL11.GL_COLOR_MATERIAL_FACE, intBuffer);
-        int colorMatFace = intBuffer.get(0);
-        GL11.glGetInteger(GL11.GL_COLOR_MATERIAL_PARAMETER, intBuffer);
-        int colorMatMode = intBuffer.get(0);
+        GL11.glGetInteger(GL11.GL_COLOR_MATERIAL_FACE, INT_BUFFER);
+        int colorMatFace = INT_BUFFER.get(0);
+        GL11.glGetInteger(GL11.GL_COLOR_MATERIAL_PARAMETER, INT_BUFFER);
+        int colorMatMode = INT_BUFFER.get(0);
 
         // depthWriteMask
-        GL11.glGetInteger(GL11.GL_DEPTH_WRITEMASK, intBuffer);
-        int depthWriteMask = intBuffer.get(0);
+        GL11.glGetInteger(GL11.GL_DEPTH_WRITEMASK, INT_BUFFER);
+        int depthWriteMask = INT_BUFFER.get(0);
 
         // shadeModel
-        GL11.glGetInteger(GL11.GL_SHADE_MODEL, intBuffer);
-        int shadeModel = intBuffer.get(0);
+        GL11.glGetInteger(GL11.GL_SHADE_MODEL, INT_BUFFER);
+        int shadeModel = INT_BUFFER.get(0);
 
         // lightModelAmbient
-        GL11.glGetFloat(GL11.GL_LIGHT_MODEL_AMBIENT, floatBuffer);
-        float lightModelAmbientR = floatBuffer.get(0);
-        float lightModelAmbientG = floatBuffer.get(1);
-        float lightModelAmbientB = floatBuffer.get(2);
-        float lightModelAmbientA = floatBuffer.get(3);
+        GL11.glGetFloat(GL11.GL_LIGHT_MODEL_AMBIENT, FLOAT_BUFFER);
+        float lightModelAmbientR = FLOAT_BUFFER.get(0);
+        float lightModelAmbientG = FLOAT_BUFFER.get(1);
+        float lightModelAmbientB = FLOAT_BUFFER.get(2);
+        float lightModelAmbientA = FLOAT_BUFFER.get(3);
 
         // s-l
         float[] light00InfoRs = new float[4];
         float[] light00InfoGs = new float[4];
         float[] light00InfoBs = new float[4];
         float[] light00InfoAs = new float[4];
-        GL11.glGetLight(GL11.GL_LIGHT0, GL11.GL_SPOT_DIRECTION, floatBuffer);
-        light00InfoRs[0] = floatBuffer.get(0);
-        light00InfoGs[0] = floatBuffer.get(1);
-        light00InfoBs[0] = floatBuffer.get(2);
-        light00InfoAs[0] = floatBuffer.get(3);
-        GL11.glGetLight(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, floatBuffer);
-        light00InfoRs[1] = floatBuffer.get(0);
-        light00InfoGs[1] = floatBuffer.get(1);
-        light00InfoBs[1] = floatBuffer.get(2);
-        light00InfoAs[1] = floatBuffer.get(3);
-        GL11.glGetLight(GL11.GL_LIGHT0, GL11.GL_AMBIENT, floatBuffer);
-        light00InfoRs[2] = floatBuffer.get(0);
-        light00InfoGs[2] = floatBuffer.get(1);
-        light00InfoBs[2] = floatBuffer.get(2);
-        light00InfoAs[2] = floatBuffer.get(3);
-        GL11.glGetLight(GL11.GL_LIGHT0, GL11.GL_SPECULAR, floatBuffer);
-        light00InfoRs[3] = floatBuffer.get(0);
-        light00InfoGs[3] = floatBuffer.get(1);
-        light00InfoBs[3] = floatBuffer.get(2);
-        light00InfoAs[3] = floatBuffer.get(3);
+        GL11.glGetLight(GL11.GL_LIGHT0, GL11.GL_SPOT_DIRECTION, FLOAT_BUFFER);
+        light00InfoRs[0] = FLOAT_BUFFER.get(0);
+        light00InfoGs[0] = FLOAT_BUFFER.get(1);
+        light00InfoBs[0] = FLOAT_BUFFER.get(2);
+        light00InfoAs[0] = FLOAT_BUFFER.get(3);
+        GL11.glGetLight(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, FLOAT_BUFFER);
+        light00InfoRs[1] = FLOAT_BUFFER.get(0);
+        light00InfoGs[1] = FLOAT_BUFFER.get(1);
+        light00InfoBs[1] = FLOAT_BUFFER.get(2);
+        light00InfoAs[1] = FLOAT_BUFFER.get(3);
+        GL11.glGetLight(GL11.GL_LIGHT0, GL11.GL_AMBIENT, FLOAT_BUFFER);
+        light00InfoRs[2] = FLOAT_BUFFER.get(0);
+        light00InfoGs[2] = FLOAT_BUFFER.get(1);
+        light00InfoBs[2] = FLOAT_BUFFER.get(2);
+        light00InfoAs[2] = FLOAT_BUFFER.get(3);
+        GL11.glGetLight(GL11.GL_LIGHT0, GL11.GL_SPECULAR, FLOAT_BUFFER);
+        light00InfoRs[3] = FLOAT_BUFFER.get(0);
+        light00InfoGs[3] = FLOAT_BUFFER.get(1);
+        light00InfoBs[3] = FLOAT_BUFFER.get(2);
+        light00InfoAs[3] = FLOAT_BUFFER.get(3);
 
         float[] light01InfoRs = new float[4];
         float[] light01InfoGs = new float[4];
         float[] light01InfoBs = new float[4];
         float[] light01InfoAs = new float[4];
-        GL11.glGetLight(GL11.GL_LIGHT1, GL11.GL_SPOT_DIRECTION, floatBuffer);
-        light01InfoRs[0] = floatBuffer.get(0);
-        light01InfoGs[0] = floatBuffer.get(1);
-        light01InfoBs[0] = floatBuffer.get(2);
-        light01InfoAs[0] = floatBuffer.get(3);
-        GL11.glGetLight(GL11.GL_LIGHT1, GL11.GL_DIFFUSE, floatBuffer);
-        light01InfoRs[1] = floatBuffer.get(0);
-        light01InfoGs[1] = floatBuffer.get(1);
-        light01InfoBs[1] = floatBuffer.get(2);
-        light01InfoAs[1] = floatBuffer.get(3);
-        GL11.glGetLight(GL11.GL_LIGHT1, GL11.GL_AMBIENT, floatBuffer);
-        light01InfoRs[2] = floatBuffer.get(0);
-        light01InfoGs[2] = floatBuffer.get(1);
-        light01InfoBs[2] = floatBuffer.get(2);
-        light01InfoAs[2] = floatBuffer.get(3);
-        GL11.glGetLight(GL11.GL_LIGHT1, GL11.GL_SPECULAR, floatBuffer);
-        light01InfoRs[3] = floatBuffer.get(0);
-        light01InfoGs[3] = floatBuffer.get(1);
-        light01InfoBs[3] = floatBuffer.get(2);
-        light01InfoAs[3] = floatBuffer.get(3);
+        GL11.glGetLight(GL11.GL_LIGHT1, GL11.GL_SPOT_DIRECTION, FLOAT_BUFFER);
+        light01InfoRs[0] = FLOAT_BUFFER.get(0);
+        light01InfoGs[0] = FLOAT_BUFFER.get(1);
+        light01InfoBs[0] = FLOAT_BUFFER.get(2);
+        light01InfoAs[0] = FLOAT_BUFFER.get(3);
+        GL11.glGetLight(GL11.GL_LIGHT1, GL11.GL_DIFFUSE, FLOAT_BUFFER);
+        light01InfoRs[1] = FLOAT_BUFFER.get(0);
+        light01InfoGs[1] = FLOAT_BUFFER.get(1);
+        light01InfoBs[1] = FLOAT_BUFFER.get(2);
+        light01InfoAs[1] = FLOAT_BUFFER.get(3);
+        GL11.glGetLight(GL11.GL_LIGHT1, GL11.GL_AMBIENT, FLOAT_BUFFER);
+        light01InfoRs[2] = FLOAT_BUFFER.get(0);
+        light01InfoGs[2] = FLOAT_BUFFER.get(1);
+        light01InfoBs[2] = FLOAT_BUFFER.get(2);
+        light01InfoAs[2] = FLOAT_BUFFER.get(3);
+        GL11.glGetLight(GL11.GL_LIGHT1, GL11.GL_SPECULAR, FLOAT_BUFFER);
+        light01InfoRs[3] = FLOAT_BUFFER.get(0);
+        light01InfoGs[3] = FLOAT_BUFFER.get(1);
+        light01InfoBs[3] = FLOAT_BUFFER.get(2);
+        light01InfoAs[3] = FLOAT_BUFFER.get(3);
 
         // textureBinding2D & activeTexture
-        GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D, intBuffer);
-        int textureBinding2D = intBuffer.get(0);
-        GL11.glGetInteger(GL13.GL_ACTIVE_TEXTURE, intBuffer);
-        int activeTexture = intBuffer.get(0);
+        GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D, INT_BUFFER);
+        int textureBinding2D = INT_BUFFER.get(0);
+        GL11.glGetInteger(GL13.GL_ACTIVE_TEXTURE, INT_BUFFER);
+        int activeTexture = INT_BUFFER.get(0);
 
         // e-l
         GlStateManager.setActiveTexture(GL13.GL_TEXTURE0);
-        GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D, intBuffer);
-        int textureBinding2D0 = intBuffer.get(0);
+        GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D, INT_BUFFER);
+        int textureBinding2D0 = INT_BUFFER.get(0);
         int textureWrapS0 = GL11.glGetTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S);
         int textureWrapT0 = GL11.glGetTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T);
         int textureMinFilter0 = GL11.glGetTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER);
@@ -176,8 +177,8 @@ public final class EntityRenderer
 
         // e-w0
         GlStateManager.setActiveTexture(GL13.GL_TEXTURE1);
-        GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D, intBuffer);
-        int textureBinding2D1 = intBuffer.get(0);
+        GL11.glGetInteger(GL11.GL_TEXTURE_BINDING_2D, INT_BUFFER);
+        int textureBinding2D1 = INT_BUFFER.get(0);
         int textureWrapS1 = GL11.glGetTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_S);
         int textureWrapT1 = GL11.glGetTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_WRAP_T);
         int textureMinFilter1 = GL11.glGetTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER);
@@ -228,23 +229,23 @@ public final class EntityRenderer
             GlStateManager.disableLighting();
 
         // free s-l
-        setFloatBuffer4(floatBuffer, light01InfoRs[0], light01InfoGs[0], light01InfoBs[0], light01InfoAs[0]);
-        GlStateManager.glLight(GL11.GL_LIGHT1, GL11.GL_POSITION, floatBuffer);
-        setFloatBuffer4(floatBuffer, light01InfoRs[1], light01InfoGs[1], light01InfoBs[1], light01InfoAs[1]);
-        GlStateManager.glLight(GL11.GL_LIGHT1, GL11.GL_DIFFUSE, floatBuffer);
-        setFloatBuffer4(floatBuffer, light01InfoRs[2], light01InfoGs[2], light01InfoBs[2], light01InfoAs[2]);
-        GlStateManager.glLight(GL11.GL_LIGHT1, GL11.GL_AMBIENT, floatBuffer);
-        setFloatBuffer4(floatBuffer, light01InfoRs[3], light01InfoGs[3], light01InfoBs[3], light01InfoAs[3]);
-        GlStateManager.glLight(GL11.GL_LIGHT1, GL11.GL_SPECULAR, floatBuffer);
+        setFloatBuffer4(FLOAT_BUFFER, light01InfoRs[0], light01InfoGs[0], light01InfoBs[0], light01InfoAs[0]);
+        GlStateManager.glLight(GL11.GL_LIGHT1, GL11.GL_POSITION, FLOAT_BUFFER);
+        setFloatBuffer4(FLOAT_BUFFER, light01InfoRs[1], light01InfoGs[1], light01InfoBs[1], light01InfoAs[1]);
+        GlStateManager.glLight(GL11.GL_LIGHT1, GL11.GL_DIFFUSE, FLOAT_BUFFER);
+        setFloatBuffer4(FLOAT_BUFFER, light01InfoRs[2], light01InfoGs[2], light01InfoBs[2], light01InfoAs[2]);
+        GlStateManager.glLight(GL11.GL_LIGHT1, GL11.GL_AMBIENT, FLOAT_BUFFER);
+        setFloatBuffer4(FLOAT_BUFFER, light01InfoRs[3], light01InfoGs[3], light01InfoBs[3], light01InfoAs[3]);
+        GlStateManager.glLight(GL11.GL_LIGHT1, GL11.GL_SPECULAR, FLOAT_BUFFER);
 
-        setFloatBuffer4(floatBuffer, light00InfoRs[0], light00InfoGs[0], light00InfoBs[0], light00InfoAs[0]);
-        GlStateManager.glLight(GL11.GL_LIGHT0, GL11.GL_POSITION, floatBuffer);
-        setFloatBuffer4(floatBuffer, light00InfoRs[1], light00InfoGs[1], light00InfoBs[1], light00InfoAs[1]);
-        GlStateManager.glLight(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, floatBuffer);
-        setFloatBuffer4(floatBuffer, light00InfoRs[2], light00InfoGs[2], light00InfoBs[2], light00InfoAs[2]);
-        GlStateManager.glLight(GL11.GL_LIGHT0, GL11.GL_AMBIENT, floatBuffer);
-        setFloatBuffer4(floatBuffer, light00InfoRs[3], light00InfoGs[3], light00InfoBs[3], light00InfoAs[3]);
-        GlStateManager.glLight(GL11.GL_LIGHT0, GL11.GL_SPECULAR, floatBuffer);
+        setFloatBuffer4(FLOAT_BUFFER, light00InfoRs[0], light00InfoGs[0], light00InfoBs[0], light00InfoAs[0]);
+        GlStateManager.glLight(GL11.GL_LIGHT0, GL11.GL_POSITION, FLOAT_BUFFER);
+        setFloatBuffer4(FLOAT_BUFFER, light00InfoRs[1], light00InfoGs[1], light00InfoBs[1], light00InfoAs[1]);
+        GlStateManager.glLight(GL11.GL_LIGHT0, GL11.GL_DIFFUSE, FLOAT_BUFFER);
+        setFloatBuffer4(FLOAT_BUFFER, light00InfoRs[2], light00InfoGs[2], light00InfoBs[2], light00InfoAs[2]);
+        GlStateManager.glLight(GL11.GL_LIGHT0, GL11.GL_AMBIENT, FLOAT_BUFFER);
+        setFloatBuffer4(FLOAT_BUFFER, light00InfoRs[3], light00InfoGs[3], light00InfoBs[3], light00InfoAs[3]);
+        GlStateManager.glLight(GL11.GL_LIGHT0, GL11.GL_SPECULAR, FLOAT_BUFFER);
 
         // free e-l
         GlStateManager.setActiveTexture(GL13.GL_TEXTURE0);
@@ -293,8 +294,8 @@ public final class EntityRenderer
         GlStateManager.bindTexture(textureBinding2D);
 
         // free lightModelAmbient
-        setFloatBuffer4(floatBuffer, lightModelAmbientR, lightModelAmbientG, lightModelAmbientB, lightModelAmbientA);
-        GlStateManager.glLightModel(GL11.GL_LIGHT_MODEL_AMBIENT, floatBuffer);
+        setFloatBuffer4(FLOAT_BUFFER, lightModelAmbientR, lightModelAmbientG, lightModelAmbientB, lightModelAmbientA);
+        GlStateManager.glLightModel(GL11.GL_LIGHT_MODEL_AMBIENT, FLOAT_BUFFER);
 
         // free shadeModel
         GlStateManager.shadeModel(shadeModel);
