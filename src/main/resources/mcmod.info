@@ -1,10 +1,10 @@
 [
 {
-  "modid": "fluidintetweaker",
-  "name": "Fluid Interaction Tweaker",
+  "modid": "${modid}",
+  "name": "${modname}",
   "description": "Help you to tweak the fluid interactions",
-  "version": "1.5.2",
-  "mcversion": "1.12.2",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
   "url": "https://github.com/tttsaurus/Fluid-Interaction-Tweaker",
   "updateUrl": "",
   "authorList": ["tttsaurus"],
